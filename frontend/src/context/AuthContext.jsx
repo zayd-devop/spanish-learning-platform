@@ -40,46 +40,56 @@ export const AuthProvider = ({ children }) => {
     };
 
     const login = async (email, password) => {
-        const response = await fetch(`${API_BASE}/login`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json',
-            },
-            body: JSON.stringify({ email, password })
-        });
+        try {
+            const response = await fetch(`${API_BASE}/login`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                },
+                body: JSON.stringify({ email, password })
+            });
 
-        const data = await response.json();
+            const data = await response.json();
 
-        if (response.ok) {
-            localStorage.setItem('auth_token', data.access_token);
-            setToken(data.access_token);
-            setUser(data.user);
-            return { success: true };
-        } else {
-            return { success: false, error: data.message || 'Login failed' };
+            if (response.ok) {
+                localStorage.setItem('auth_token', data.access_token);
+                setToken(data.access_token);
+                setUser(data.user);
+                return { success: true };
+            } else {
+                return { success: false, error: data.message || 'Login failed' };
+            }
+        } catch (error) {
+            console.error("Login fetch error:", error);
+            return { success: false, error: 'Cannot connect to server. Check if VITE_API_BASE_URL is correct.' };
         }
     };
 
     const register = async (name, email, password, password_confirmation) => {
-        const response = await fetch(`${API_BASE}/register`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json',
-            },
-            body: JSON.stringify({ name, email, password, password_confirmation })
-        });
+        try {
+            const response = await fetch(`${API_BASE}/register`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                },
+                body: JSON.stringify({ name, email, password, password_confirmation })
+            });
 
-        const data = await response.json();
+            const data = await response.json();
 
-        if (response.ok) {
-            localStorage.setItem('auth_token', data.access_token);
-            setToken(data.access_token);
-            setUser(data.user);
-            return { success: true };
-        } else {
-            return { success: false, error: data.message || 'Registration failed' };
+            if (response.ok) {
+                localStorage.setItem('auth_token', data.access_token);
+                setToken(data.access_token);
+                setUser(data.user);
+                return { success: true };
+            } else {
+                return { success: false, error: data.message || 'Registration failed' };
+            }
+        } catch (error) {
+            console.error("Register fetch error:", error);
+            return { success: false, error: 'Cannot connect to server. Check if VITE_API_BASE_URL is correct.' };
         }
     };
 
