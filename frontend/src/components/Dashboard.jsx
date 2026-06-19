@@ -10,19 +10,12 @@ const Dashboard = () => {
     const [kpiData, setKpiData] = useState(null);
     const [loading, setLoading] = useState(true);
 
-    // Mock data for charts if API doesn't provide enough history
-    const weeklyTimeData = [
-        { name: 'W1', minutes: 420 },
-        { name: 'W2', minutes: 350 },
-        { name: 'W3', minutes: 500 },
-        { name: 'W4', minutes: 280 },
-        { name: 'W5', minutes: 0 },
-    ];
+    const [weeklyTimeData, setWeeklyTimeData] = useState([]);
+    const [completionData, setCompletionData] = useState([
+        { name: 'Completed', value: 0 },
+        { name: 'Remaining', value: 1 }
+    ]);
 
-    const completionData = [
-        { name: 'Completed', value: 4 },
-        { name: 'Remaining', value: 8 },
-    ];
     const COLORS = ['#10b981', '#334155'];
 
     useEffect(() => {
@@ -30,7 +23,52 @@ const Dashboard = () => {
             try {
                 const res = await fetch(`${API_BASE}/weeks`);
                 const data = await res.json();
+                
                 setKpiData(data.kpi);
+
+                // Build dynamic Weekly Time Data (up to 12 weeks)
+                const dynamicWeeklyTimeData = data.weeks.map(week => {
+                    let totalMins = 0;
+                    if (week.task_progress) {
+                        totalMins = Object.values(week.task_progress).reduce((a, b) => a + Number(b), 0);
+                    }
+                    return {
+                        name: 'W' + week.week_number,
+                        minutes: totalMins
+                    };
+                });
+                setWeeklyTimeData(dynamicWeeklyTimeData);
+
+                // Build dynamic Curriculum Progress Data
+                let completedTasks = 0;
+                let remainingTasks = 0;
+                
+                data.weeks.forEach(week => {
+                    const checklist = week.checklist || [];
+                    const progress = week.task_progress || {};
+                    
+                    checklist.forEach((item, i) => {
+                        const goal = item.weekly_goal_minutes || 0;
+                        const logged = progress[i] ? Number(progress[i]) : 0;
+                        
+                        if (goal > 0 && logged >= goal) {
+                            completedTasks++;
+                        } else {
+                            remainingTasks++;
+                        }
+                    });
+                });
+
+                // Avoid division by zero in UI if there are no tasks
+                if (completedTasks === 0 && remainingTasks === 0) {
+                    remainingTasks = 1; 
+                }
+
+                setCompletionData([
+                    { name: 'Completed', value: completedTasks },
+                    { name: 'Remaining', value: remainingTasks }
+                ]);
+
                 setLoading(false);
             } catch (err) {
                 console.error("Failed to load dashboard data", err);
