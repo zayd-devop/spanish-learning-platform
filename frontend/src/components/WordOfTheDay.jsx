@@ -46,12 +46,14 @@ const WordOfTheDay = () => {
                     <h2 className="gradient-text" style={{ fontSize: '2.8rem', fontWeight: '800', margin: '0 0 0.5rem 0', lineHeight: '1.1' }}>
                         {dailyWord.word}
                     </h2>
-                    <span style={{ display: 'inline-block', background: 'rgba(59, 130, 246, 0.1)', color: 'var(--accent-primary)', padding: '4px 12px', borderRadius: '20px', fontSize: '0.85rem', fontWeight: '600' }}>
-                        {dailyWord.type}
-                    </span>
-                    <span style={{ fontSize: '1.2rem', color: 'var(--text-secondary)', marginLeft: '1rem', fontWeight: '500' }}>
-                        "{dailyWord.translation}"
-                    </span>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', flexWrap: 'wrap' }}>
+                        <span style={{ display: 'inline-block', background: 'rgba(59, 130, 246, 0.1)', color: 'var(--accent-primary)', padding: '4px 12px', borderRadius: '20px', fontSize: '0.85rem', fontWeight: '600' }}>
+                            {dailyWord.type}
+                        </span>
+                        <span style={{ fontSize: '1.2rem', color: 'var(--text-secondary)', fontWeight: '500', whiteSpace: 'nowrap' }}>
+                            "{dailyWord.translation}"
+                        </span>
+                    </div>
                 </div>
 
                 <div style={{ background: 'rgba(0,0,0,0.03)', padding: '1.25rem', borderRadius: '12px', borderLeft: '4px solid var(--accent-secondary)' }}>
