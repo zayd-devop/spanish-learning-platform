@@ -22,18 +22,18 @@ const Navbar = () => {
     };
 
     return (
-        <nav className="navbar glass-panel" style={{ borderRadius: '0', borderLeft: 'none', borderRight: 'none', borderTop: 'none', display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1rem 2rem' }}>
+        <nav className="navbar glass-panel" style={{ borderRadius: '0', borderLeft: 'none', borderRight: 'none', borderTop: 'none', display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1rem', flexWrap: 'wrap', gap: '0.5rem' }}>
             <div className="navbar-brand">
-                <Link to="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '12px' }}>
+                <Link to="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '8px' }}>
                     <ESpanishLogo />
-                    <span className="gradient-text" style={{ fontSize: '1.5rem', fontWeight: '800', margin: 0 }}>e-Spanish</span>
+                    <span className="gradient-text" style={{ fontSize: '1.5rem', fontWeight: '800', margin: 0, whiteSpace: 'nowrap' }}>e-Spanish</span>
                 </Link>
             </div>
 
-            <div className="navbar-menu" style={{ display: 'flex', alignItems: 'center', gap: '1.25rem' }}>
+            <div className="navbar-menu" style={{ display: 'flex', alignItems: 'center', gap: '1rem', flexWrap: 'wrap' }}>
                 {user ? (
                     <>
-                        <span style={{ color: '#475569', fontWeight: '500', marginLeft: '1rem' }}>Hola, {user.name}</span>
+                        <span style={{ color: '#475569', fontWeight: '500', whiteSpace: 'nowrap' }}>Hola, {user.name.split(' ')[0]}</span>
                         <button onClick={handleLogout} className="nav-btn nav-btn-danger">
                             Logout
                         </button>

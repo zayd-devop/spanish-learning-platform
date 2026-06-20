@@ -206,7 +206,7 @@ const PracticeChat = () => {
 
                 {/* Chat Input */}
                 <div className="chat-input-area">
-                    <div style={{ display: 'flex', gap: '1rem', background: 'white', padding: '0.5rem', borderRadius: '16px', boxShadow: 'inset 0 2px 4px rgba(0,0,0,0.02), 0 4px 10px rgba(0,0,0,0.05)' }}>
+                    <div style={{ display: 'flex', gap: '0.5rem', background: 'white', padding: '0.5rem', borderRadius: '16px', boxShadow: 'inset 0 2px 4px rgba(0,0,0,0.02), 0 4px 10px rgba(0,0,0,0.05)' }}>
                         <input 
                             type="text" 
                             value={input}
@@ -214,7 +214,7 @@ const PracticeChat = () => {
                             onKeyDown={handleKeyDown}
                             placeholder={isRecording ? "Grabando audio..." : "Escribe un mensaje aquí..."}
                             disabled={isLoading || isRecording}
-                            style={{ flex: 1, border: 'none', background: 'transparent', padding: '0.5rem 1rem', fontSize: '1rem', color: isRecording ? 'var(--danger)' : 'var(--text-primary)', outline: 'none', fontStyle: isRecording ? 'italic' : 'normal' }}
+                            style={{ flex: 1, minWidth: 0, border: 'none', background: 'transparent', padding: '0.5rem 0.5rem', fontSize: '1rem', color: isRecording ? 'var(--danger)' : 'var(--text-primary)', outline: 'none', fontStyle: isRecording ? 'italic' : 'normal' }}
                         />
                         
                         <button 
