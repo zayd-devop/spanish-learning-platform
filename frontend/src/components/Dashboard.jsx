@@ -130,7 +130,7 @@ const Dashboard = () => {
 
             <StudentKPIs data={kpiData} />
 
-            <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: '2rem', marginTop: '2.5rem' }}>
+            <div className="responsive-grid-2-1" style={{ marginTop: '2.5rem' }}>
                 {/* Left Column */}
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '2.5rem' }}>
                     {/* Time Logged Chart */}

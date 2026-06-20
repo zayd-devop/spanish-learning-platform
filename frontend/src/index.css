@@ -668,6 +668,10 @@ h1, h2, h3 {
   margin-right: 0;
 }
 
+.global-sidebar.collapsed .sidebar-label {
+  display: none;
+}
+
 .global-sidebar.collapsed .sidebar-link {
   justify-content: center;
   padding: 0.75rem;
@@ -684,5 +688,133 @@ h1, h2, h3 {
   flex: 1;
   overflow-y: auto;
   padding-bottom: 2rem;
+}
+
+/* =========================================
+   RESPONSIVE LAYOUT & MOBILE OPTIMIZATIONS
+   ========================================= */
+
+/* Grid Utilities */
+.responsive-grid-2-1 {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 2rem;
+}
+
+.responsive-grid-3 {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.responsive-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.responsive-flex-layout {
+  display: flex;
+  gap: 2rem;
+}
+
+.responsive-sidebar {
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+}
+
+@media (max-width: 1024px) {
+  .responsive-grid-2-1 {
+    grid-template-columns: 1fr;
+  }
+  .responsive-grid-3 {
+    grid-template-columns: 1fr 1fr;
+  }
+  .responsive-flex-layout {
+    flex-direction: column;
+  }
+  .responsive-sidebar {
+    width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  /* Global Layout */
+  .main-layout {
+    flex-direction: column;
+  }
+
+  .global-sidebar {
+    width: 100% !important;
+    height: 70px !important;
+    flex-direction: row;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-top: 1px solid var(--glass-border);
+    border-right: none;
+    z-index: 999;
+    padding: 0;
+  }
+
+  .sidebar-header {
+    display: none; /* Hide logo/title on bottom nav */
+  }
+
+  .sidebar-menu {
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+  }
+
+  .sidebar-link {
+    flex-direction: column;
+    padding: 0.5rem;
+    font-size: 0.75rem;
+    gap: 0.25rem;
+  }
+
+  .sidebar-link .sidebar-label {
+    display: block !important; /* Show text under icon */
+    font-size: 0.7rem;
+    white-space: nowrap;
+  }
+
+  .sidebar-icon {
+    margin-right: 0 !important;
+    font-size: 1.25rem;
+  }
+
+  .scrollable-content {
+    padding-bottom: 90px; /* Make room for bottom nav */
+  }
+
+  /* Grid Utilities */
+  .responsive-grid-3, .responsive-grid-2 {
+    grid-template-columns: 1fr;
+  }
+  
+  /* Padding Adjustments */
+  .app-container {
+    padding: 1rem !important;
+  }
+  .glass-panel {
+    padding: 1.5rem !important;
+  }
+  
+  .dashboard-header {
+    padding: 1rem !important;
+  }
+
+  /* Typography Adjustments */
+  h1 { font-size: 2rem !important; }
+  h2 { font-size: 1.5rem !important; }
+  h3 { font-size: 1.25rem !important; }
 }
 

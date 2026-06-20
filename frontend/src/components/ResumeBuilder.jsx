@@ -143,7 +143,7 @@ const ResumeBuilder = () => {
                 </div>
 
                 <h3>Personal Details</h3>
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '1rem', marginBottom: '1rem' }}>
+                <div className="responsive-grid-3" style={{ marginBottom: '1rem' }}>
                     <div className="form-group">
                         <label>Full Name</label>
                         <input type="text" className="form-control" value={content.personalInfo.name} onChange={(e) => handlePersonalInfoChange('name', e.target.value)} />
@@ -181,7 +181,7 @@ const ResumeBuilder = () => {
                 {content.experience.map((exp, index) => (
                     <div key={index} style={{ border: '1px solid var(--glass-border)', padding: '1.5rem', borderRadius: '12px', marginBottom: '1.5rem', position: 'relative', background: 'rgba(255,255,255,0.5)' }}>
                         <button onClick={() => removeArrayItem('experience', index)} style={{ position: 'absolute', top: '15px', right: '15px', width: '28px', height: '28px', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#ef4444', color: 'white', border: 'none', borderRadius: '6px', cursor: 'pointer', fontWeight: 'bold' }}>✕</button>
-                        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem' }}>
+                        <div className="responsive-grid-2">
                             <div className="form-group">
                                 <label>Company</label>
                                 <input type="text" className="form-control" value={exp.company} onChange={(e) => handleArrayChange('experience', index, 'company', e.target.value)} />
@@ -203,7 +203,7 @@ const ResumeBuilder = () => {
                 {content.education.map((edu, index) => (
                     <div key={index} style={{ border: '1px solid var(--glass-border)', padding: '1.5rem', borderRadius: '12px', marginBottom: '1.5rem', position: 'relative', background: 'rgba(255,255,255,0.5)' }}>
                         <button onClick={() => removeArrayItem('education', index)} style={{ position: 'absolute', top: '15px', right: '15px', width: '28px', height: '28px', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#ef4444', color: 'white', border: 'none', borderRadius: '6px', cursor: 'pointer', fontWeight: 'bold' }}>✕</button>
-                        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '1.5rem' }}>
+                        <div className="responsive-grid-3">
                             <div className="form-group" style={{ marginBottom: 0 }}>
                                 <label>Institution</label>
                                 <input type="text" className="form-control" value={edu.institution} onChange={(e) => handleArrayChange('education', index, 'institution', e.target.value)} />

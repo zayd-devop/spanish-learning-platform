@@ -203,8 +203,8 @@ const LearningPath = () => {
   const progressPercentage = Math.round((completedCount / weeks.length) * 100) || 0;
 
   return (
-    <div style={{ display: 'flex', gap: '2rem' }}>
-      <aside className="glass-panel" style={{ width: '300px', padding: '1.5rem', display: 'flex', flexDirection: 'column' }}>
+    <div className="responsive-flex-layout">
+      <aside className="glass-panel responsive-sidebar" style={{ padding: '1.5rem' }}>
         <h2 className="gradient-text" style={{ marginBottom: '2rem', fontSize: '1.5rem' }}>
           El Camino a la Fluidez
         </h2>

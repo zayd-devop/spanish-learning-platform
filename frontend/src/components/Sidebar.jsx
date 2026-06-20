@@ -70,7 +70,7 @@ const Sidebar = () => {
                         title={collapsed ? item.label : ''}
                     >
                         <span className="sidebar-icon">{item.icon}</span>
-                        {!collapsed && <span className="sidebar-label">{item.label}</span>}
+                        <span className="sidebar-label">{item.label}</span>
                     </Link>
                 ))}
             </div>
