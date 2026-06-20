@@ -19,7 +19,10 @@ class AiController extends Controller
             ];
         }
 
-        $url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key={$apiKey}";
+        // Remove surrounding quotes if they exist in the env variable
+        $apiKey = trim($apiKey, "'\"");
+        
+        $url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent";
 
         try {
             $parts = [['text' => $prompt]];
@@ -33,7 +36,12 @@ class AiController extends Controller
             }
 
             // Disable SSL verification for local Windows environments (Fixes cURL error 60)
-            $response = Http::withoutVerifying()->post($url, [
+            $response = Http::withoutVerifying()
+                ->withHeaders([
+                    'x-goog-api-key' => $apiKey,
+                    'Content-Type' => 'application/json'
+                ])
+                ->post($url, [
                 'contents' => [
                     [
                         'parts' => $parts

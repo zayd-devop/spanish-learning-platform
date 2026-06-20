@@ -232,7 +232,8 @@ const PracticeChat = () => {
                                 alignItems: 'center', 
                                 justifyContent: 'center', 
                                 cursor: isLoading ? 'not-allowed' : 'pointer',
-                                transition: 'all 0.3s'
+                                transition: 'all 0.3s',
+                                flexShrink: 0
                             }}
                             title="Enviar audio"
                         >
@@ -263,7 +264,8 @@ const PracticeChat = () => {
                                 alignItems: 'center', 
                                 justifyContent: 'center', 
                                 cursor: input.trim() && !isLoading ? 'pointer' : 'not-allowed',
-                                transition: 'all 0.3s'
+                                transition: 'all 0.3s',
+                                flexShrink: 0
                             }}
                         >
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
