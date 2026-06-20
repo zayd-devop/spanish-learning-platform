@@ -105,12 +105,12 @@ const Dashboard = () => {
 
     return (
         <div style={{ padding: '2.5rem', animation: 'fadeIn 0.5s ease-out' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '2.5rem' }}>
+            <div className="dashboard-header-flex" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '2.5rem' }}>
                 <div>
                     <h1 className="gradient-text" style={{ fontSize: '3rem', marginBottom: '0.5rem', fontWeight: '800' }}>Analytics Dashboard</h1>
                     <p style={{ color: 'var(--text-secondary)', fontSize: '1.1rem' }}>Track your fluency journey and learning metrics in real-time.</p>
                 </div>
-                <div style={{ display: 'flex', gap: '1rem', background: 'rgba(255,255,255,0.05)', padding: '0.5rem', borderRadius: '12px', border: '1px solid var(--glass-border)' }}>
+                <div className="dashboard-filters" style={{ display: 'flex', gap: '1rem', background: 'rgba(255,255,255,0.05)', padding: '0.5rem', borderRadius: '12px', border: '1px solid var(--glass-border)' }}>
                     <button style={{ background: 'var(--accent-primary)', color: 'white', border: 'none', padding: '0.5rem 1rem', borderRadius: '8px', fontWeight: '600', cursor: 'pointer' }}>Last 7 Days</button>
                     <button style={{ background: 'transparent', color: 'var(--text-secondary)', border: 'none', padding: '0.5rem 1rem', borderRadius: '8px', fontWeight: '600', cursor: 'pointer' }}>30 Days</button>
                     <button style={{ background: 'transparent', color: 'var(--text-secondary)', border: 'none', padding: '0.5rem 1rem', borderRadius: '8px', fontWeight: '600', cursor: 'pointer' }}>All Time</button>
@@ -118,7 +118,7 @@ const Dashboard = () => {
             </div>
 
             {/* Smart Alerts */}
-            <div className="glass-panel" style={{ background: 'linear-gradient(90deg, rgba(239,68,68,0.15) 0%, rgba(239,68,68,0.05) 100%)', borderColor: 'rgba(239, 68, 68, 0.3)', marginBottom: '2.5rem', padding: '1.5rem 2rem', display: 'flex', alignItems: 'center', gap: '1.5rem', borderRadius: '16px', boxShadow: '0 10px 30px -10px rgba(239,68,68,0.2)' }}>
+            <div className="glass-panel smart-alert-flex" style={{ background: 'linear-gradient(90deg, rgba(239,68,68,0.15) 0%, rgba(239,68,68,0.05) 100%)', borderColor: 'rgba(239, 68, 68, 0.3)', marginBottom: '2.5rem', padding: '1.5rem 2rem', display: 'flex', alignItems: 'center', gap: '1.5rem', borderRadius: '16px', boxShadow: '0 10px 30px -10px rgba(239,68,68,0.2)' }}>
                 <div style={{ background: 'linear-gradient(135deg, #ef4444 0%, #b91c1c 100%)', color: 'white', width: '48px', height: '48px', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.8rem', fontWeight: '900', boxShadow: '0 4px 12px rgba(239,68,68,0.4)', flexShrink: 0 }}>
                     !
                 </div>

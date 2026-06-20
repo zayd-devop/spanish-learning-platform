@@ -19,8 +19,8 @@ class AiController extends Controller
             ];
         }
 
-        // Remove surrounding quotes if they exist in the env variable
-        $apiKey = trim($apiKey, "'\"");
+        // Remove surrounding quotes and any whitespace/newlines
+        $apiKey = trim(env('GEMINI_API_KEY'), " \t\n\r\0\x0B'\"");
         
         $url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent";
 

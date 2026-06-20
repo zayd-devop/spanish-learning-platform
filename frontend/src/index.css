@@ -802,7 +802,8 @@ h1, h2, h3 {
 
   .global-sidebar {
     width: 100% !important;
-    height: 70px !important;
+    height: calc(70px + env(safe-area-inset-bottom, 0px)) !important;
+    padding-bottom: env(safe-area-inset-bottom, 0px) !important;
     flex-direction: row;
     position: fixed;
     bottom: 0;
@@ -812,7 +813,6 @@ h1, h2, h3 {
     border-top: 1px solid var(--glass-border);
     border-right: none;
     z-index: 999;
-    padding: 0;
   }
 
   .sidebar-header {
@@ -865,6 +865,31 @@ h1, h2, h3 {
   
   .dashboard-header {
     padding: 1rem !important;
+  }
+  
+  .dashboard-header-flex {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 1.5rem !important;
+  }
+
+  .dashboard-filters {
+    width: 100%;
+    justify-content: space-between;
+    overflow-x: auto;
+  }
+
+  .dashboard-filters button {
+    flex: 1;
+    white-space: nowrap;
+    padding: 0.5rem !important;
+    font-size: 0.85rem !important;
+  }
+
+  .smart-alert-flex {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 1rem !important;
   }
 
   /* Typography Adjustments */
