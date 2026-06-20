@@ -22,6 +22,12 @@ class AiController extends Controller
         // Remove surrounding quotes and any whitespace/newlines
         $apiKey = trim(env('GEMINI_API_KEY'), " \t\n\r\0\x0B'\"");
         
+        // Failsafe: If the key got accidentally duplicated in a system environment variable 
+        // (e.g. "KEY' KEY"), extract only the first valid alphanumeric/dash segment.
+        $apiKey = explode("'", $apiKey)[0];
+        $apiKey = explode(" ", $apiKey)[0];
+        $apiKey = trim($apiKey);
+        
         $url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent";
 
         try {

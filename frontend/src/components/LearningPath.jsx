@@ -327,7 +327,7 @@ const LearningPath = () => {
                             <div style={{ width: `${percentage}%`, height: '100%', background: isCompleted ? 'var(--success)' : 'var(--accent-primary)', transition: 'width 0.3s' }}></div>
                           </div>
 
-                          <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
+                          <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center', flexWrap: 'wrap' }}>
                             <span style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', marginRight: 'auto' }}>
                               Logged: {Math.floor(loggedMinutes / 60)}h {loggedMinutes % 60}m / {Math.floor(goalMinutes / 60)}h {goalMinutes % 60}m
                             </span>
