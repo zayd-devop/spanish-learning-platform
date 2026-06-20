@@ -133,14 +133,14 @@ const Dashboard = () => {
                 {/* Left Column */}
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '2.5rem' }}>
                     {/* Time Logged Chart */}
-                    <div className="glass-panel hover-glow" style={{ padding: '2.5rem', borderRadius: '20px', background: 'linear-gradient(145deg, rgba(255,255,255,0.05) 0%, rgba(0,0,0,0) 100%)' }}>
-                        <h3 style={{ marginBottom: '2rem', fontSize: '1.3rem', color: 'var(--text-primary)', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                    <div className="glass-panel hover-glow" style={{ padding: '1.5rem', borderRadius: '20px', background: 'linear-gradient(145deg, rgba(255,255,255,0.05) 0%, rgba(0,0,0,0) 100%)' }}>
+                        <h3 style={{ marginBottom: '1.5rem', fontSize: '1.2rem', color: 'var(--text-primary)', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent-primary)" strokeWidth="2">
                                 <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
                             </svg>
                             Study Time per Week (Minutes)
                         </h3>
-                        <div style={{ height: '320px' }}>
+                        <div style={{ height: '240px' }}>
                             <ResponsiveContainer width="100%" height="100%">
                                 <BarChart data={weeklyTimeData} barSize={45}>
                                     <defs>
@@ -160,15 +160,15 @@ const Dashboard = () => {
                     </div>
 
                     {/* Tasks Completed Bar Chart */}
-                    <div className="glass-panel hover-glow" style={{ padding: '2.5rem', borderRadius: '20px', background: 'linear-gradient(145deg, rgba(255,255,255,0.05) 0%, rgba(0,0,0,0) 100%)' }}>
-                        <h3 style={{ marginBottom: '2rem', fontSize: '1.3rem', color: 'var(--text-primary)', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                    <div className="glass-panel hover-glow" style={{ padding: '1.5rem', borderRadius: '20px', background: 'linear-gradient(145deg, rgba(255,255,255,0.05) 0%, rgba(0,0,0,0) 100%)' }}>
+                        <h3 style={{ marginBottom: '1.5rem', fontSize: '1.2rem', color: 'var(--text-primary)', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#8b5cf6" strokeWidth="2">
                                 <path d="M22 11.08V12a10 10 10 0 1 1-5.93-9.14"></path>
                                 <polyline points="22 4 12 14.01 9 11.01"></polyline>
                             </svg>
                             Tasks Completed per Week
                         </h3>
-                        <div style={{ height: '320px' }}>
+                        <div style={{ height: '240px' }}>
                             <ResponsiveContainer width="100%" height="100%">
                                 <BarChart data={weeklyTasksData} barSize={45}>
                                     <defs>
@@ -191,14 +191,14 @@ const Dashboard = () => {
                 {/* Right Column */}
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '2.5rem' }}>
                     {/* Completion Donut Chart */}
-                    <div className="glass-panel hover-glow" style={{ padding: '2.5rem', borderRadius: '20px', display: 'flex', flexDirection: 'column', background: 'linear-gradient(145deg, rgba(255,255,255,0.05) 0%, rgba(0,0,0,0) 100%)' }}>
-                        <h3 style={{ marginBottom: '1.5rem', fontSize: '1.3rem', color: 'var(--text-primary)', textAlign: 'center' }}>Curriculum Progress</h3>
-                        <div style={{ height: '280px', display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative' }}>
+                    <div className="glass-panel hover-glow" style={{ padding: '1.5rem', borderRadius: '20px', display: 'flex', flexDirection: 'column', background: 'linear-gradient(145deg, rgba(255,255,255,0.05) 0%, rgba(0,0,0,0) 100%)' }}>
+                        <h3 style={{ marginBottom: '1rem', fontSize: '1.2rem', color: 'var(--text-primary)', textAlign: 'center' }}>Curriculum Progress</h3>
+                        <div style={{ height: '240px', display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative' }}>
                             <div style={{ position: 'absolute', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', pointerEvents: 'none', zIndex: 10 }}>
-                                <span style={{ fontSize: '2.5rem', fontWeight: '800', color: 'var(--text-primary)', lineHeight: '1', marginBottom: '4px' }}>
+                                <span style={{ fontSize: '2rem', fontWeight: '800', color: 'var(--text-primary)', lineHeight: '1', marginBottom: '4px' }}>
                                     {Math.round((completionData[0].value / (completionData[0].value + completionData[1].value)) * 100)}%
                                 </span>
-                                <span style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', fontWeight: '600', textTransform: 'uppercase', letterSpacing: '1px' }}>
+                                <span style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', fontWeight: '600', textTransform: 'uppercase', letterSpacing: '1px' }}>
                                     Done
                                 </span>
                             </div>
@@ -208,8 +208,8 @@ const Dashboard = () => {
                                         data={completionData}
                                         cx="50%"
                                         cy="50%"
-                                        innerRadius={90}
-                                        outerRadius={120}
+                                        innerRadius="65%"
+                                        outerRadius="85%"
                                         paddingAngle={8}
                                         dataKey="value"
                                         stroke="none"
