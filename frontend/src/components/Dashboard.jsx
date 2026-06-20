@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import StudentKPIs from './StudentKPIs';
-import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid, LineChart, Line, PieChart, Pie, Cell } from 'recharts';
+import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid, LineChart, Line, PieChart, Pie, Cell, AreaChart, Area } from 'recharts';
 
 import WordOfTheDay from './WordOfTheDay';
 
@@ -142,19 +142,19 @@ const Dashboard = () => {
                         </h3>
                         <div style={{ height: '240px' }}>
                             <ResponsiveContainer width="100%" height="100%">
-                                <BarChart data={weeklyTimeData} barSize={45}>
+                                <AreaChart data={weeklyTimeData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
                                     <defs>
-                                        <linearGradient id="colorMinutes" x1="0" y1="0" x2="0" y2="1">
-                                            <stop offset="5%" stopColor="var(--accent-primary)" stopOpacity={0.8}/>
-                                            <stop offset="95%" stopColor="var(--accent-primary)" stopOpacity={0.2}/>
+                                        <linearGradient id="colorMinutesFlow" x1="0" y1="0" x2="0" y2="1">
+                                            <stop offset="5%" stopColor="#3b82f6" stopOpacity={0.5}/>
+                                            <stop offset="95%" stopColor="#3b82f6" stopOpacity={0.0}/>
                                         </linearGradient>
                                     </defs>
                                     <CartesianGrid strokeDasharray="3 3" stroke="rgba(0,0,0,0.05)" vertical={false} />
-                                    <XAxis dataKey="name" stroke="#64748b" tickLine={false} axisLine={false} />
-                                    <YAxis stroke="#64748b" tickLine={false} axisLine={false} />
-                                    <Tooltip cursor={{fill: 'rgba(0,0,0,0.02)'}} contentStyle={{ backgroundColor: 'rgba(255,255,255,0.95)', border: '1px solid rgba(0,0,0,0.1)', borderRadius: '12px', backdropFilter: 'blur(8px)', boxShadow: '0 4px 6px -1px rgba(0,0,0,0.1)' }} />
-                                    <Bar dataKey="minutes" fill="url(#colorMinutes)" radius={[6, 6, 0, 0]} />
-                                </BarChart>
+                                    <XAxis dataKey="name" stroke="#64748b" tickLine={false} axisLine={false} tickMargin={10} />
+                                    <YAxis stroke="#64748b" tickLine={false} axisLine={false} tickMargin={10} />
+                                    <Tooltip cursor={{ stroke: '#3b82f6', strokeWidth: 1.5, strokeDasharray: '4 4' }} contentStyle={{ backgroundColor: 'rgba(255,255,255,0.95)', border: '1px solid rgba(59,130,246,0.2)', borderRadius: '12px', boxShadow: '0 4px 20px -2px rgba(0,0,0,0.1)' }} />
+                                    <Area type="monotone" dataKey="minutes" stroke="#3b82f6" strokeWidth={4} fillOpacity={1} fill="url(#colorMinutesFlow)" activeDot={{ r: 6, fill: '#3b82f6', stroke: '#fff', strokeWidth: 2, style: { filter: 'drop-shadow(0px 4px 6px rgba(59,130,246,0.4))' } }} />
+                                </AreaChart>
                             </ResponsiveContainer>
                         </div>
                     </div>
@@ -170,19 +170,19 @@ const Dashboard = () => {
                         </h3>
                         <div style={{ height: '240px' }}>
                             <ResponsiveContainer width="100%" height="100%">
-                                <BarChart data={weeklyTasksData} barSize={45}>
+                                <AreaChart data={weeklyTasksData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
                                     <defs>
-                                        <linearGradient id="colorTasks" x1="0" y1="0" x2="0" y2="1">
-                                            <stop offset="5%" stopColor="#8b5cf6" stopOpacity={0.8}/>
-                                            <stop offset="95%" stopColor="#8b5cf6" stopOpacity={0.2}/>
+                                        <linearGradient id="colorTasksFlow" x1="0" y1="0" x2="0" y2="1">
+                                            <stop offset="5%" stopColor="#8b5cf6" stopOpacity={0.5}/>
+                                            <stop offset="95%" stopColor="#8b5cf6" stopOpacity={0.0}/>
                                         </linearGradient>
                                     </defs>
                                     <CartesianGrid strokeDasharray="3 3" stroke="rgba(0,0,0,0.05)" vertical={false} />
-                                    <XAxis dataKey="name" stroke="#64748b" tickLine={false} axisLine={false} />
-                                    <YAxis stroke="#64748b" tickLine={false} axisLine={false} allowDecimals={false} />
-                                    <Tooltip cursor={{fill: 'rgba(0,0,0,0.02)'}} contentStyle={{ backgroundColor: 'rgba(255,255,255,0.95)', border: '1px solid rgba(0,0,0,0.1)', borderRadius: '12px', backdropFilter: 'blur(8px)', boxShadow: '0 4px 6px -1px rgba(0,0,0,0.1)' }} />
-                                    <Bar dataKey="completed" fill="url(#colorTasks)" radius={[6, 6, 0, 0]} />
-                                </BarChart>
+                                    <XAxis dataKey="name" stroke="#64748b" tickLine={false} axisLine={false} tickMargin={10} />
+                                    <YAxis stroke="#64748b" tickLine={false} axisLine={false} tickMargin={10} allowDecimals={false} />
+                                    <Tooltip cursor={{ stroke: '#8b5cf6', strokeWidth: 1.5, strokeDasharray: '4 4' }} contentStyle={{ backgroundColor: 'rgba(255,255,255,0.95)', border: '1px solid rgba(139,92,246,0.2)', borderRadius: '12px', boxShadow: '0 4px 20px -2px rgba(0,0,0,0.1)' }} />
+                                    <Area type="monotone" dataKey="completed" stroke="#8b5cf6" strokeWidth={4} fillOpacity={1} fill="url(#colorTasksFlow)" activeDot={{ r: 6, fill: '#8b5cf6', stroke: '#fff', strokeWidth: 2, style: { filter: 'drop-shadow(0px 4px 6px rgba(139,92,246,0.4))' } }} />
+                                </AreaChart>
                             </ResponsiveContainer>
                         </div>
                     </div>
