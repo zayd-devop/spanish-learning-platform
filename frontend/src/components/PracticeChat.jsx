@@ -5,9 +5,21 @@ const API_BASE = import.meta.env.VITE_API_BASE_URL || 'http://127.0.0.1:8000/api
 
 const PracticeChat = () => {
     const { user } = useAuth();
-    const [messages, setMessages] = useState([
-        { role: 'assistant', content: '¡Hola! Soy Maestro. Estoy aquí para ayudarte a practicar tu español. ¿De qué te gustaría hablar hoy?' }
-    ]);
+    const storageKey = `ai_tutor_messages_${user?.id || 'default'}`;
+
+    const [messages, setMessages] = useState(() => {
+        const saved = localStorage.getItem(storageKey);
+        if (saved) {
+            try {
+                return JSON.parse(saved);
+            } catch (e) {
+                console.error("Failed to parse saved chat", e);
+            }
+        }
+        return [
+            { role: 'assistant', content: '¡Hola! Soy Maestro. Estoy aquí para ayudarte a practicar tu español. ¿De qué te gustaría hablar hoy?' }
+        ];
+    });
     const [input, setInput] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const [isRecording, setIsRecording] = useState(false);
@@ -22,6 +34,20 @@ const PracticeChat = () => {
     useEffect(() => {
         scrollToBottom();
     }, [messages, isLoading]);
+
+    useEffect(() => {
+        localStorage.setItem(storageKey, JSON.stringify(messages));
+    }, [messages, storageKey]);
+
+    const clearChat = () => {
+        if (window.confirm("Are you sure you want to delete the entire conversation?")) {
+            const initialMessage = [
+                { role: 'assistant', content: '¡Hola! Soy Maestro. Estoy aquí para ayudarte a practicar tu español. ¿De qué te gustaría hablar hoy?' }
+            ];
+            setMessages(initialMessage);
+            localStorage.setItem(storageKey, JSON.stringify(initialMessage));
+        }
+    };
 
     const handleSend = async () => {
         if (!input.trim()) return;
@@ -149,13 +175,24 @@ const PracticeChat = () => {
                     <div style={{ width: '38px', height: '38px', borderRadius: '50%', background: 'var(--accent-gradient)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', fontSize: '1.2rem', boxShadow: '0 4px 10px rgba(59, 130, 246, 0.3)' }}>
                         🎓
                     </div>
-                    <div>
+                    <div style={{ flex: 1 }}>
                         <h3 style={{ margin: 0, fontSize: '1.05rem', color: 'var(--text-primary)' }}>Maestro</h3>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem', marginTop: '2px' }}>
                             <div style={{ width: '6px', height: '6px', borderRadius: '50%', background: 'var(--success)' }}></div>
                             <span style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>Online - B1/B2 Level</span>
                         </div>
                     </div>
+                    <button 
+                        onClick={clearChat}
+                        title="Borrar conversación"
+                        style={{ background: 'transparent', border: '1px solid rgba(239, 68, 68, 0.3)', color: 'var(--danger)', padding: '0.4rem 0.8rem', borderRadius: '8px', fontSize: '0.8rem', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.4rem' }}
+                    >
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                            <polyline points="3 6 5 6 21 6"></polyline>
+                            <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                        </svg>
+                        Clear
+                    </button>
                 </div>
 
                 {/* Chat Messages */}
@@ -222,7 +259,7 @@ const PracticeChat = () => {
                             disabled={isLoading}
                             className={isRecording ? "recording-pulse" : ""}
                             style={{ 
-                                background: isRecording ? 'var(--danger)' : 'rgba(0,0,0,0.05)', 
+                                background: isRecording ? '#ef4444' : 'rgba(0,0,0,0.05)', 
                                 color: isRecording ? 'white' : 'var(--text-secondary)', 
                                 border: 'none', 
                                 width: '45px', 

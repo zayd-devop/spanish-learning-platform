@@ -53,14 +53,42 @@ const LearningPath = () => {
   }, [selectedWeekId]);
 
   const handleToggleCompletion = async (id) => {
+    const week = weeks.find(w => w.id === id);
+    if (!week) return;
+
+    if (!week.is_completed && week.checklist && week.checklist.length > 0) {
+      let allTasksCompleted = true;
+      for (let idx = 0; idx < week.checklist.length; idx++) {
+        const item = week.checklist[idx];
+        const loggedMinutes = week.task_progress?.[idx] || 0;
+        const goalMinutes = item.weekly_goal_minutes || 0;
+        if (loggedMinutes < goalMinutes) {
+          allTasksCompleted = false;
+          break;
+        }
+      }
+
+      if (!allTasksCompleted) {
+        Swal.fire({
+          title: 'Incomplete Tasks',
+          text: 'You must reach the target time for all weekly tasks before marking this milestone as completed.',
+          icon: 'warning',
+          background: '#1e293b',
+          color: '#fff',
+          confirmButtonColor: '#3b82f6'
+        });
+        return;
+      }
+    }
+
     try {
       const response = await fetch(`${API_BASE}/weeks/${id}/toggle-complete`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
       });
       if (response.ok) {
-        setWeeks(weeks.map(week => 
-          week.id === id ? { ...week, is_completed: !week.is_completed } : week
+        setWeeks(weeks.map(w => 
+          w.id === id ? { ...w, is_completed: !w.is_completed } : w
         ));
       }
     } catch (err) {

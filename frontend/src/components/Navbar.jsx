@@ -22,7 +22,7 @@ const Navbar = () => {
     };
 
     return (
-        <nav className="navbar glass-panel" style={{ borderRadius: '0', borderLeft: 'none', borderRight: 'none', borderTop: 'none', display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1rem', flexWrap: 'wrap', gap: '0.5rem' }}>
+        <nav className="navbar glass-panel" style={{ borderRadius: '0', borderLeft: 'none', borderRight: 'none', borderTop: 'none', display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1rem', flexWrap: 'nowrap', gap: '0.5rem' }}>
             <div className="navbar-brand">
                 <Link to="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '8px' }}>
                     <ESpanishLogo />
@@ -30,12 +30,16 @@ const Navbar = () => {
                 </Link>
             </div>
 
-            <div className="navbar-menu" style={{ display: 'flex', alignItems: 'center', gap: '1rem', flexWrap: 'wrap' }}>
+            <div className="navbar-menu" style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', flexWrap: 'nowrap' }}>
                 {user ? (
                     <>
-                        <span style={{ color: '#475569', fontWeight: '500', whiteSpace: 'nowrap' }}>Hola, {user.name.split(' ')[0]}</span>
-                        <button onClick={handleLogout} className="nav-btn nav-btn-danger">
-                            Logout
+                        <span style={{ color: '#475569', fontWeight: '500', whiteSpace: 'nowrap', fontSize: '0.95rem' }}>Hola, {user.name.split(' ')[0]}</span>
+                        <button onClick={handleLogout} className="nav-btn nav-btn-danger" style={{ padding: '0.4rem', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: '8px' }} title="Logout">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                                <polyline points="16 17 21 12 16 7"></polyline>
+                                <line x1="21" y1="12" x2="9" y2="12"></line>
+                            </svg>
                         </button>
                     </>
                 ) : (
