@@ -137,7 +137,7 @@ const PracticeChat = () => {
     };
 
     return (
-        <div style={{ display: 'flex', flexDirection: 'column', height: '100%', padding: '2rem', animation: 'fadeIn 0.5s ease-out' }}>
+        <div className="chat-container">
             <div style={{ marginBottom: '1.5rem' }}>
                 <h1 className="gradient-text" style={{ fontSize: '2.5rem', marginBottom: '0.5rem', fontWeight: '800' }}>AI Tutor</h1>
                 <p style={{ color: 'var(--text-secondary)' }}>Practice your Spanish conversation skills with real-time grammar corrections.</p>
@@ -159,7 +159,7 @@ const PracticeChat = () => {
                 </div>
 
                 {/* Chat Messages */}
-                <div style={{ flex: 1, overflowY: 'auto', padding: '2rem', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+                <div className="chat-messages">
                     {messages.map((msg, idx) => {
                         const isUser = msg.role === 'user';
                         return (
@@ -169,17 +169,12 @@ const PracticeChat = () => {
                                         🎓
                                     </div>
                                 )}
-                                <div style={{ 
-                                    maxWidth: '75%', 
-                                    padding: '1rem 1.5rem', 
-                                    borderRadius: '20px', 
+                                <div className="chat-bubble" style={{ 
                                     borderBottomRightRadius: isUser ? '4px' : '20px',
                                     borderBottomLeftRadius: !isUser ? '4px' : '20px',
                                     background: isUser ? 'var(--accent-primary)' : 'rgba(255,255,255,0.9)', 
                                     color: isUser ? 'white' : 'var(--text-primary)',
                                     boxShadow: isUser ? '0 4px 15px rgba(59, 130, 246, 0.2)' : '0 4px 15px rgba(0,0,0,0.05)',
-                                    lineHeight: '1.5',
-                                    fontSize: '1rem',
                                     border: isUser ? 'none' : '1px solid rgba(0,0,0,0.05)'
                                 }}>
                                     {msg.content}
@@ -192,9 +187,7 @@ const PracticeChat = () => {
                             <div style={{ width: '30px', height: '30px', borderRadius: '50%', background: 'var(--accent-gradient)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', fontSize: '0.9rem', flexShrink: 0 }}>
                                 🎓
                             </div>
-                            <div style={{ 
-                                padding: '1rem 1.5rem', 
-                                borderRadius: '20px', 
+                            <div className="chat-bubble" style={{ 
                                 borderBottomLeftRadius: '4px',
                                 background: 'rgba(255,255,255,0.9)', 
                                 boxShadow: '0 4px 15px rgba(0,0,0,0.05)',
@@ -212,7 +205,7 @@ const PracticeChat = () => {
                 </div>
 
                 {/* Chat Input */}
-                <div style={{ padding: '1.5rem', borderTop: '1px solid rgba(0,0,0,0.05)', background: 'rgba(255,255,255,0.5)' }}>
+                <div className="chat-input-area">
                     <div style={{ display: 'flex', gap: '1rem', background: 'white', padding: '0.5rem', borderRadius: '16px', boxShadow: 'inset 0 2px 4px rgba(0,0,0,0.02), 0 4px 10px rgba(0,0,0,0.05)' }}>
                         <input 
                             type="text" 

@@ -691,6 +691,61 @@ h1, h2, h3 {
 }
 
 /* =========================================
+   PRACTICE CHAT RESPONSIVE UI
+   ========================================= */
+
+.chat-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 2rem;
+  animation: fadeIn 0.5s ease-out;
+}
+
+.chat-messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.chat-bubble {
+  max-width: 75%;
+  padding: 1rem 1.5rem;
+  border-radius: 20px;
+  line-height: 1.5;
+  font-size: 1rem;
+}
+
+.chat-input-area {
+  padding: 1.5rem;
+  border-top: 1px solid rgba(0,0,0,0.05);
+  background: rgba(255,255,255,0.5);
+}
+
+@media (max-width: 768px) {
+  .chat-container {
+    padding: 1rem !important;
+    /* On mobile, adjust height to account for the bottom nav */
+    min-height: calc(100vh - 120px) !important;
+  }
+  .chat-messages {
+    padding: 1rem !important;
+    gap: 1rem !important;
+  }
+  .chat-bubble {
+    max-width: 90% !important;
+    padding: 0.85rem 1.15rem !important;
+    font-size: 0.95rem !important;
+  }
+  .chat-input-area {
+    padding: 1rem !important;
+  }
+}
+
+/* =========================================
    RESPONSIVE LAYOUT & MOBILE OPTIMIZATIONS
    ========================================= */
 
