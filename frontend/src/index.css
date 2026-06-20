@@ -576,7 +576,6 @@ h1, h2, h3 {
 .main-layout {
   display: flex;
   height: 100vh;
-  overflow: hidden;
   background: var(--bg-primary);
 }
 
