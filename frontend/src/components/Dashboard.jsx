@@ -110,10 +110,9 @@ const Dashboard = () => {
                     <h1 className="gradient-text" style={{ fontSize: '3rem', marginBottom: '0.5rem', fontWeight: '800' }}>Analytics Dashboard</h1>
                     <p style={{ color: 'var(--text-secondary)', fontSize: '1.1rem' }}>Track your fluency journey and learning metrics in real-time.</p>
                 </div>
-                <div className="dashboard-filters" style={{ display: 'flex', gap: '1rem', background: 'rgba(255,255,255,0.05)', padding: '0.5rem', borderRadius: '12px', border: '1px solid var(--glass-border)' }}>
-                    <button style={{ background: 'var(--accent-primary)', color: 'white', border: 'none', padding: '0.5rem 1rem', borderRadius: '8px', fontWeight: '600', cursor: 'pointer' }}>Last 7 Days</button>
-                    <button style={{ background: 'transparent', color: 'var(--text-secondary)', border: 'none', padding: '0.5rem 1rem', borderRadius: '8px', fontWeight: '600', cursor: 'pointer' }}>30 Days</button>
-                    <button style={{ background: 'transparent', color: 'var(--text-secondary)', border: 'none', padding: '0.5rem 1rem', borderRadius: '8px', fontWeight: '600', cursor: 'pointer' }}>All Time</button>
+                <div className="dashboard-filters" style={{ display: 'flex', gap: '0.5rem', background: 'rgba(255,255,255,0.05)', padding: '0.5rem', borderRadius: '12px', border: '1px solid var(--glass-border)', alignItems: 'center' }}>
+                    <label style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', fontWeight: '600', marginLeft: '0.5rem' }}>Filter by Date:</label>
+                    <input type="date" style={{ background: 'white', color: 'var(--text-primary)', border: '1px solid var(--glass-border)', padding: '0.4rem 0.8rem', borderRadius: '8px', fontWeight: '500', outline: 'none', cursor: 'pointer' }} />
                 </div>
             </div>
 

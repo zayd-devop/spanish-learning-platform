@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
+import Swal from 'sweetalert2';
 
 const API_BASE = import.meta.env.VITE_API_BASE_URL || 'http://127.0.0.1:8000/api';
 
@@ -39,8 +40,20 @@ const PracticeChat = () => {
         localStorage.setItem(storageKey, JSON.stringify(messages));
     }, [messages, storageKey]);
 
-    const clearChat = () => {
-        if (window.confirm("Are you sure you want to delete the entire conversation?")) {
+    const clearChat = async () => {
+        const result = await Swal.fire({
+            title: 'Delete Conversation?',
+            text: "Are you sure you want to delete the entire conversation with Maestro? This cannot be undone.",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#ef4444',
+            cancelButtonColor: '#4b5563',
+            confirmButtonText: 'Yes, clear it',
+            background: '#1e293b',
+            color: '#fff'
+        });
+
+        if (result.isConfirmed) {
             const initialMessage = [
                 { role: 'assistant', content: '¡Hola! Soy Maestro. Estoy aquí para ayudarte a practicar tu español. ¿De qué te gustaría hablar hoy?' }
             ];

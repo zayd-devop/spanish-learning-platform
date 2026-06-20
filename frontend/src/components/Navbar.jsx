@@ -22,7 +22,7 @@ const Navbar = () => {
     };
 
     return (
-        <nav className="navbar glass-panel" style={{ borderRadius: '0', borderLeft: 'none', borderRight: 'none', borderTop: 'none', display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1rem', flexWrap: 'nowrap', gap: '0.5rem' }}>
+        <nav className="navbar glass-panel" style={{ position: 'sticky', top: 0, zIndex: 100, borderRadius: '0', borderLeft: 'none', borderRight: 'none', borderTop: 'none', display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1rem', flexWrap: 'nowrap', gap: '0.5rem' }}>
             <div className="navbar-brand">
                 <Link to="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '8px' }}>
                     <ESpanishLogo />
@@ -44,11 +44,20 @@ const Navbar = () => {
                     </>
                 ) : (
                     <>
-                        <Link to="/login" className="nav-btn nav-btn-outline">
-                            Login
+                        <Link to="/login" className="nav-btn nav-btn-outline" style={{ padding: '0.4rem', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: '8px' }} title="Log In">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                                <path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"></path>
+                                <polyline points="10 17 15 12 10 7"></polyline>
+                                <line x1="15" y1="12" x2="3" y2="12"></line>
+                            </svg>
                         </Link>
-                        <Link to="/register" className="nav-btn nav-btn-solid">
-                            Register
+                        <Link to="/register" className="nav-btn nav-btn-solid" style={{ padding: '0.4rem', display: 'flex', alignItems: 'center', justifyContent: 'center', borderRadius: '8px' }} title="Sign Up">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                                <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="8.5" cy="7" r="4"></circle>
+                                <line x1="20" y1="8" x2="20" y2="14"></line>
+                                <line x1="23" y1="11" x2="17" y2="11"></line>
+                            </svg>
                         </Link>
                     </>
                 )}
