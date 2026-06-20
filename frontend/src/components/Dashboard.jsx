@@ -160,7 +160,7 @@ const Dashboard = () => {
                         </div>
                     </div>
 
-                    {/* Tasks Completed Line Chart */}
+                    {/* Tasks Completed Bar Chart */}
                     <div className="glass-panel hover-glow" style={{ padding: '2.5rem', borderRadius: '20px', background: 'linear-gradient(145deg, rgba(255,255,255,0.05) 0%, rgba(0,0,0,0) 100%)' }}>
                         <h3 style={{ marginBottom: '2rem', fontSize: '1.3rem', color: 'var(--text-primary)', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#8b5cf6" strokeWidth="2">
@@ -171,7 +171,7 @@ const Dashboard = () => {
                         </h3>
                         <div style={{ height: '320px' }}>
                             <ResponsiveContainer width="100%" height="100%">
-                                <LineChart data={weeklyTasksData}>
+                                <BarChart data={weeklyTasksData} barSize={45}>
                                     <defs>
                                         <linearGradient id="colorTasks" x1="0" y1="0" x2="0" y2="1">
                                             <stop offset="5%" stopColor="#8b5cf6" stopOpacity={0.8}/>
@@ -181,9 +181,9 @@ const Dashboard = () => {
                                     <CartesianGrid strokeDasharray="3 3" stroke="rgba(0,0,0,0.05)" vertical={false} />
                                     <XAxis dataKey="name" stroke="#64748b" tickLine={false} axisLine={false} />
                                     <YAxis stroke="#64748b" tickLine={false} axisLine={false} allowDecimals={false} />
-                                    <Tooltip contentStyle={{ backgroundColor: 'rgba(255,255,255,0.95)', border: '1px solid rgba(0,0,0,0.1)', borderRadius: '12px', backdropFilter: 'blur(8px)', boxShadow: '0 4px 6px -1px rgba(0,0,0,0.1)' }} />
-                                    <Line type="monotone" dataKey="completed" stroke="#8b5cf6" strokeWidth={4} dot={{ r: 6, fill: '#8b5cf6', strokeWidth: 2, stroke: '#fff' }} activeDot={{ r: 8 }} />
-                                </LineChart>
+                                    <Tooltip cursor={{fill: 'rgba(0,0,0,0.02)'}} contentStyle={{ backgroundColor: 'rgba(255,255,255,0.95)', border: '1px solid rgba(0,0,0,0.1)', borderRadius: '12px', backdropFilter: 'blur(8px)', boxShadow: '0 4px 6px -1px rgba(0,0,0,0.1)' }} />
+                                    <Bar dataKey="completed" fill="url(#colorTasks)" radius={[6, 6, 0, 0]} />
+                                </BarChart>
                             </ResponsiveContainer>
                         </div>
                     </div>
