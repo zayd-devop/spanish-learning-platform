@@ -26,7 +26,9 @@ body {
   background-color: var(--bg-primary);
   color: var(--text-primary);
   min-height: 100vh;
+  min-height: 100dvh;
   overflow-x: hidden;
+  -webkit-tap-highlight-color: transparent;
 }
 
 /* Glassmorphism Utilities */
@@ -576,6 +578,7 @@ h1, h2, h3 {
 .main-layout {
   display: flex;
   height: 100vh;
+  height: 100dvh;
   background: var(--bg-primary);
 }
 
@@ -686,6 +689,7 @@ h1, h2, h3 {
 .scrollable-content {
   flex: 1;
   overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
   padding-bottom: 2rem;
 }
 
