@@ -112,7 +112,7 @@ const Dashboard = () => {
                 </div>
                 <div className="dashboard-filters" style={{ display: 'flex', gap: '0.5rem', background: 'rgba(255,255,255,0.05)', padding: '0.5rem', borderRadius: '12px', border: '1px solid var(--glass-border)', alignItems: 'center' }}>
                     <label style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', fontWeight: '600', marginLeft: '0.5rem' }}>Filter by Date:</label>
-                    <input type="date" style={{ background: 'white', color: 'var(--text-primary)', border: '1px solid var(--glass-border)', padding: '0.4rem 0.8rem', borderRadius: '8px', fontWeight: '500', outline: 'none', cursor: 'pointer' }} />
+                    <input type="date" defaultValue={new Date().toLocaleDateString('en-CA')} style={{ background: 'white', color: 'var(--text-primary)', border: '1px solid var(--glass-border)', padding: '0.4rem 0.8rem', borderRadius: '8px', fontWeight: '500', outline: 'none', cursor: 'pointer' }} />
                 </div>
             </div>
 
