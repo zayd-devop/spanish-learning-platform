@@ -11,6 +11,7 @@ const Dashboard = () => {
     const [loading, setLoading] = useState(true);
 
     const [weeklyTimeData, setWeeklyTimeData] = useState([]);
+    const [weeklyTasksData, setWeeklyTasksData] = useState([]);
     const [completionData, setCompletionData] = useState([
         { name: 'Completed', value: 0 },
         { name: 'Remaining', value: 1 }
@@ -26,18 +27,40 @@ const Dashboard = () => {
                 
                 setKpiData(data.kpi);
 
-                // Build dynamic Weekly Time Data (up to 12 weeks)
-                const dynamicWeeklyTimeData = data.weeks.map(week => {
+                // Build dynamic Weekly Time Data & Tasks Data
+                const dynamicWeeklyTimeData = [];
+                const dynamicWeeklyTasksData = [];
+                
+                data.weeks.forEach(week => {
                     let totalMins = 0;
+                    let tasksCompleted = 0;
+                    
+                    const checklist = week.checklist || [];
+                    const progress = week.task_progress || {};
+
+                    checklist.forEach((item, i) => {
+                        const goal = item.weekly_goal_minutes || 0;
+                        const logged = progress[i] ? Number(progress[i]) : 0;
+                        if (goal > 0 && logged >= goal) {
+                            tasksCompleted++;
+                        }
+                    });
+
                     if (week.task_progress) {
                         totalMins = Object.values(week.task_progress).reduce((a, b) => a + Number(b), 0);
                     }
-                    return {
+
+                    dynamicWeeklyTimeData.push({
                         name: 'W' + week.week_number,
                         minutes: totalMins
-                    };
+                    });
+                    dynamicWeeklyTasksData.push({
+                        name: 'W' + week.week_number,
+                        completed: tasksCompleted
+                    });
                 });
                 setWeeklyTimeData(dynamicWeeklyTimeData);
+                setWeeklyTasksData(dynamicWeeklyTasksData);
 
                 // Build dynamic Curriculum Progress Data
                 let completedTasks = 0;
@@ -108,30 +131,61 @@ const Dashboard = () => {
             <StudentKPIs data={kpiData} />
 
             <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: '2rem', marginTop: '2.5rem' }}>
-                {/* Time Logged Chart */}
-                <div className="glass-panel hover-glow" style={{ padding: '2.5rem', borderRadius: '20px', background: 'linear-gradient(145deg, rgba(255,255,255,0.05) 0%, rgba(0,0,0,0) 100%)' }}>
-                    <h3 style={{ marginBottom: '2rem', fontSize: '1.3rem', color: 'var(--text-primary)', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent-primary)" strokeWidth="2">
-                            <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
-                        </svg>
-                        Study Time per Week (Minutes)
-                    </h3>
-                    <div style={{ height: '320px' }}>
-                        <ResponsiveContainer width="100%" height="100%">
-                            <BarChart data={weeklyTimeData} barSize={45}>
-                                <defs>
-                                    <linearGradient id="colorMinutes" x1="0" y1="0" x2="0" y2="1">
-                                        <stop offset="5%" stopColor="var(--accent-primary)" stopOpacity={0.8}/>
-                                        <stop offset="95%" stopColor="var(--accent-primary)" stopOpacity={0.2}/>
-                                    </linearGradient>
-                                </defs>
-                                <CartesianGrid strokeDasharray="3 3" stroke="rgba(0,0,0,0.05)" vertical={false} />
-                                <XAxis dataKey="name" stroke="#64748b" tickLine={false} axisLine={false} />
-                                <YAxis stroke="#64748b" tickLine={false} axisLine={false} />
-                                <Tooltip cursor={{fill: 'rgba(0,0,0,0.02)'}} contentStyle={{ backgroundColor: 'rgba(255,255,255,0.95)', border: '1px solid rgba(0,0,0,0.1)', borderRadius: '12px', backdropFilter: 'blur(8px)', boxShadow: '0 4px 6px -1px rgba(0,0,0,0.1)' }} />
-                                <Bar dataKey="minutes" fill="url(#colorMinutes)" radius={[6, 6, 0, 0]} />
-                            </BarChart>
-                        </ResponsiveContainer>
+                {/* Left Column */}
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '2.5rem' }}>
+                    {/* Time Logged Chart */}
+                    <div className="glass-panel hover-glow" style={{ padding: '2.5rem', borderRadius: '20px', background: 'linear-gradient(145deg, rgba(255,255,255,0.05) 0%, rgba(0,0,0,0) 100%)' }}>
+                        <h3 style={{ marginBottom: '2rem', fontSize: '1.3rem', color: 'var(--text-primary)', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--accent-primary)" strokeWidth="2">
+                                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
+                            </svg>
+                            Study Time per Week (Minutes)
+                        </h3>
+                        <div style={{ height: '320px' }}>
+                            <ResponsiveContainer width="100%" height="100%">
+                                <BarChart data={weeklyTimeData} barSize={45}>
+                                    <defs>
+                                        <linearGradient id="colorMinutes" x1="0" y1="0" x2="0" y2="1">
+                                            <stop offset="5%" stopColor="var(--accent-primary)" stopOpacity={0.8}/>
+                                            <stop offset="95%" stopColor="var(--accent-primary)" stopOpacity={0.2}/>
+                                        </linearGradient>
+                                    </defs>
+                                    <CartesianGrid strokeDasharray="3 3" stroke="rgba(0,0,0,0.05)" vertical={false} />
+                                    <XAxis dataKey="name" stroke="#64748b" tickLine={false} axisLine={false} />
+                                    <YAxis stroke="#64748b" tickLine={false} axisLine={false} />
+                                    <Tooltip cursor={{fill: 'rgba(0,0,0,0.02)'}} contentStyle={{ backgroundColor: 'rgba(255,255,255,0.95)', border: '1px solid rgba(0,0,0,0.1)', borderRadius: '12px', backdropFilter: 'blur(8px)', boxShadow: '0 4px 6px -1px rgba(0,0,0,0.1)' }} />
+                                    <Bar dataKey="minutes" fill="url(#colorMinutes)" radius={[6, 6, 0, 0]} />
+                                </BarChart>
+                            </ResponsiveContainer>
+                        </div>
+                    </div>
+
+                    {/* Tasks Completed Line Chart */}
+                    <div className="glass-panel hover-glow" style={{ padding: '2.5rem', borderRadius: '20px', background: 'linear-gradient(145deg, rgba(255,255,255,0.05) 0%, rgba(0,0,0,0) 100%)' }}>
+                        <h3 style={{ marginBottom: '2rem', fontSize: '1.3rem', color: 'var(--text-primary)', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#8b5cf6" strokeWidth="2">
+                                <path d="M22 11.08V12a10 10 10 0 1 1-5.93-9.14"></path>
+                                <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                            </svg>
+                            Tasks Completed per Week
+                        </h3>
+                        <div style={{ height: '320px' }}>
+                            <ResponsiveContainer width="100%" height="100%">
+                                <LineChart data={weeklyTasksData}>
+                                    <defs>
+                                        <linearGradient id="colorTasks" x1="0" y1="0" x2="0" y2="1">
+                                            <stop offset="5%" stopColor="#8b5cf6" stopOpacity={0.8}/>
+                                            <stop offset="95%" stopColor="#8b5cf6" stopOpacity={0.2}/>
+                                        </linearGradient>
+                                    </defs>
+                                    <CartesianGrid strokeDasharray="3 3" stroke="rgba(0,0,0,0.05)" vertical={false} />
+                                    <XAxis dataKey="name" stroke="#64748b" tickLine={false} axisLine={false} />
+                                    <YAxis stroke="#64748b" tickLine={false} axisLine={false} allowDecimals={false} />
+                                    <Tooltip contentStyle={{ backgroundColor: 'rgba(255,255,255,0.95)', border: '1px solid rgba(0,0,0,0.1)', borderRadius: '12px', backdropFilter: 'blur(8px)', boxShadow: '0 4px 6px -1px rgba(0,0,0,0.1)' }} />
+                                    <Line type="monotone" dataKey="completed" stroke="#8b5cf6" strokeWidth={4} dot={{ r: 6, fill: '#8b5cf6', strokeWidth: 2, stroke: '#fff' }} activeDot={{ r: 8 }} />
+                                </LineChart>
+                            </ResponsiveContainer>
+                        </div>
                     </div>
                 </div>
 
