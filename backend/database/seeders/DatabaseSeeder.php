@@ -56,10 +56,44 @@ class DatabaseSeeder extends Seeder
             ]
         ];
 
+        $dayTitles = [
+            "Fondations de la Fluidité",
+            "Maîtriser le Code à l'Oral",
+            "L'Art du Pitch",
+            "Construire la Confiance",
+            "Simuler l'Entretien Idéal",
+            "Bâtir des Phrases Complexes",
+            "Bilan : Semaine 1",
+            "Plongée dans le Vocabulaire Tech",
+            "Structurer son Argumentation",
+            "La Posture en Entretien",
+            "Raconter ses Projets",
+            "Les Connecteurs en Action",
+            "Débattre d'un Sujet Tech",
+            "Bilan : Semaine 2",
+            "Parler de ses Erreurs",
+            "Défendre son Choix Technologique",
+            "Comprendre l'Architecture",
+            "Présenter une Base de Données",
+            "L'Alternance : Vos Motivations",
+            "Gérer l'Imprévu à l'Oral",
+            "Bilan : Semaine 3",
+            "Exprimer ses Ambitions",
+            "Poser les Bonnes Questions",
+            "Le Vocabulaire Agile",
+            "Convaincre un Recruteur",
+            "L'Avenir de l'IA (Argumentation)",
+            "Négocier son Alternance",
+            "Bilan : Semaine 4",
+            "Dernières Révisions",
+            "Prêt pour l'Entreprise"
+        ];
+
         for ($i = 1; $i <= 30; $i++) {
+            $uniqueTitle = $dayTitles[$i - 1];
             Week::create([
                 'week_number' => $i,
-                'title' => 'Jour ' . $i . ' : Entraînement 3 Heures',
+                'title' => 'Jour ' . $i . ' : ' . $uniqueTitle,
                 'focus' => 'Réalisez vos 3 blocs quotidiens (Déblocage Actif, Entretiens, Stratégie Test) pour un total de 3 heures de pratique intensive en français.',
                 'milestone' => 'Compléter les 3 heures d\'entraînement sans sauter d\'étapes.',
                 'source_links' => [
