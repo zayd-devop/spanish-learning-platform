@@ -48,7 +48,7 @@ const Sidebar = () => {
         },
         { 
             path: '/guide-france', 
-            label: 'Guide Campus France', 
+            label: 'Campus France', 
             icon: (
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"></path>
