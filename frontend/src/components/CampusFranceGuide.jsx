@@ -97,7 +97,7 @@ const CampusFranceGuide = () => {
         </p>
       </section>
 
-      <div style={{ position: 'relative', paddingLeft: '2rem' }}>
+      <div style={{ position: 'relative', paddingLeft: '2rem', marginBottom: '4rem' }}>
         {/* Ligne verticale de la timeline */}
         <div style={{ position: 'absolute', top: 0, bottom: 0, left: '38px', width: '4px', background: 'var(--glass-border)', borderRadius: '2px' }}></div>
 
@@ -138,6 +138,53 @@ const CampusFranceGuide = () => {
           ))}
         </div>
       </div>
+
+      {/* --- NOUVELLE SECTION: ÉCOLES PRIVÉES --- */}
+      <section className="glass-panel" style={{ padding: '2.5rem', marginBottom: '3rem', borderLeft: '4px solid #8b5cf6' }}>
+        <h2 style={{ color: '#8b5cf6', marginBottom: '1.5rem', fontSize: '2rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
+            <path d="M2 17l10 5 10-5M2 12l10 5 10-5"></path>
+          </svg>
+          L'Alternative : Les Écoles Privées (Titres RNCP)
+        </h2>
+        <p style={{ color: 'var(--text-secondary)', lineHeight: '1.7', fontSize: '1.1rem', marginBottom: '2rem' }}>
+          De nombreux étudiants de l'OFPPT optent pour des écoles privées (souvent appelées "écoles d'ingénierie informatique"). Ces écoles ne délivrent pas de Licences universitaires, mais des <strong>Titres RNCP Niveau 6 (Bac+3)</strong> ou <strong>Niveau 7 (Bac+5)</strong>, très reconnus par les entreprises françaises.
+        </p>
+
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem', marginBottom: '2rem' }}>
+          <div style={{ background: 'rgba(0,0,0,0.03)', padding: '1.5rem', borderRadius: '12px' }}>
+            <h4 style={{ color: 'var(--text-primary)', marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+              <span style={{ fontSize: '1.5rem' }}>⚡</span> Le Processus (Très Différent)
+            </h4>
+            <ul style={{ listStyle: 'none', padding: 0, display: 'flex', flexDirection: 'column', gap: '0.75rem', color: 'var(--text-secondary)' }}>
+              <li><strong>1. Admission Directe :</strong> Vous postulez directement sur le site de l'école (toute l'année). Pas besoin d'attendre la procédure Études en France.</li>
+              <li><strong>2. Tests de l'École :</strong> Vous passez leurs propres tests en ligne (logique, technique, anglais) et un entretien de motivation.</li>
+              <li><strong>3. "Je suis accepté" :</strong> Une fois admis, vous allez sur Campus France et choisissez la procédure allégée "Je suis accepté" (juste pour valider le visa).</li>
+            </ul>
+          </div>
+
+          <div style={{ background: 'rgba(0,0,0,0.03)', padding: '1.5rem', borderRadius: '12px' }}>
+            <h4 style={{ color: 'var(--text-primary)', marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+              <span style={{ fontSize: '1.5rem' }}>💰</span> Frais et Alternance
+            </h4>
+            <ul style={{ listStyle: 'none', padding: 0, display: 'flex', flexDirection: 'column', gap: '0.75rem', color: 'var(--text-secondary)' }}>
+              <li><strong>Coût :</strong> Les frais de scolarité varient de 6 000€ à 9 000€ par an.</li>
+              <li><strong>L'Alternance :</strong> Si vous trouvez une entreprise, c'est elle qui paie vos frais de scolarité (et vous verse un salaire).</li>
+              <li><strong>Le Risque :</strong> Si vous ne trouvez pas d'entreprise avant la rentrée, vous devrez payer l'école vous-même pour la première année en statut "Initial".</li>
+            </ul>
+          </div>
+        </div>
+
+        <h4 style={{ color: 'var(--text-primary)', marginBottom: '1rem', fontSize: '1.2rem' }}>Écoles populaires auprès des profils OFPPT :</h4>
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem' }}>
+          {['Ynov Campus', 'Epitech', 'EPSI', 'MyDigitalSchool', 'CESI', 'Supinfo', 'Web@cademie', 'Campus Academy'].map(ecole => (
+            <span key={ecole} style={{ background: 'rgba(139, 92, 246, 0.1)', color: '#8b5cf6', padding: '0.5rem 1rem', borderRadius: '8px', fontWeight: '600' }}>
+              {ecole}
+            </span>
+          ))}
+        </div>
+      </section>
 
     </div>
   );
