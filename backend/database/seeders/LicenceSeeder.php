@@ -152,6 +152,62 @@ class LicenceSeeder extends Seeder
                 'name' => 'Licence Pro DWM', 'institute' => 'Université de Poitiers', 'location' => 'Poitiers, Nouvelle-Aquitaine',
                 'description' => 'Développement Web et Multimédia, parcours spécialisé Front-end / UX.',
                 'website' => 'https://www.univ-poitiers.fr/', 'latitude' => 46.5802, 'longitude' => 0.3404,
+            ],
+            // --- ÉCOLES PRIVÉES (TITRES RNCP) ---
+            [
+                'name' => 'Mastère Développement Web (Titre RNCP Nv 7)', 'institute' => 'Ynov Campus Paris', 'location' => 'Nanterre, Île-de-France',
+                'description' => 'École très prisée. Cycle de 2 ans en alternance après un Bac+3 ou admission parallèle. Gros réseau d\'entreprises.',
+                'website' => 'https://www.ynov.com/campus/paris/', 'latitude' => 48.8996, 'longitude' => 2.2046,
+            ],
+            [
+                'name' => 'Mastère Développement Logiciel', 'institute' => 'Ynov Campus Lyon', 'location' => 'Lyon, Auvergne-Rhône-Alpes',
+                'description' => 'Formation pratique basée sur des projets. Très orienté Alternance.',
+                'website' => 'https://www.ynov.com/campus/lyon/', 'latitude' => 45.7485, 'longitude' => 4.8467,
+            ],
+            [
+                'name' => 'Expert en Ingénierie Logicielle', 'institute' => 'Epitech Paris', 'location' => 'Le Kremlin-Bicêtre, Île-de-France',
+                'description' => 'Pédagogie par projet (Piscine). Réputation d\'excellence technique.',
+                'website' => 'https://www.epitech.eu/', 'latitude' => 48.8156, 'longitude' => 2.3631,
+            ],
+            [
+                'name' => 'Expert IT', 'institute' => 'Epitech Nantes', 'location' => 'Nantes, Pays de la Loire',
+                'description' => 'Campus dynamique. 100% de la 4e et 5e année se font en alternance.',
+                'website' => 'https://www.epitech.eu/', 'latitude' => 47.2140, 'longitude' => -1.5540,
+            ],
+            [
+                'name' => 'Concepteur Développeur d\'Applications', 'institute' => 'CESI École d\'Ingénieurs', 'location' => 'Nanterre, Île-de-France',
+                'description' => 'Titre RNCP niveau 6 (Bac+3). Pédagogie active (PBL). Leader de l\'alternance.',
+                'website' => 'https://www.cesi.fr/', 'latitude' => 48.8956, 'longitude' => 2.2223,
+            ],
+            [
+                'name' => 'Manager en Systèmes d\'Information', 'institute' => 'CESI Bordeaux', 'location' => 'Bordeaux, Nouvelle-Aquitaine',
+                'description' => 'Formation très recherchée par les ESN de la région bordelaise.',
+                'website' => 'https://www.cesi.fr/', 'latitude' => 44.8690, 'longitude' => -0.5560,
+            ],
+            [
+                'name' => 'Bachelor Développeur Web', 'institute' => 'MyDigitalSchool Lyon', 'location' => 'Lyon, Auvergne-Rhône-Alpes',
+                'description' => 'Axé sur les technologies web modernes (React, Node). Alternance dès la 3ème année.',
+                'website' => 'https://www.mydigitalschool.com/', 'latitude' => 45.7500, 'longitude' => 4.8300,
+            ],
+            [
+                'name' => 'Bachelor Développeur Web', 'institute' => 'MyDigitalSchool Rennes', 'location' => 'Rennes, Bretagne',
+                'description' => 'Forte employabilité dans le bassin tech rennais.',
+                'website' => 'https://www.mydigitalschool.com/', 'latitude' => 48.1150, 'longitude' => -1.6800,
+            ],
+            [
+                'name' => 'Ingénierie Informatique', 'institute' => 'EPSI Montpellier', 'location' => 'Montpellier, Occitanie',
+                'description' => 'École pionnière. 100% alternance en cycle mastère.',
+                'website' => 'https://www.epsi.fr/', 'latitude' => 43.6120, 'longitude' => 3.8780,
+            ],
+            [
+                'name' => 'Ingénierie Informatique', 'institute' => 'EPSI Lille', 'location' => 'Lille, Hauts-de-France',
+                'description' => 'Partenariats solides avec la French Tech Lille.',
+                'website' => 'https://www.epsi.fr/', 'latitude' => 50.6300, 'longitude' => 3.0600,
+            ],
+            [
+                'name' => 'Expert en Informatique et SI', 'institute' => 'Supinfo Paris', 'location' => 'Paris, Île-de-France',
+                'description' => 'Cursus généraliste tech. Alternance possible tout au long du cursus.',
+                'website' => 'https://www.supinfo.com/', 'latitude' => 48.8800, 'longitude' => 2.3500,
             ]
         ];
 
