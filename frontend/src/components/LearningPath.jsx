@@ -270,6 +270,23 @@ const LearningPath = () => {
           </div>
         </section>
 
+        <section className="glass-panel" style={{ marginBottom: '2rem', background: 'linear-gradient(145deg, rgba(59, 130, 246, 0.05) 0%, rgba(0,0,0,0) 100%)', borderLeft: '4px solid var(--accent-primary)' }}>
+          <h3 style={{ color: 'var(--accent-primary)', marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+            </svg>
+            Les Règles d'Or pour Bâtir la Confiance
+          </h3>
+          <ul style={{ listStyle: 'none', padding: 0, display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+            <li>
+              <strong>Acceptez l'erreur :</strong> En entretien ou à l'oral, la fluidité prime sur la perfection grammaticale. Un recruteur préférera quelqu'un qui parle avec aisance en faisant quelques fautes de conjugaison, plutôt que quelqu'un de parfait mais qui hésite à chaque mot.
+            </li>
+            <li>
+              <strong>Pensez en blocs, pas en mots :</strong> N'apprenez pas des mots isolés. Apprenez des structures prêtes à l'emploi ("Ce qui me passionne dans ce domaine, c'est...", "Pourriez-vous m'en dire plus sur...").
+            </li>
+          </ul>
+        </section>
+
         {selectedWeek && (
           <section className="glass-panel week-detail">
             <div className="detail-header">
