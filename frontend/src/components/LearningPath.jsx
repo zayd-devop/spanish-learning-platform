@@ -350,15 +350,26 @@ const LearningPath = () => {
                               <span style={{ color: isCompleted ? 'var(--success)' : 'var(--text-primary)', fontSize: '0.95rem', fontWeight: '500', textDecoration: isCompleted ? 'line-through' : 'none' }}>
                                 {item.task}
                               </span>
-                              {item.resource && (
-                                <a href={item.resource.url} target="_blank" rel="noopener noreferrer" style={{ fontSize: '0.8rem', color: 'var(--accent-primary)', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '4px' }}>
-                                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                                    <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
-                                    <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
-                                  </svg>
-                                  {item.resource.title}
-                                </a>
-                              )}
+                              <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
+                                {item.resource && (
+                                  <a href={item.resource.url} target="_blank" rel="noopener noreferrer" style={{ fontSize: '0.8rem', color: 'var(--accent-primary)', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '4px', background: 'rgba(59, 130, 246, 0.1)', padding: '2px 8px', borderRadius: '4px' }}>
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                      <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+                                      <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+                                    </svg>
+                                    {item.resource.title}
+                                  </a>
+                                )}
+                                {item.youtube_resource && (
+                                  <a href={item.youtube_resource.url} target="_blank" rel="noopener noreferrer" style={{ fontSize: '0.8rem', color: '#ef4444', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '4px', background: 'rgba(239, 68, 68, 0.1)', padding: '2px 8px', borderRadius: '4px' }}>
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" stroke="none">
+                                      <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29.01 29.01 0 0 0 1 11.75a29.01 29.01 0 0 0 .46 5.33 2.78 2.78 0 0 0 1.94 2c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29.01 29.01 0 0 0 .46-5.33 29.01 29.01 0 0 0-.46-5.33z"></path>
+                                      <polygon fill="#fff" points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon>
+                                    </svg>
+                                    {item.youtube_resource.title}
+                                  </a>
+                                )}
+                              </div>
                             </div>
                             <span style={{ fontSize: '0.8rem', color: isCompleted ? 'var(--success)' : 'var(--accent-secondary)', whiteSpace: 'nowrap', marginLeft: '1rem' }}>
                               {isCompleted ? 'Objectif atteint !' : `${remainingMinutes}m restants`}

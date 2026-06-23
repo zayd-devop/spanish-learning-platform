@@ -39,51 +39,60 @@ class DatabaseSeeder extends Seeder
                 // Bloc 1
                 [
                     'task' => '[Bloc 1] Rubber Ducking : Expliquez à voix haute et en français le concept suivant : ' . $techTopics[$idx] . '.', 
-                    'weekly_goal_minutes' => 45,
-                    'resource' => ['title' => 'Article sur ' . $techTopics[$idx], 'url' => 'https://www.google.com/search?q=' . urlencode('développement web ' . $techTopics[$idx])]
+                    'weekly_goal_minutes' => 30,
+                    'resource' => ['title' => 'Article sur ' . $techTopics[$idx], 'url' => 'https://www.google.com/search?q=' . urlencode('développement web ' . $techTopics[$idx])],
+                    'youtube_resource' => ['title' => 'Tuto YouTube', 'url' => 'https://www.youtube.com/results?search_query=' . urlencode('tutoriel français ' . $techTopics[$idx])]
                 ],
                 [
                     'task' => '[Bloc 1] Shadowing Technique : Cherchez un podcast/vidéo sur "' . $podcastTopics[$idx] . '". Écoutez et répétez les phrases.', 
-                    'weekly_goal_minutes' => 45,
-                    'resource' => ['title' => 'Podcast/Vidéo : ' . $podcastTopics[$idx], 'url' => 'https://www.youtube.com/results?search_query=' . urlencode('podcast developpeur français ' . $podcastTopics[$idx])]
+                    'weekly_goal_minutes' => 30,
+                    'resource' => ['title' => 'Podcast : ' . $podcastTopics[$idx], 'url' => 'https://www.google.com/search?q=' . urlencode('podcast developpeur français ' . $podcastTopics[$idx])],
+                    'youtube_resource' => ['title' => 'Vidéo YouTube', 'url' => 'https://www.youtube.com/results?search_query=' . urlencode('tech francais ' . $podcastTopics[$idx])]
                 ],
                 [
                     'task' => '[Bloc 1] Lecture à voix haute : Lisez un article d\'actualité tech en articulant chaque mot.', 
-                    'weekly_goal_minutes' => 45,
-                    'resource' => ['title' => 'Actualité Developpez.com', 'url' => 'https://www.developpez.com/']
+                    'weekly_goal_minutes' => 30,
+                    'resource' => ['title' => 'Actualité Developpez.com', 'url' => 'https://www.developpez.com/'],
+                    'youtube_resource' => ['title' => 'News Tech YouTube', 'url' => 'https://www.youtube.com/results?search_query=actualite+tech+francais']
                 ],
                 // Bloc 2
                 [
                     'task' => '[Bloc 2] Le Pitch (Ajustement) : Répétez votre présentation de 2 minutes en mettant en avant un aspect lié à ' . $techTopics[$idx] . '.', 
-                    'weekly_goal_minutes' => 45,
-                    'resource' => ['title' => 'Conseils Pitch', 'url' => 'https://www.welcometothejungle.com/fr/articles/entretien-embauche-comment-reussir-pitch-presentation']
+                    'weekly_goal_minutes' => 35,
+                    'resource' => ['title' => 'Conseils Pitch', 'url' => 'https://www.welcometothejungle.com/fr/articles/entretien-embauche-comment-reussir-pitch-presentation'],
+                    'youtube_resource' => ['title' => 'Exemple Pitch YouTube', 'url' => 'https://www.youtube.com/results?search_query=pitch+presentation+entretien+embauche']
                 ],
                 [
                     'task' => '[Bloc 2] Simulation d\'Entretien : Préparez une réponse orale détaillée à la question : "' . $interviewQuestions[$idx] . '"', 
-                    'weekly_goal_minutes' => 45,
-                    'resource' => ['title' => 'Questions d\'entretien', 'url' => 'https://www.apec.fr/tous-nos-conseils/entretien-dembauche.html']
+                    'weekly_goal_minutes' => 35,
+                    'resource' => ['title' => 'Questions d\'entretien', 'url' => 'https://www.apec.fr/tous-nos-conseils/entretien-dembauche.html'],
+                    'youtube_resource' => ['title' => 'Coaching Entretien', 'url' => 'https://www.youtube.com/results?search_query=' . urlencode('repondre entretien ' . $interviewQuestions[$idx])]
                 ],
                 // Bloc 3
                 [
-                    'task' => '[Bloc 3] L\'Argumentation : Préparez un plan de 15 min puis parlez 10 min sur le sujet : "' . $argTopics[$idx] . '"', 
-                    'weekly_goal_minutes' => 45,
-                    'resource' => ['title' => 'Inspiration sur le sujet', 'url' => 'https://www.google.com/search?q=' . urlencode('débat ' . $argTopics[$idx])]
+                    'task' => '[Bloc 3] L\'Argumentation : Préparez un plan de 10 min puis parlez 5 min sur le sujet : "' . $argTopics[$idx] . '"', 
+                    'weekly_goal_minutes' => 35,
+                    'resource' => ['title' => 'Inspiration sur le sujet', 'url' => 'https://www.google.com/search?q=' . urlencode('débat ' . $argTopics[$idx])],
+                    'youtube_resource' => ['title' => 'Débat YouTube', 'url' => 'https://www.youtube.com/results?search_query=' . urlencode('debat ' . $argTopics[$idx])]
                 ],
                 [
                     'task' => '[Bloc 3] Connecteurs Logiques : Entraînez-vous à faire des phrases complexes à l\'oral en intégrant obligatoirement : "' . $connecteurs[$connIdx] . '".', 
-                    'weekly_goal_minutes' => 45,
-                    'resource' => ['title' => 'Liste des connecteurs', 'url' => 'https://www.bonjourdefrance.com/exercices/contenu/les-connecteurs-logiques.html']
+                    'weekly_goal_minutes' => 35,
+                    'resource' => ['title' => 'Liste des connecteurs', 'url' => 'https://www.bonjourdefrance.com/exercices/contenu/les-connecteurs-logiques.html'],
+                    'youtube_resource' => ['title' => 'Cours YouTube', 'url' => 'https://www.youtube.com/results?search_query=connecteurs+logiques+francais+b2']
                 ],
                 // Bloc 4 : Préparation B2/C1
                 [
                     'task' => '[Bloc 4] Examen B2/C1 : Entraînement ciblé sur l\'épreuve "' . $b2c1Exams[$idx % count($b2c1Exams)] . '".', 
-                    'weekly_goal_minutes' => 45,
-                    'resource' => ['title' => 'Sujets d\'examen TV5Monde', 'url' => 'https://apprendre.tv5monde.com/fr/tcf']
+                    'weekly_goal_minutes' => 35,
+                    'resource' => ['title' => 'Sujets d\'examen TV5Monde', 'url' => 'https://apprendre.tv5monde.com/fr/tcf'],
+                    'youtube_resource' => ['title' => 'Entraînement YouTube', 'url' => 'https://www.youtube.com/results?search_query=' . urlencode('entrainement ' . $b2c1Exams[$idx % count($b2c1Exams)])]
                 ],
                 [
                     'task' => '[Bloc 4] Examen B2/C1 : Correction et analyse de vos erreurs (Grammaire avancée, Subjonctif, Concordance des temps).', 
-                    'weekly_goal_minutes' => 45,
-                    'resource' => ['title' => 'Grammaire avancée B2/C1', 'url' => 'https://www.lepointdufle.net/p/grammaire.htm']
+                    'weekly_goal_minutes' => 35,
+                    'resource' => ['title' => 'Grammaire avancée B2/C1', 'url' => 'https://www.lepointdufle.net/p/grammaire.htm'],
+                    'youtube_resource' => ['title' => 'Règle Grammaire', 'url' => 'https://www.youtube.com/results?search_query=grammaire+avancee+francais+c1']
                 ]
             ];
 
@@ -91,7 +100,7 @@ class DatabaseSeeder extends Seeder
                 'week_number' => $i,
                 'title' => 'Jour ' . $i . ' : ' . $dayTitles[$idx],
                 'focus' => 'Réalisez vos 4 blocs (Déblocage Actif, Entretiens Écoles, Stratégie, et B2/C1) pour assurer votre admission en école française.',
-                'milestone' => 'Compléter les 6h45 d\'entraînement pour réussir les entretiens des écoles privées et valider un score TCF B2/C1.',
+                'milestone' => 'Compléter les 5 heures d\'entraînement (300 minutes) pour réussir les entretiens des écoles privées et valider un score TCF B2/C1.',
                 'source_links' => [
                     ['title' => 'Tests Admission Écoles d\'Ingénieurs', 'url' => 'https://www.concours-puissance-alpha.fr/'],
                     ['title' => 'Réussir l\'Entretien Campus France', 'url' => 'https://maroc.campusfrance.org/lentretien-campus-france-0'],
