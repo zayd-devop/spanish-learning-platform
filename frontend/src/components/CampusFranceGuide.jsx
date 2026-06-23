@@ -77,7 +77,14 @@ const CampusFranceGuide = () => {
       <header style={{ marginBottom: '3rem', textAlign: 'center' }}>
         <h1 style={{ fontSize: '2.5rem', marginBottom: '1rem', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.75rem', flexWrap: 'wrap', color: 'var(--text-primary)' }}>
           <span className="gradient-text">De</span>
-          <img src="https://www.ofppt.ma/themes/custom/ofppt/logo.png" alt="OFPPT" style={{ height: '45px', objectFit: 'contain' }} />
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', margin: '0 0.5rem' }}>
+            <svg width="55" height="25" viewBox="0 0 100 45" fill="none" strokeWidth="8" strokeLinejoin="miter">
+              <path d="M 25 5 L 45 25 L 25 45 L 5 25 Z" stroke="#009A4D" />
+              <path d="M 50 5 L 70 25 L 50 45 L 30 25 Z" stroke="#9E9E9F" />
+              <path d="M 75 5 L 95 25 L 75 45 L 55 25 Z" stroke="#00529C" />
+            </svg>
+            <span style={{ fontSize: '0.7rem', fontWeight: '800', letterSpacing: '1px', marginTop: '2px', color: 'var(--text-primary)' }}>OFPPT</span>
+          </div>
           <span className="gradient-text" style={{ marginLeft: '0.5rem' }}>à la France</span>
           <img src="https://flagcdn.com/w80/fr.png" alt="France" style={{ height: '30px', borderRadius: '4px', boxShadow: '0 2px 5px rgba(0,0,0,0.1)' }} />
         </h1>
