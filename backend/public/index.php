@@ -3,6 +3,16 @@
 use Illuminate\Foundation\Application;
 use Illuminate\Http\Request;
 
+// Intercept OPTIONS requests early to guarantee CORS preflight succeeds
+if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+    header('Access-Control-Allow-Origin: *');
+    header('Access-Control-Allow-Methods: POST, GET, OPTIONS, PUT, DELETE, PATCH');
+    header('Access-Control-Allow-Headers: Content-Type, X-Auth-Token, Origin, Authorization, Accept, X-Requested-With');
+    header('Access-Control-Max-Age: 86400');
+    http_response_code(204);
+    exit;
+}
+
 // Vercel Serverless Fixes:
 // Overwrite Laravel storage paths to /tmp so it doesn't crash on Vercel's read-only file system
 if (isset($_ENV['VERCEL']) || getenv('VERCEL')) {
