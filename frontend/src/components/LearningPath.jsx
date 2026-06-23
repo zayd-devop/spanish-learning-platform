@@ -270,7 +270,7 @@ const LearningPath = () => {
           </div>
         </section>
 
-        <section className="glass-panel" style={{ marginBottom: '2rem', background: 'linear-gradient(145deg, rgba(59, 130, 246, 0.05) 0%, rgba(0,0,0,0) 100%)', borderLeft: '4px solid var(--accent-primary)' }}>
+        <section className="glass-panel" style={{ padding: '1.5rem 2rem', marginBottom: '2rem', background: 'linear-gradient(145deg, rgba(59, 130, 246, 0.05) 0%, rgba(0,0,0,0) 100%)', borderLeft: '4px solid var(--accent-primary)' }}>
           <h3 style={{ color: 'var(--accent-primary)', marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
