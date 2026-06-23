@@ -10,6 +10,7 @@ import LicencesList from './components/LicencesList';
 import LearningPath from './components/LearningPath';
 import Dashboard from './components/Dashboard';
 import PracticeChat from './components/PracticeChat';
+import CampusFranceGuide from './components/CampusFranceGuide';
 
 const ProtectedRoute = ({ children }) => {
   const { user, loading } = useAuth();
@@ -67,6 +68,13 @@ function App() {
             <ProtectedRoute>
               <MainLayout>
                 <PracticeChat />
+              </MainLayout>
+            </ProtectedRoute>
+          } />
+          <Route path="/guide-france" element={
+            <ProtectedRoute>
+              <MainLayout>
+                <CampusFranceGuide />
               </MainLayout>
             </ProtectedRoute>
           } />
