@@ -5,7 +5,7 @@ import Swal from 'sweetalert2';
 const API_BASE = import.meta.env.VITE_API_BASE_URL || 'http://127.0.0.1:8000/api';
 
 const PracticeChat = () => {
-    const { user } = useAuth();
+    const { user, token } = useAuth();
     const storageKey = `ai_tutor_messages_${user?.id || 'default'}`;
 
     const initialMessage = [
@@ -16,7 +16,6 @@ const PracticeChat = () => {
     const [input, setInput] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const [isLoaded, setIsLoaded] = useState(false);
-    const token = localStorage.getItem('token');
     const messagesEndRef = useRef(null);
 
     useEffect(() => {

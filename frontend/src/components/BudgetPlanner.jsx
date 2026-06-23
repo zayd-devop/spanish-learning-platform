@@ -4,7 +4,7 @@ import { useAuth } from '../context/AuthContext';
 const API_BASE = import.meta.env.VITE_API_BASE_URL || 'http://127.0.0.1:8000/api';
 
 const BudgetPlanner = () => {
-    const { user } = useAuth();
+    const { user, token } = useAuth();
     const storageKey = `cf_budget_${user?.id || 'default'}`;
 
     const [budget, setBudget] = useState({
@@ -20,7 +20,6 @@ const BudgetPlanner = () => {
     });
 
     const [isLoaded, setIsLoaded] = useState(false);
-    const token = localStorage.getItem('token');
 
     useEffect(() => {
         const fetchUserData = async () => {

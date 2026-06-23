@@ -4,7 +4,7 @@ import { useAuth } from '../context/AuthContext';
 const API_BASE = import.meta.env.VITE_API_BASE_URL || 'http://127.0.0.1:8000/api';
 
 const DocumentManager = () => {
-    const { user } = useAuth();
+    const { user, token } = useAuth();
     const storageKey = `cf_documents_${user?.id || 'default'}`;
 
     const defaultDocs = [
@@ -19,7 +19,6 @@ const DocumentManager = () => {
 
     const [documents, setDocuments] = useState(defaultDocs);
     const [isLoaded, setIsLoaded] = useState(false);
-    const token = localStorage.getItem('token');
 
     useEffect(() => {
         const fetchUserData = async () => {
