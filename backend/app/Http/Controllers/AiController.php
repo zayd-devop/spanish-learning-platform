@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
-use App\Models\Grado;
+use App\Models\Licence;
 
 class AiController extends Controller
 {
@@ -103,22 +103,22 @@ class AiController extends Controller
             'cv_text' => 'required|string'
         ]);
 
-        $grados = Grado::all();
-        $gradosList = $grados->map(function($g) {
-            return "- ID: {$g->id}, Name: {$g->name}, Institute: {$g->institute}";
+        $licences = Licence::all();
+        $licencesList = $licences->map(function($l) {
+            return "- ID: {$l->id}, Name: {$l->name}, Institute: {$l->institute}";
         })->join("\n");
 
-        $prompt = "You are an expert academic advisor in Spain. Analyze the following developer CV and compare it to these Vocational Training Degrees (Grados Superiores). Assign a 'match score' (0-100) to each Grado.
+        $prompt = "You are an expert academic advisor in France. Analyze the following developer CV and compare it to these L3 Licences avec Alternance. Assign a 'match score' (0-100) to each Licence.
         
 Return ONLY a strictly valid JSON array of objects. Do not use markdown blocks like ```json.
 The JSON must look EXACTLY like this structure:
 [
-  { \"grado_id\": 1, \"score\": 90, \"reason\": \"Strong web skills match DAW.\" },
-  { \"grado_id\": 2, \"score\": 60, \"reason\": \"Lacks Java experience for DAM.\" }
+  { \"licence_id\": 1, \"score\": 90, \"reason\": \"Strong web skills match Fullstack L3.\" },
+  { \"licence_id\": 2, \"score\": 60, \"reason\": \"Lacks Java experience for this program.\" }
 ]
 
-Grados:
-{$gradosList}
+Licences:
+{$licencesList}
 
 CV:
 {$validated['cv_text']}";
@@ -237,11 +237,11 @@ CV Text:
             $audioBase64 = preg_replace('/^data:audio\/\w+(?:;\w+=[^;]+)*;base64,/', '', $audioBase64);
         }
 
-        $prompt = "You are 'Maestro', a friendly and encouraging native Spanish language tutor. 
-Your student is learning Spanish and is currently around a B1 level.
+        $prompt = "You are 'Maestro', a friendly and encouraging native French language tutor. 
+Your student is learning French and is currently around a B1 level.
 Your rules:
-1. ALWAYS reply entirely in Spanish, keeping the vocabulary at a B1/B2 level.
-2. If the student makes a grammatical error, politely correct them in Spanish before continuing the conversation.
+1. ALWAYS reply entirely in French, keeping the vocabulary at a B1/B2 level.
+2. If the student makes a grammatical error, politely correct them in French before continuing the conversation.
 3. Ask a relevant follow-up question to keep the conversation flowing.
 4. Keep your responses relatively short and conversational (2-4 sentences max).
 
@@ -250,7 +250,7 @@ Conversation History:
 
         if ($hasAudio) {
             $prompt .= "The student provided an AUDIO message. Listen to it carefully. 
-First, transcribe exactly what the student said in Spanish (prefix with 'Transcripción:'). 
+First, transcribe exactly what the student said in French (prefix with 'Transcription:'). 
 Then, correct any grammatical or pronunciation mistakes they made. 
 Finally, provide your conversational response to what they said.";
         } else {

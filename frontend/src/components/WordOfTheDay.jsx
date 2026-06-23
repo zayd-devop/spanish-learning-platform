@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
 
-// A predefined list of high-frequency Spanish words and phrases (B1/B2 level focus)
+// A predefined list of high-frequency French words and phrases (B1/B2 level focus)
 const vocabularyList = [
-    { word: 'Desarrollador', type: 'Noun (m)', translation: 'Developer', example: 'Trabajo como desarrollador de software en Madrid.', exampleTranslation: 'I work as a software developer in Madrid.' },
-    { word: 'Aprender', type: 'Verb', translation: 'To learn', example: 'Quiero aprender español para mi máster.', exampleTranslation: 'I want to learn Spanish for my Master\'s.' },
-    { word: 'Éxito', type: 'Noun (m)', translation: 'Success', example: 'El esfuerzo constante es la clave del éxito.', exampleTranslation: 'Constant effort is the key to success.' },
-    { word: 'Lograr', type: 'Verb', translation: 'To achieve', example: 'Espero lograr un nivel B2 pronto.', exampleTranslation: 'I hope to achieve a B2 level soon.' },
-    { word: 'Sin embargo', type: 'Conjunction', translation: 'However', example: 'El examen fue difícil; sin embargo, aprobé.', exampleTranslation: 'The exam was difficult; however, I passed.' },
-    { word: 'Desafío', type: 'Noun (m)', translation: 'Challenge', example: 'Aprender la gramática es un buen desafío.', exampleTranslation: 'Learning the grammar is a good challenge.' },
-    { word: 'Fluidez', type: 'Noun (f)', translation: 'Fluency', example: 'Practicar todos los días mejora la fluidez.', exampleTranslation: 'Practicing every day improves fluency.' }
+    { word: 'Développeur', type: 'Noun (m)', translation: 'Developer', example: 'Je travaille comme développeur en France.', exampleTranslation: 'I work as a developer in France.' },
+    { word: 'Apprendre', type: 'Verb', translation: 'To learn', example: 'Je veux apprendre le français pour mon master.', exampleTranslation: 'I want to learn French for my Master\'s.' },
+    { word: 'Réussite', type: 'Noun (f)', translation: 'Success', example: 'L\'effort constant est la clé de la réussite.', exampleTranslation: 'Constant effort is the key to success.' },
+    { word: 'Atteindre', type: 'Verb', translation: 'To achieve', example: 'J\'espère atteindre un niveau B2 bientôt.', exampleTranslation: 'I hope to achieve a B2 level soon.' },
+    { word: 'Cependant', type: 'Conjunction', translation: 'However', example: 'L\'examen était difficile; cependant, j\'ai réussi.', exampleTranslation: 'The exam was difficult; however, I passed.' },
+    { word: 'Défi', type: 'Noun (m)', translation: 'Challenge', example: 'Apprendre la grammaire est un bon défi.', exampleTranslation: 'Learning the grammar is a good challenge.' },
+    { word: 'Fluidité', type: 'Noun (f)', translation: 'Fluency', example: 'Pratiquer tous les jours améliore la fluidité.', exampleTranslation: 'Practicing every day improves fluency.' }
 ];
 
 const WordOfTheDay = () => {

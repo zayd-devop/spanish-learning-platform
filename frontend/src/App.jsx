@@ -6,7 +6,7 @@ import Navbar from './components/Navbar';
 import Sidebar from './components/Sidebar';
 import Login from './components/Login';
 import Register from './components/Register';
-import GradosList from './components/GradosList';
+import LicencesList from './components/LicencesList';
 import LearningPath from './components/LearningPath';
 import Dashboard from './components/Dashboard';
 import PracticeChat from './components/PracticeChat';
@@ -56,10 +56,10 @@ function App() {
               </MainLayout>
             </ProtectedRoute>
           } />
-          <Route path="/grados" element={
+          <Route path="/licences" element={
             <ProtectedRoute>
               <MainLayout>
-                <GradosList />
+                <LicencesList />
               </MainLayout>
             </ProtectedRoute>
           } />

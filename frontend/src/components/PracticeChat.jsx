@@ -18,7 +18,7 @@ const PracticeChat = () => {
             }
         }
         return [
-            { role: 'assistant', content: '¡Hola! Soy Maestro. Estoy aquí para ayudarte a practicar tu español. ¿De qué te gustaría hablar hoy?' }
+            { role: 'assistant', content: 'Bonjour ! Je suis Maestro. Je suis là pour t\'aider à pratiquer ton français. De quoi aimerais-tu parler aujourd\'hui ?' }
         ];
     });
     const [input, setInput] = useState('');
@@ -55,7 +55,7 @@ const PracticeChat = () => {
 
         if (result.isConfirmed) {
             const initialMessage = [
-                { role: 'assistant', content: '¡Hola! Soy Maestro. Estoy aquí para ayudarte a practicar tu español. ¿De qué te gustaría hablar hoy?' }
+                { role: 'assistant', content: 'Bonjour ! Je suis Maestro. Je suis là pour t\'aider à pratiquer ton français. De quoi aimerais-tu parler aujourd\'hui ?' }
             ];
             setMessages(initialMessage);
             localStorage.setItem(storageKey, JSON.stringify(initialMessage));
@@ -89,18 +89,18 @@ const PracticeChat = () => {
             if (response.ok && data.reply) {
                 setMessages([...updatedMessages, { role: 'assistant', content: data.reply }]);
             } else {
-                setMessages([...updatedMessages, { role: 'assistant', content: 'Lo siento, tuve un problema de conexión. ¿Podemos intentarlo de nuevo?' }]);
+                setMessages([...updatedMessages, { role: 'assistant', content: 'Désolé, j\'ai eu un problème de connexion. Pouvons-nous réessayer ?' }]);
             }
         } catch (error) {
             console.error('Chat error:', error);
-            setMessages([...updatedMessages, { role: 'assistant', content: 'Error de red. Intenta de nuevo.' }]);
+            setMessages([...updatedMessages, { role: 'assistant', content: 'Erreur réseau. Veuillez réessayer.' }]);
         } finally {
             setIsLoading(false);
         }
     };
 
     const sendAudioMessage = async (base64Audio, mimeType) => {
-        const userMessage = { role: 'user', content: '🎤 Mensaje de audio enviado' };
+        const userMessage = { role: 'user', content: '🎤 Message audio envoyé' };
         const updatedMessages = [...messages, userMessage];
         setMessages(updatedMessages);
         setIsLoading(true);
@@ -125,11 +125,11 @@ const PracticeChat = () => {
             if (response.ok && data.reply) {
                 setMessages([...updatedMessages, { role: 'assistant', content: data.reply }]);
             } else {
-                setMessages([...updatedMessages, { role: 'assistant', content: 'Lo siento, tuve un problema de conexión.' }]);
+                setMessages([...updatedMessages, { role: 'assistant', content: 'Désolé, j\'ai eu un problème de connexion.' }]);
             }
         } catch (error) {
             console.error('Audio Chat error:', error);
-            setMessages([...updatedMessages, { role: 'assistant', content: 'Error de red.' }]);
+            setMessages([...updatedMessages, { role: 'assistant', content: 'Erreur réseau.' }]);
         } finally {
             setIsLoading(false);
         }
@@ -179,7 +179,7 @@ const PracticeChat = () => {
         <div className="chat-container">
             <div style={{ marginBottom: '1.5rem' }}>
                 <h1 className="gradient-text" style={{ fontSize: '2.5rem', marginBottom: '0.5rem', fontWeight: '800' }}>AI Tutor</h1>
-                <p style={{ color: 'var(--text-secondary)' }}>Practice your Spanish conversation skills with real-time grammar corrections.</p>
+                <p style={{ color: 'var(--text-secondary)' }}>Practice your French conversation skills with real-time grammar corrections.</p>
             </div>
 
             <div className="glass-panel" style={{ flex: 1, display: 'flex', flexDirection: 'column', overflow: 'hidden', borderRadius: '20px', padding: 0 }}>
@@ -197,7 +197,7 @@ const PracticeChat = () => {
                     </div>
                     <button 
                         onClick={clearChat}
-                        title="Borrar conversación"
+                        title="Effacer la conversation"
                         style={{ background: 'transparent', border: '1px solid rgba(239, 68, 68, 0.3)', color: 'var(--danger)', padding: '0.4rem 0.8rem', borderRadius: '8px', fontSize: '0.8rem', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.4rem' }}
                     >
                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -262,7 +262,7 @@ const PracticeChat = () => {
                             value={input}
                             onChange={(e) => setInput(e.target.value)}
                             onKeyDown={handleKeyDown}
-                            placeholder={isRecording ? "Grabando audio..." : "Escribe un mensaje aquí..."}
+                            placeholder={isRecording ? "Enregistrement audio..." : "Écrivez un message ici..."}
                             disabled={isLoading || isRecording}
                             style={{ flex: 1, minWidth: 0, border: 'none', background: 'transparent', padding: '0.5rem 0.5rem', fontSize: '1rem', color: isRecording ? 'var(--danger)' : 'var(--text-primary)', outline: 'none', fontStyle: isRecording ? 'italic' : 'normal' }}
                         />
@@ -285,7 +285,7 @@ const PracticeChat = () => {
                                 transition: 'all 0.3s',
                                 flexShrink: 0
                             }}
-                            title="Enviar audio"
+                            title="Envoyer l'audio"
                         >
                             {isRecording ? (
                                 <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">

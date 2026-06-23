@@ -28,8 +28,8 @@ Route::post('/ai/extract-pdf', [App\Http\Controllers\AiController::class, 'extra
 Route::post('/ai/parse-resume-pdf', [App\Http\Controllers\AiController::class, 'parseResumePdf']);
 Route::post('/ai/chat-practice', [App\Http\Controllers\AiController::class, 'chatPractice']);
 
-// Grados Route
-Route::get('/grados', [App\Http\Controllers\GradoController::class, 'index']);
+// Licences Route
+Route::get('/licences', [App\Http\Controllers\LicenceController::class, 'index']);
 
 // Weeks Routes
 Route::get('/weeks', [WeekController::class, 'index']);

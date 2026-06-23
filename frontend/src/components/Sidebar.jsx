@@ -37,8 +37,8 @@ const Sidebar = () => {
             )
         },
         { 
-            path: '/grados', 
-            label: 'Grados Matcher', 
+            path: '/licences', 
+            label: 'Licences Matcher', 
             icon: (
                 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M22 10v6M2 10l10-5 10 5-10 5z"></path>

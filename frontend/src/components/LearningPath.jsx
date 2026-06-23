@@ -21,10 +21,7 @@ const LearningPath = () => {
   });
 
   const getDeadline = (weekNumber) => {
-    if (weekNumber === 13) return "When you are ready"; 
-    const deadline = new Date(startDate);
-    deadline.setDate(deadline.getDate() + (weekNumber * 7));
-    return deadline.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' });
+    return "Aujourd'hui"; // It's a daily action plan
   };
 
   useEffect(() => {
@@ -138,8 +135,8 @@ const LearningPath = () => {
 
   const handleResetProgress = async (weekId) => {
     const result = await Swal.fire({
-      title: 'Reset Weekly Tracker?',
-      text: "You will lose all time logged for this week. This cannot be undone!",
+      title: 'Reset Daily Tracker?',
+      text: "You will lose all time logged for this block. This cannot be undone!",
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#ef4444',
@@ -166,7 +163,7 @@ const LearningPath = () => {
 
       Swal.fire({
         title: 'Reset!',
-        text: 'Your weekly progress has been cleared.',
+        text: 'Your progress for this block has been cleared.',
         icon: 'success',
         background: '#1e293b',
         color: '#fff',
@@ -234,7 +231,7 @@ const LearningPath = () => {
     <div className="responsive-flex-layout">
       <aside className="glass-panel responsive-sidebar" style={{ padding: '1.5rem' }}>
         <h2 className="gradient-text" style={{ marginBottom: '2rem', fontSize: '1.5rem' }}>
-          El Camino a la Fluidez
+          Le Chemin vers la Fluidité
         </h2>
         
         <div className="week-list" style={{ flexGrow: 1 }}>
@@ -245,8 +242,8 @@ const LearningPath = () => {
               onClick={() => setSelectedWeekId(week.id)}
             >
               <div>
-                <div className="week-number">{week.week_number === 13 ? 'FINAL STAGE' : `Week ${week.week_number}`}</div>
-                <div className="week-title">{week.title}</div>
+                <div className="week-number">{week.title.split(' : ')[0]}</div>
+                <div className="week-title">{week.title.split(' : ')[1]}</div>
               </div>
               <div className="status-indicator">
                 {week.is_completed && (
@@ -263,7 +260,7 @@ const LearningPath = () => {
       <main style={{ flex: 1 }}>
         <section className="glass-panel progress-container dashboard-header" style={{ marginBottom: '2rem' }}>
           <div className="progress-stats">
-            <h3>Your 12-Week Journey</h3>
+            <h3>Votre Parcours Quotidien</h3>
             <span style={{ fontSize: '1.2rem', fontWeight: 'bold', color: 'var(--accent-primary)' }}>
               {progressPercentage}% Completed
             </span>
@@ -277,9 +274,9 @@ const LearningPath = () => {
           <section className="glass-panel week-detail">
             <div className="detail-header">
               <span className="week-number" style={{ fontSize: '1rem', color: 'var(--accent-secondary)' }}>
-                {selectedWeek.week_number === 13 ? 'FINAL STAGE' : `Week ${selectedWeek.week_number}`}
+                {selectedWeek.title.split(' : ')[0]}
               </span>
-              <h1 style={{ fontSize: '2.5rem', marginTop: '0.5rem' }}>{selectedWeek.title}</h1>
+              <h1 style={{ fontSize: '2.5rem', marginTop: '0.5rem' }}>{selectedWeek.title.split(' : ')[1]}</h1>
             </div>
 
             <div className="detail-section">
@@ -309,7 +306,7 @@ const LearningPath = () => {
                 <div style={{ marginTop: '2rem' }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                      <h4 style={{ fontSize: '1rem', color: 'var(--text-primary)', margin: 0 }}>Weekly Tracker</h4>
+                      <h4 style={{ fontSize: '1rem', color: 'var(--text-primary)', margin: 0 }}>Daily Tracker</h4>
                       <button 
                         onClick={() => handleResetProgress(selectedWeek.id)}
                         style={{ background: 'transparent', border: '1px solid var(--danger)', color: 'var(--danger)', padding: '2px 8px', borderRadius: '4px', fontSize: '0.75rem', cursor: 'pointer' }}
