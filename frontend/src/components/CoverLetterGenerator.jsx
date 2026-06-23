@@ -5,7 +5,7 @@ import Swal from 'sweetalert2';
 const API_BASE = import.meta.env.VITE_API_BASE_URL || 'http://127.0.0.1:8000/api';
 
 const CoverLetterGenerator = () => {
-    const { user } = useAuth();
+    const { user, token } = useAuth();
     const [formData, setFormData] = useState({
         parcours: "Diplôme de Technicien Spécialisé en Développement Digital à l'OFPPT",
         formation: "Licence 3 Informatique (Parcours Développement Web)",
@@ -14,6 +14,47 @@ const CoverLetterGenerator = () => {
     });
     const [generatedLetter, setGeneratedLetter] = useState('');
     const [isLoading, setIsLoading] = useState(false);
+    
+    // History State
+    const [savedLetters, setSavedLetters] = useState([]);
+    const [isLoaded, setIsLoaded] = useState(false);
+
+    useEffect(() => {
+        const fetchUserData = async () => {
+            if (!token) return;
+            try {
+                const response = await fetch(`${API_BASE}/user/data`, {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                const data = await response.json();
+                if (data && data.cover_letters && data.cover_letters.length > 0) {
+                    setSavedLetters(data.cover_letters);
+                }
+            } catch (err) {
+                console.error('Failed to load cover letters', err);
+            } finally {
+                setIsLoaded(true);
+            }
+        };
+        fetchUserData();
+    }, [token]);
+
+    const saveToDB = async (newLettersArray) => {
+        if (!token) return;
+        try {
+            await fetch(`${API_BASE}/user/data`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify({ cover_letters: newLettersArray })
+            });
+        } catch (err) {
+            console.error('Failed to save cover letters', err);
+        }
+    };
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -43,6 +84,19 @@ const CoverLetterGenerator = () => {
 
             if (response.ok && data.letter) {
                 setGeneratedLetter(data.letter);
+                
+                // Add to history
+                const newLetterObj = {
+                    id: Date.now(),
+                    date: new Date().toLocaleDateString('fr-FR'),
+                    formation: formData.formation,
+                    universite: formData.universite,
+                    content: data.letter
+                };
+                const updatedLetters = [newLetterObj, ...savedLetters];
+                setSavedLetters(updatedLetters);
+                saveToDB(updatedLetters);
+
             } else {
                 Swal.fire({ title: 'Erreur', text: data.error || 'Erreur lors de la génération.', icon: 'error' });
             }
@@ -168,6 +222,32 @@ const CoverLetterGenerator = () => {
                     </div>
                 </div>
             </div>
+
+            {/* History Section */}
+            {savedLetters.length > 0 && (
+                <div className="glass-panel animate-slide-up stagger-3" style={{ marginTop: '2rem', padding: '2rem' }}>
+                    <h2 style={{ fontSize: '1.2rem', marginBottom: '1.5rem', color: 'var(--text-primary)', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                        <span>🗂️</span> Historique de vos lettres
+                    </h2>
+                    <div style={{ display: 'grid', gap: '1rem', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))' }}>
+                        {savedLetters.map(letter => (
+                            <div key={letter.id} className="hover-lift" style={{ background: 'rgba(255,255,255,0.6)', border: '1px solid var(--glass-border)', padding: '1rem', borderRadius: '12px', display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+                                <div style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>{letter.date}</div>
+                                <div style={{ fontWeight: '600', color: 'var(--text-primary)', fontSize: '0.95rem' }}>{letter.formation}</div>
+                                <div style={{ fontSize: '0.9rem', color: 'var(--text-secondary)' }}>{letter.universite}</div>
+                                <div style={{ display: 'flex', gap: '0.5rem', marginTop: '0.5rem' }}>
+                                    <button 
+                                        onClick={() => setGeneratedLetter(letter.content)}
+                                        style={{ flex: 1, padding: '0.5rem', background: 'var(--accent-gradient)', color: 'white', border: 'none', borderRadius: '6px', fontSize: '0.8rem', cursor: 'pointer', fontWeight: '600' }}
+                                    >
+                                        Afficher
+                                    </button>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            )}
         </div>
     );
 };

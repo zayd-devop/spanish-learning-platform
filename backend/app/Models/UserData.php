@@ -16,7 +16,8 @@ class UserData extends Model
         'documents_data',
         'budget_data',
         'practice_chat_history',
-        'interview_history'
+        'interview_history',
+        'cover_letters'
     ];
 
     protected $casts = [
@@ -24,6 +25,7 @@ class UserData extends Model
         'budget_data' => 'array',
         'practice_chat_history' => 'array',
         'interview_history' => 'array',
+        'cover_letters' => 'array',
     ];
 
     public function user()

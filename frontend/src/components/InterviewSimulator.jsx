@@ -134,15 +134,15 @@ const InterviewSimulator = () => {
     };
 
     return (
-        <div className="animate-fade-in" style={{ padding: '1rem', height: 'calc(100vh - 100px)', display: 'flex', flexDirection: 'column' }}>
+        <div className="animate-fade-in interview-container" style={{ padding: '1rem', height: 'calc(100vh - 100px)', display: 'flex', flexDirection: 'column' }}>
             <div style={{ marginBottom: '1.5rem', flexShrink: 0 }}>
                 <h1 className="gradient-text" style={{ fontSize: '2.5rem', marginBottom: '0.5rem', fontWeight: '800' }}>Simulation d'Entretien</h1>
-                <p style={{ color: 'var(--text-secondary)' }}>Préparez-vous à l'entretien pédagogique Campus France face à notre IA (niveau exigeant).</p>
+                <p style={{ color: 'var(--text-secondary)' }}>Préparez-vous à l'entretien pédagogique Campus France face à notre IA.</p>
             </div>
 
             <div className="glass-panel animate-slide-up stagger-1" style={{ flex: 1, display: 'flex', flexDirection: 'column', overflow: 'hidden', padding: 0 }}>
                 {/* Chat Header */}
-                <div style={{ padding: '1rem 1.5rem', borderBottom: '1px solid var(--glass-border)', display: 'flex', alignItems: 'center', gap: '1rem', background: 'rgba(255,255,255,0.5)' }}>
+                <div className="interview-chat-header" style={{ padding: '1rem 1.5rem', borderBottom: '1px solid var(--glass-border)', display: 'flex', alignItems: 'center', gap: '1rem', background: 'rgba(255,255,255,0.5)' }}>
                     <div style={{ width: '45px', height: '45px', borderRadius: '50%', background: '#1e293b', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'white', fontSize: '1.2rem', boxShadow: '0 4px 10px rgba(0,0,0,0.1)' }}>
                         👔
                     </div>
@@ -165,7 +165,7 @@ const InterviewSimulator = () => {
                 </div>
 
                 {/* Chat Messages */}
-                <div style={{ flex: 1, overflowY: 'auto', padding: '1.5rem', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+                <div className="interview-chat-body" style={{ flex: 1, overflowY: 'auto', padding: '1.5rem', display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
                     {messages.map((msg, idx) => {
                         const isUser = msg.role === 'user';
                         return (
@@ -175,7 +175,7 @@ const InterviewSimulator = () => {
                                         👔
                                     </div>
                                 )}
-                                <div style={{ 
+                                <div className="interview-message" style={{ 
                                     maxWidth: '75%',
                                     padding: '1rem 1.25rem',
                                     borderBottomRightRadius: isUser ? '4px' : '20px',
@@ -218,7 +218,7 @@ const InterviewSimulator = () => {
                 </div>
 
                 {/* Chat Input */}
-                <div style={{ padding: '1rem 1.5rem', borderTop: '1px solid var(--glass-border)', background: 'rgba(255,255,255,0.5)' }}>
+                <div className="interview-chat-footer" style={{ padding: '1rem 1.5rem', borderTop: '1px solid var(--glass-border)', background: 'rgba(255,255,255,0.5)' }}>
                     <div style={{ display: 'flex', gap: '0.75rem', background: 'white', padding: '0.5rem', borderRadius: '16px', boxShadow: 'inset 0 2px 4px rgba(0,0,0,0.02), 0 4px 10px rgba(0,0,0,0.05)', border: '1px solid var(--glass-border)' }}>
                         <textarea 
                             value={input}
@@ -264,6 +264,31 @@ const InterviewSimulator = () => {
                 @keyframes typing {
                     0%, 80%, 100% { transform: scale(0); }
                     40% { transform: scale(1); }
+                }
+
+                /* Mobile Responsive Styles */
+                @media (max-width: 768px) {
+                    .interview-container {
+                        height: calc(100vh - 60px) !important;
+                        padding: 0.5rem !important;
+                    }
+                    .interview-container h1 {
+                        font-size: 1.8rem !important;
+                    }
+                    .interview-chat-header {
+                        padding: 0.75rem 1rem !important;
+                    }
+                    .interview-chat-body {
+                        padding: 1rem 0.5rem !important;
+                    }
+                    .interview-chat-footer {
+                        padding: 0.75rem !important;
+                    }
+                    .interview-message {
+                        max-width: 90% !important;
+                        padding: 0.75rem 1rem !important;
+                        font-size: 0.9rem !important;
+                    }
                 }
             `}</style>
         </div>

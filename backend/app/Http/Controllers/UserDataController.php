@@ -23,6 +23,7 @@ class UserDataController extends Controller
             'budget_data' => 'nullable|array',
             'practice_chat_history' => 'nullable|array',
             'interview_history' => 'nullable|array',
+            'cover_letters' => 'nullable|array',
         ]);
 
         $user = Auth::user();
@@ -40,6 +41,9 @@ class UserDataController extends Controller
         }
         if ($request->has('interview_history')) {
             $userData->interview_history = $request->input('interview_history');
+        }
+        if ($request->has('cover_letters')) {
+            $userData->cover_letters = $request->input('cover_letters');
         }
 
         $userData->save();
