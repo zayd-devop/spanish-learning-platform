@@ -23,10 +23,7 @@ const PracticeChat = () => {
     });
     const [input, setInput] = useState('');
     const [isLoading, setIsLoading] = useState(false);
-    const [isRecording, setIsRecording] = useState(false);
     const messagesEndRef = useRef(null);
-    const mediaRecorderRef = useRef(null);
-    const audioChunksRef = useRef([]);
 
     const scrollToBottom = () => {
         messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -99,74 +96,7 @@ const PracticeChat = () => {
         }
     };
 
-    const sendAudioMessage = async (base64Audio, mimeType) => {
-        const userMessage = { role: 'user', content: '🎤 Message audio envoyé' };
-        const updatedMessages = [...messages, userMessage];
-        setMessages(updatedMessages);
-        setIsLoading(true);
 
-        try {
-            const response = await fetch(`${API_BASE}/ai/chat-practice`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json'
-                },
-                body: JSON.stringify({
-                    message: null,
-                    audio_data: base64Audio,
-                    mime_type: mimeType,
-                    history: messages.slice(-6)
-                })
-            });
-
-            const data = await response.json();
-
-            if (response.ok && data.reply) {
-                setMessages([...updatedMessages, { role: 'assistant', content: data.reply }]);
-            } else {
-                setMessages([...updatedMessages, { role: 'assistant', content: 'Désolé, j\'ai eu un problème de connexion.' }]);
-            }
-        } catch (error) {
-            console.error('Audio Chat error:', error);
-            setMessages([...updatedMessages, { role: 'assistant', content: 'Erreur réseau.' }]);
-        } finally {
-            setIsLoading(false);
-        }
-    };
-
-    const handleRecordToggle = async () => {
-        if (isRecording) {
-            mediaRecorderRef.current.stop();
-            setIsRecording(false);
-        } else {
-            try {
-                const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-                mediaRecorderRef.current = new MediaRecorder(stream);
-                audioChunksRef.current = [];
-
-                mediaRecorderRef.current.ondataavailable = (e) => {
-                    if (e.data.size > 0) audioChunksRef.current.push(e.data);
-                };
-
-                mediaRecorderRef.current.onstop = async () => {
-                    const audioBlob = new Blob(audioChunksRef.current, { type: 'audio/webm' });
-                    const reader = new FileReader();
-                    reader.readAsDataURL(audioBlob);
-                    reader.onloadend = () => {
-                        sendAudioMessage(reader.result, 'audio/webm');
-                    };
-                    stream.getTracks().forEach(track => track.stop());
-                };
-
-                mediaRecorderRef.current.start();
-                setIsRecording(true);
-            } catch (err) {
-                console.error("Error accessing mic:", err);
-                alert("Please allow microphone access to use this feature.");
-            }
-        }
-    };
 
     const handleKeyDown = (e) => {
         if (e.key === 'Enter' && !e.shiftKey) {
@@ -262,47 +192,14 @@ const PracticeChat = () => {
                             value={input}
                             onChange={(e) => setInput(e.target.value)}
                             onKeyDown={handleKeyDown}
-                            placeholder={isRecording ? "Enregistrement audio..." : "Écrivez un message ici..."}
-                            disabled={isLoading || isRecording}
-                            style={{ flex: 1, minWidth: 0, border: 'none', background: 'transparent', padding: '0.5rem 0.5rem', fontSize: '1rem', color: isRecording ? 'var(--danger)' : 'var(--text-primary)', outline: 'none', fontStyle: isRecording ? 'italic' : 'normal' }}
-                        />
-                        
-                        <button 
-                            onClick={handleRecordToggle}
+                            placeholder="Écrivez un message ici..."
                             disabled={isLoading}
-                            className={isRecording ? "recording-pulse" : ""}
-                            style={{ 
-                                background: isRecording ? '#ef4444' : 'rgba(0,0,0,0.05)', 
-                                color: isRecording ? 'white' : 'var(--text-secondary)', 
-                                border: 'none', 
-                                width: '45px', 
-                                height: '45px', 
-                                borderRadius: '12px', 
-                                display: 'flex', 
-                                alignItems: 'center', 
-                                justifyContent: 'center', 
-                                cursor: isLoading ? 'not-allowed' : 'pointer',
-                                transition: 'all 0.3s',
-                                flexShrink: 0
-                            }}
-                            title="Envoyer l'audio"
-                        >
-                            {isRecording ? (
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                                    <rect x="6" y="6" width="12" height="12" rx="2" ry="2"></rect>
-                                </svg>
-                            ) : (
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                                    <path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"></path>
-                                    <path d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
-                                    <line x1="12" y1="19" x2="12" y2="22"></line>
-                                </svg>
-                            )}
-                        </button>
+                            style={{ flex: 1, minWidth: 0, border: 'none', background: 'transparent', padding: '0.5rem 0.5rem', fontSize: '1rem', color: 'var(--text-primary)', outline: 'none' }}
+                        />
 
                         <button 
                             onClick={handleSend}
-                            disabled={isLoading || (!input.trim() && !isRecording)}
+                            disabled={isLoading || !input.trim()}
                             style={{ 
                                 background: input.trim() && !isLoading ? 'var(--accent-primary)' : '#cbd5e1', 
                                 color: 'white', 

@@ -8,66 +8,52 @@ use App\Models\Licence;
 
 class AiController extends Controller
 {
-    private function callGemini($prompt, $audioBase64 = null, $audioMimeType = null)
+    private function callGithubModel($prompt)
     {
-        $apiKey = env('GEMINI_API_KEY');
+        $apiKey = env('GITHUB_PAT');
         
         if (!$apiKey) {
             return [
                 'error' => true,
-                'message' => 'GEMINI_API_KEY is not set in the .env file.',
+                'message' => 'GITHUB_PAT is not set in the .env file.',
             ];
         }
 
-        // Remove surrounding quotes and any whitespace/newlines
-        $apiKey = trim(env('GEMINI_API_KEY'), " \t\n\r\0\x0B'\"");
-        
-        // Failsafe: If the key got accidentally duplicated in a system environment variable 
-        // (e.g. "KEY' KEY"), extract only the first valid alphanumeric/dash segment.
+        $apiKey = trim($apiKey, " \t\n\r\0\x0B'\"");
         $apiKey = explode("'", $apiKey)[0];
         $apiKey = explode(" ", $apiKey)[0];
         $apiKey = trim($apiKey);
         
-        $url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent";
+        $url = "https://models.inference.ai.azure.com/chat/completions";
 
         try {
-            $parts = [['text' => $prompt]];
-            if ($audioBase64 && $audioMimeType) {
-                $parts[] = [
-                    'inline_data' => [
-                        'mime_type' => $audioMimeType,
-                        'data' => $audioBase64
-                    ]
-                ];
-            }
-
-            // Disable SSL verification for local Windows environments (Fixes cURL error 60)
             $response = Http::withoutVerifying()
                 ->withHeaders([
-                    'x-goog-api-key' => $apiKey,
+                    'Authorization' => 'Bearer ' . $apiKey,
                     'Content-Type' => 'application/json'
                 ])
                 ->post($url, [
-                'contents' => [
-                    [
-                        'parts' => $parts
-                    ]
-                ]
-            ]);
+                    'messages' => [
+                        ['role' => 'user', 'content' => $prompt]
+                    ],
+                    'model' => 'gpt-4o-mini',
+                    'temperature' => 0.7,
+                    'max_tokens' => 2000
+                ]);
 
             if ($response->successful()) {
                 $data = $response->json();
-                if (isset($data['candidates'][0]['content']['parts'][0]['text'])) {
+                if (isset($data['choices'][0]['message']['content'])) {
                     return [
                         'error' => false,
-                        'text' => $data['candidates'][0]['content']['parts'][0]['text']
+                        'text' => $data['choices'][0]['message']['content']
                     ];
                 }
             }
 
             return [
                 'error' => true,
-                'message' => 'Failed to get a response from Gemini API: ' . $response->body()
+                'message' => 'Failed to get a response from GitHub API: ' . $response->body()
             ];
         } catch (\Exception $e) {
             return [
@@ -88,7 +74,7 @@ class AiController extends Controller
                   ($validated['context'] ? "Context: {$validated['context']}. " : "") . 
                   "Do not include any intro or outro, just return the enhanced text itself.\n\nText: " . $validated['text'];
 
-        $result = $this->callGemini($prompt);
+        $result = $this->callGithubModel($prompt);
 
         if ($result['error']) {
             return response()->json(['error' => $result['message']], 500);
@@ -123,14 +109,14 @@ Licences:
 CV:
 {$validated['cv_text']}";
 
-        $result = $this->callGemini($prompt);
+        $result = $this->callGithubModel($prompt);
 
         if ($result['error']) {
             return response()->json(['error' => $result['message']], 500);
         }
 
         // Log the raw response for debugging!
-        \Illuminate\Support\Facades\Log::info("RAW GEMINI CV RESPONSE: " . $result['text']);
+        \Illuminate\Support\Facades\Log::info("RAW GITHUB CV RESPONSE: " . $result['text']);
 
         // Clean up markdown if the model accidentally included it
         $jsonStr = str_replace(['```json', '```'], '', trim($result['text']));
@@ -194,7 +180,7 @@ Return ONLY JSON, no markdown blocks.
 CV Text:
 " . $text;
 
-        $result = $this->callGemini($prompt);
+        $result = $this->callGithubModel($prompt);
 
         if ($result['error']) {
             return response()->json(['error' => $result['message']], 500);
@@ -213,10 +199,8 @@ CV Text:
     public function chatPractice(Request $request)
     {
         $request->validate([
-            'message' => 'required_without:audio_data|nullable|string',
-            'history' => 'nullable|array',
-            'audio_data' => 'nullable|string',
-            'mime_type' => 'nullable|string'
+            'message' => 'required|string',
+            'history' => 'nullable|array'
         ]);
 
         $historyStr = "";
@@ -228,15 +212,6 @@ CV Text:
             }
         }
 
-        $hasAudio = $request->has('audio_data') && $request->has('mime_type');
-        $audioBase64 = $hasAudio ? $request->audio_data : null;
-        $audioMimeType = $hasAudio ? $request->mime_type : null;
-        
-        // Strip the data:audio/...;base64, prefix if it exists in audio_data
-        if ($hasAudio) {
-            $audioBase64 = preg_replace('/^data:audio\/\w+(?:;\w+=[^;]+)*;base64,/', '', $audioBase64);
-        }
-
         $prompt = "You are 'Maestro', a friendly and encouraging native French language tutor. 
 Your student is learning French and is currently around a B1 level.
 Your rules:
@@ -246,20 +221,13 @@ Your rules:
 4. Keep your responses relatively short and conversational (2-4 sentences max).
 
 Conversation History:
-{$historyStr}\n";
+{$historyStr}
 
-        if ($hasAudio) {
-            $prompt .= "The student provided an AUDIO message. Listen to it carefully. 
-First, transcribe exactly what the student said in French (prefix with 'Transcription:'). 
-Then, correct any grammatical or pronunciation mistakes they made. 
-Finally, provide your conversational response to what they said.";
-        } else {
-            $prompt .= "Student's latest message: {$request->message}";
-        }
+Student's latest message: {$request->message}
 
-        $prompt .= "\n\nTutor's reply:";
+Tutor's reply:";
 
-        $result = $this->callGemini($prompt, $audioBase64, $audioMimeType);
+        $result = $this->callGithubModel($prompt);
 
         if ($result['error']) {
             return response()->json(['error' => $result['message']], 500);
