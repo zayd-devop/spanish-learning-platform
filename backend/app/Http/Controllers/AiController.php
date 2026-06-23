@@ -235,4 +235,76 @@ Tutor's reply:";
 
         return response()->json(['reply' => trim($result['text'])]);
     }
+
+    public function mockInterview(Request $request)
+    {
+        $request->validate([
+            'message' => 'required|string',
+            'history' => 'nullable|array'
+        ]);
+
+        $historyStr = "";
+        if ($request->has('history') && is_array($request->history)) {
+            foreach ($request->history as $msg) {
+                $role = isset($msg['role']) && $msg['role'] === 'user' ? 'Student' : 'Interviewer';
+                $content = isset($msg['content']) ? $msg['content'] : '';
+                $historyStr .= "{$role}: {$content}\n";
+            }
+        }
+
+        $prompt = "Tu es un conseiller pédagogique de Campus France, très strict mais professionnel.
+Tu mènes un entretien de 20 minutes (simulation) avec un étudiant marocain de l'OFPPT qui postule pour une Licence 3 en France.
+Tes règles :
+1. Pose toujours UNE SEULE question à la fois.
+2. Si les réponses de l'étudiant sont trop courtes ou vagues, demande-lui d'élaborer de façon ferme.
+3. Alterne entre les questions sur ses motivations, son projet d'étude, son projet professionnel et ses choix d'universités.
+4. Parle toujours en français très formel et professionnel.
+5. Garde tes répliques courtes (1 à 3 phrases).
+6. N'oublie pas que le but est de tester sa capacité à s'exprimer en français et à argumenter son projet.
+
+Historique de l'entretien:
+{$historyStr}
+
+Dernier message de l'étudiant: {$request->message}
+
+Réponse du conseiller Campus France:";
+
+        $result = $this->callGithubModel($prompt);
+
+        if ($result['error']) {
+            return response()->json(['error' => $result['message']], 500);
+        }
+
+        return response()->json(['reply' => trim($result['text'])]);
+    }
+
+    public function generateCoverLetter(Request $request)
+    {
+        $request->validate([
+            'formation' => 'required|string',
+            'universite' => 'required|string',
+            'parcours' => 'required|string',
+            'projet_pro' => 'required|string'
+        ]);
+
+        $prompt = "Tu es un expert en rédaction de 'Projet d'Études' (lettre de motivation) pour Campus France.
+Rédige une lettre de motivation professionnelle, convaincante et sans aucune faute de français pour un étudiant marocain diplômé de l'OFPPT.
+La lettre doit suivre les standards universitaires français (ton formel, structure logique : Vous, Moi, Nous).
+
+Informations sur l'étudiant et la candidature :
+- Parcours actuel (OFPPT) : {$request->parcours}
+- Formation visée en France : {$request->formation}
+- Université visée : {$request->universite}
+- Projet professionnel futur : {$request->projet_pro}
+
+Rédige uniquement le corps de la lettre de motivation (sans les adresses en haut ni la date). Le ton doit être sérieux et montrer la détermination de l'étudiant.";
+
+        $result = $this->callGithubModel($prompt);
+
+        if ($result['error']) {
+            return response()->json(['error' => $result['message']], 500);
+        }
+
+        return response()->json(['letter' => trim($result['text'])]);
+    }
 }

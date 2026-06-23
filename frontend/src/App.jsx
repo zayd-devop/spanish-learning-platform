@@ -11,6 +11,10 @@ import LearningPath from './components/LearningPath';
 import Dashboard from './components/Dashboard';
 import PracticeChat from './components/PracticeChat';
 import CampusFranceGuide from './components/CampusFranceGuide';
+import InterviewSimulator from './components/InterviewSimulator';
+import DocumentManager from './components/DocumentManager';
+import BudgetPlanner from './components/BudgetPlanner';
+import CoverLetterGenerator from './components/CoverLetterGenerator';
 
 const ProtectedRoute = ({ children }) => {
   const { user, loading } = useAuth();
@@ -75,6 +79,34 @@ function App() {
             <ProtectedRoute>
               <MainLayout>
                 <CampusFranceGuide />
+              </MainLayout>
+            </ProtectedRoute>
+          } />
+          <Route path="/interview-simulator" element={
+            <ProtectedRoute>
+              <MainLayout>
+                <InterviewSimulator />
+              </MainLayout>
+            </ProtectedRoute>
+          } />
+          <Route path="/documents" element={
+            <ProtectedRoute>
+              <MainLayout>
+                <DocumentManager />
+              </MainLayout>
+            </ProtectedRoute>
+          } />
+          <Route path="/budget" element={
+            <ProtectedRoute>
+              <MainLayout>
+                <BudgetPlanner />
+              </MainLayout>
+            </ProtectedRoute>
+          } />
+          <Route path="/cover-letter" element={
+            <ProtectedRoute>
+              <MainLayout>
+                <CoverLetterGenerator />
               </MainLayout>
             </ProtectedRoute>
           } />

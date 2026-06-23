@@ -8,22 +8,53 @@ const PracticeChat = () => {
     const { user } = useAuth();
     const storageKey = `ai_tutor_messages_${user?.id || 'default'}`;
 
-    const [messages, setMessages] = useState(() => {
-        const saved = localStorage.getItem(storageKey);
-        if (saved) {
-            try {
-                return JSON.parse(saved);
-            } catch (e) {
-                console.error("Failed to parse saved chat", e);
-            }
-        }
-        return [
-            { role: 'assistant', content: 'Bonjour ! Je suis Maestro. Je suis là pour t\'aider à pratiquer ton français. De quoi aimerais-tu parler aujourd\'hui ?' }
-        ];
-    });
+    const initialMessage = [
+        { role: 'assistant', content: 'Bonjour ! Je suis Maestro, ton tuteur de français IA. De quoi veux-tu parler aujourd\'hui ?' }
+    ];
+
+    const [messages, setMessages] = useState(initialMessage);
     const [input, setInput] = useState('');
     const [isLoading, setIsLoading] = useState(false);
+    const [isLoaded, setIsLoaded] = useState(false);
+    const token = localStorage.getItem('token');
     const messagesEndRef = useRef(null);
+
+    useEffect(() => {
+        const fetchUserData = async () => {
+            if (!token) return;
+            try {
+                const response = await fetch(`${API_BASE}/user/data`, {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                const data = await response.json();
+                if (data && data.practice_chat_history && data.practice_chat_history.length > 0) {
+                    setMessages(data.practice_chat_history);
+                }
+            } catch (err) {
+                console.error('Failed to load practice history', err);
+            } finally {
+                setIsLoaded(true);
+            }
+        };
+        fetchUserData();
+    }, [token]);
+
+    const saveToDB = async (newHistory) => {
+        if (!token) return;
+        try {
+            await fetch(`${API_BASE}/user/data`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify({ practice_chat_history: newHistory })
+            });
+        } catch (err) {
+            console.error('Failed to save practice history', err);
+        }
+    };
 
     const scrollToBottom = () => {
         messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -32,10 +63,6 @@ const PracticeChat = () => {
     useEffect(() => {
         scrollToBottom();
     }, [messages, isLoading]);
-
-    useEffect(() => {
-        localStorage.setItem(storageKey, JSON.stringify(messages));
-    }, [messages, storageKey]);
 
     const clearChat = async () => {
         const result = await Swal.fire({
@@ -51,11 +78,8 @@ const PracticeChat = () => {
         });
 
         if (result.isConfirmed) {
-            const initialMessage = [
-                { role: 'assistant', content: 'Bonjour ! Je suis Maestro. Je suis là pour t\'aider à pratiquer ton français. De quoi aimerais-tu parler aujourd\'hui ?' }
-            ];
             setMessages(initialMessage);
-            localStorage.setItem(storageKey, JSON.stringify(initialMessage));
+            saveToDB(initialMessage);
         }
     };
 
@@ -84,13 +108,19 @@ const PracticeChat = () => {
             const data = await response.json();
 
             if (response.ok && data.reply) {
-                setMessages([...updatedMessages, { role: 'assistant', content: data.reply }]);
+                const newMessages = [...updatedMessages, { role: 'assistant', content: data.reply }];
+                setMessages(newMessages);
+                saveToDB(newMessages);
             } else {
-                setMessages([...updatedMessages, { role: 'assistant', content: 'Désolé, j\'ai eu un problème de connexion. Pouvons-nous réessayer ?' }]);
+                const newMessages = [...updatedMessages, { role: 'assistant', content: 'Désolé, j\'ai eu un petit problème. Peux-tu répéter ?' }];
+                setMessages(newMessages);
+                saveToDB(newMessages);
             }
         } catch (error) {
             console.error('Chat error:', error);
-            setMessages([...updatedMessages, { role: 'assistant', content: 'Erreur réseau. Veuillez réessayer.' }]);
+            const newMessages = [...updatedMessages, { role: 'assistant', content: 'Erreur réseau.' }];
+            setMessages(newMessages);
+            saveToDB(newMessages);
         } finally {
             setIsLoading(false);
         }

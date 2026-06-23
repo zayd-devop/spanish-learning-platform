@@ -51,7 +51,7 @@ const StudentKPIs = ({ data }) => {
         gap: '1rem' 
       }}>
         {kpiCards.map((kpi, idx) => (
-          <div key={idx} style={{
+          <div key={idx} className={`hover-lift animate-slide-up stagger-${idx + 1}`} style={{
             background: 'var(--bg-secondary)',
             border: '1px solid var(--glass-border)',
             borderRadius: '12px',
