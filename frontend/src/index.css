@@ -243,12 +243,12 @@ h1, h2, h3 {
   flex-direction: column;
   gap: 1rem;
   max-height: none;
-  overflow-y: visible;
-  padding-right: 10px;
+  overflow-x: hidden;
 }
 
 .week-list::-webkit-scrollbar {
   width: 6px;
+  height: 6px;
 }
 .week-list::-webkit-scrollbar-thumb {
   background: var(--glass-border);
@@ -795,6 +795,18 @@ h1, h2, h3 {
   .responsive-sidebar {
     width: 100%;
   }
+
+  /* Make week list horizontal on mobile */
+  .week-list {
+    flex-direction: row;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding-bottom: 10px;
+    padding-right: 0;
+  }
+  .week-item {
+    min-width: 160px;
+  }
 }
 
 @media (max-width: 768px) {
@@ -820,6 +832,11 @@ h1, h2, h3 {
 
   .sidebar-header {
     display: none; /* Hide logo/title on bottom nav */
+  }
+
+  /* Responsive Map */
+  .map-container-responsive {
+    height: 350px !important;
   }
 
   .sidebar-menu {
@@ -851,6 +868,18 @@ h1, h2, h3 {
 
   .scrollable-content {
     padding-bottom: 90px; /* Make room for bottom nav */
+  }
+
+  /* Timeline Guide Adjustments */
+  .timeline-container {
+    padding-left: 0.5rem !important;
+  }
+  .timeline-item {
+    gap: 1rem !important;
+    flex-direction: column !important;
+  }
+  .timeline-line {
+    display: none !important; /* Hide vertical line on mobile */
   }
 
   /* Grid Utilities */
@@ -895,9 +924,16 @@ h1, h2, h3 {
     gap: 1rem !important;
   }
 
-  /* Typography Adjustments */
   h1 { font-size: 2rem !important; }
   h2 { font-size: 1.5rem !important; }
   h3 { font-size: 1.25rem !important; }
+}
+
+/* Map specific classes */
+.map-container-responsive {
+  height: 500px;
+  width: 100%;
+  border-radius: 12px;
+  z-index: 0;
 }
 

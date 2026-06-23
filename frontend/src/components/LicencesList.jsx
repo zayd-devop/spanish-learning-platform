@@ -131,9 +131,9 @@ const LicencesList = () => {
                 </div>
             </div>
 
-            <div className="glass-panel" style={{ padding: '1rem', marginBottom: '2rem', height: '450px', zIndex: 1 }}>
-                {/* Centered on France */}
-                <MapContainer center={[46.603354, 1.888334]} zoom={5} scrollWheelZoom={false} style={{ height: '100%', width: '100%', borderRadius: '12px' }}>
+            <div className="glass-panel" style={{ padding: '0', overflow: 'hidden', marginBottom: '2rem' }}>
+                {/* Responsive Map Area */}
+                <MapContainer center={[46.603354, 1.888334]} zoom={6} className="map-container-responsive">
                     <TileLayer
                         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
                         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"

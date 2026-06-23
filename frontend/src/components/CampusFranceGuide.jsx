@@ -97,13 +97,13 @@ const CampusFranceGuide = () => {
         </p>
       </section>
 
-      <div style={{ position: 'relative', paddingLeft: '2rem', marginBottom: '4rem' }}>
+      <div className="timeline-container" style={{ position: 'relative', paddingLeft: '2rem', marginBottom: '4rem' }}>
         {/* Ligne verticale de la timeline */}
-        <div style={{ position: 'absolute', top: 0, bottom: 0, left: '38px', width: '4px', background: 'var(--glass-border)', borderRadius: '2px' }}></div>
+        <div className="timeline-line" style={{ position: 'absolute', top: 0, bottom: 0, left: '38px', width: '4px', background: 'var(--glass-border)', borderRadius: '2px' }}></div>
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: '3rem' }}>
           {steps.map((step) => (
-            <div key={step.id} style={{ position: 'relative', display: 'flex', gap: '2rem' }}>
+            <div key={step.id} className="timeline-item" style={{ position: 'relative', display: 'flex', gap: '2rem' }}>
               
               {/* Point de la timeline */}
               <div style={{ 
