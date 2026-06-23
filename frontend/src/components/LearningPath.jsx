@@ -67,8 +67,8 @@ const LearningPath = () => {
 
       if (!allTasksCompleted) {
         Swal.fire({
-          title: 'Incomplete Tasks',
-          text: 'You must reach the target time for all weekly tasks before marking this milestone as completed.',
+          title: 'Tâches Incomplètes',
+          text: 'Vous devez atteindre l\'objectif de temps pour toutes les tâches avant de marquer cette étape comme terminée.',
           icon: 'warning',
           background: '#1e293b',
           color: '#fff',
@@ -125,7 +125,7 @@ const LearningPath = () => {
       });
       Toast.fire({
         icon: 'success',
-        title: `Logged ${minutesToAdd}m`
+        title: `Enregistré ${minutesToAdd}m`
       });
 
     } catch (err) {
@@ -135,13 +135,13 @@ const LearningPath = () => {
 
   const handleResetProgress = async (weekId) => {
     const result = await Swal.fire({
-      title: 'Reset Daily Tracker?',
-      text: "You will lose all time logged for this block. This cannot be undone!",
+      title: 'Réinitialiser le suivi quotidien ?',
+      text: "Vous perdrez tout le temps enregistré pour ce bloc. Cette action est irréversible !",
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#ef4444',
       cancelButtonColor: '#4b5563',
-      confirmButtonText: 'Yes, reset it',
+      confirmButtonText: 'Oui, réinitialiser',
       background: '#1e293b',
       color: '#fff'
     });
@@ -162,8 +162,8 @@ const LearningPath = () => {
       setKpiData(data.kpi);
 
       Swal.fire({
-        title: 'Reset!',
-        text: 'Your progress for this block has been cleared.',
+        title: 'Réinitialisé !',
+        text: 'Votre progression pour ce bloc a été effacée.',
         icon: 'success',
         background: '#1e293b',
         color: '#fff',
@@ -176,13 +176,13 @@ const LearningPath = () => {
 
   const handleResetTaskProgress = async (weekId, checklistIdx) => {
     const result = await Swal.fire({
-      title: 'Reset Task?',
-      text: "This will clear the time logged for this specific task.",
+      title: 'Réinitialiser la tâche ?',
+      text: "Cela effacera le temps enregistré pour cette tâche spécifique.",
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#ef4444',
       cancelButtonColor: '#4b5563',
-      confirmButtonText: 'Yes, clear it',
+      confirmButtonText: 'Oui, effacer',
       background: '#1e293b',
       color: '#fff'
     });
@@ -217,9 +217,9 @@ const LearningPath = () => {
 
   if (error) return (
     <div style={{ padding: '2rem', textAlign: 'center' }}>
-      <h2 style={{color: '#ef4444'}}>Backend Connection Error</h2>
+      <h2 style={{color: '#ef4444'}}>Erreur de connexion au serveur</h2>
       <p style={{marginTop: '1rem', color: '#fbbf24', fontSize: '1.2rem'}}>{error}</p>
-      <p style={{marginTop: '2rem'}}>Could not connect to the Laravel API at {API_BASE}.</p>
+      <p style={{marginTop: '2rem'}}>Impossible de se connecter à l'API Laravel à {API_BASE}.</p>
     </div>
   );
 
@@ -262,7 +262,7 @@ const LearningPath = () => {
           <div className="progress-stats">
             <h3>Votre Parcours Quotidien</h3>
             <span style={{ fontSize: '1.2rem', fontWeight: 'bold', color: 'var(--accent-primary)' }}>
-              {progressPercentage}% Completed
+              {progressPercentage}% Complété
             </span>
           </div>
           <div className="progress-bar-bg">
@@ -302,7 +302,7 @@ const LearningPath = () => {
                   <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
                   <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
                 </svg>
-                Focus & Strategy
+                Focus & Stratégie
               </h3>
               <p>{selectedWeek.focus}</p>
               
@@ -315,7 +315,7 @@ const LearningPath = () => {
                   <circle cx="12" cy="8" r="7"></circle>
                   <polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline>
                 </svg>
-                Milestone Target
+                Objectif de l'Étape
               </h3>
               <p>{selectedWeek.milestone}</p>
               
@@ -323,16 +323,16 @@ const LearningPath = () => {
                 <div style={{ marginTop: '2rem' }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem' }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                      <h4 style={{ fontSize: '1rem', color: 'var(--text-primary)', margin: 0 }}>Daily Tracker</h4>
+                      <h4 style={{ fontSize: '1rem', color: 'var(--text-primary)', margin: 0 }}>Suivi Quotidien</h4>
                       <button 
                         onClick={() => handleResetProgress(selectedWeek.id)}
                         style={{ background: 'transparent', border: '1px solid var(--danger)', color: 'var(--danger)', padding: '2px 8px', borderRadius: '4px', fontSize: '0.75rem', cursor: 'pointer' }}
                       >
-                        Reset Progress
+                        Réinitialiser la progression
                       </button>
                     </div>
                     <span style={{ fontSize: '0.85rem', color: 'var(--accent-secondary)', background: 'rgba(59, 130, 246, 0.1)', padding: '4px 10px', borderRadius: '6px', fontWeight: '500' }}>
-                        📅 Due: {getDeadline(selectedWeek.week_number)}
+                        📅 Échéance : {getDeadline(selectedWeek.week_number)}
                     </span>
                   </div>
                   <ul style={{ listStyle: 'none', padding: 0 }}>
@@ -361,7 +361,7 @@ const LearningPath = () => {
                               )}
                             </div>
                             <span style={{ fontSize: '0.8rem', color: isCompleted ? 'var(--success)' : 'var(--accent-secondary)', whiteSpace: 'nowrap', marginLeft: '1rem' }}>
-                              {isCompleted ? 'Goal Reached!' : `${remainingMinutes}m remaining`}
+                              {isCompleted ? 'Objectif atteint !' : `${remainingMinutes}m restants`}
                             </span>
                           </div>
 
@@ -371,7 +371,7 @@ const LearningPath = () => {
 
                           <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center', flexWrap: 'wrap' }}>
                             <span style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', marginRight: 'auto' }}>
-                              Logged: {Math.floor(loggedMinutes / 60)}h {loggedMinutes % 60}m / {Math.floor(goalMinutes / 60)}h {goalMinutes % 60}m
+                              Enregistré : {Math.floor(loggedMinutes / 60)}h {loggedMinutes % 60}m / {Math.floor(goalMinutes / 60)}h {goalMinutes % 60}m
                             </span>
                             {!isCompleted && (
                               <>
@@ -386,7 +386,7 @@ const LearningPath = () => {
                               <button 
                                 onClick={() => handleResetTaskProgress(selectedWeek.id, idx)} 
                                 style={{ background: 'transparent', border: '1px solid var(--danger)', color: 'var(--danger)', padding: '2px 6px', borderRadius: '4px', fontSize: '0.8rem', cursor: 'pointer', marginLeft: '0.5rem' }}
-                                title="Reset this task's time to 0"
+                                title="Remettre le temps de cette tâche à 0"
                               >
                                 ↺
                               </button>
@@ -406,9 +406,9 @@ const LearningPath = () => {
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" style={{marginRight: '8px', verticalAlign: 'middle'}}>
                         <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
-                    Official Practice Exams
+                    Examens Pratiques Officiels
                 </h3>
-                <p style={{ color: 'var(--text-secondary)', marginBottom: '1rem' }}>Test your knowledge with these real exams from official sources matching your current milestone.</p>
+                <p style={{ color: 'var(--text-secondary)', marginBottom: '1rem' }}>Testez vos connaissances avec ces vrais examens de sources officielles.</p>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                   {selectedWeek.exam_links.map((exam, idx) => (
                     <a key={idx} href={exam.url} target="_blank" rel="noopener noreferrer" style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', padding: '1rem', background: 'rgba(0,0,0,0.02)', borderRadius: '8px', color: 'var(--text-primary)', textDecoration: 'none', border: '1px solid var(--glass-border)', transition: 'background 0.2s' }}>
@@ -433,7 +433,7 @@ const LearningPath = () => {
                     <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
                     <polyline points="22 4 12 14.01 9 11.01"></polyline>
                   </svg>
-                  Milestone Completed! Click to Undo
+                  Étape terminée ! Cliquez pour annuler
                 </>
               ) : (
                 <>
@@ -441,7 +441,7 @@ const LearningPath = () => {
                     <circle cx="12" cy="12" r="10"></circle>
                     <polygon points="10 8 16 12 10 16 10 8"></polygon>
                   </svg>
-                  Mark Milestone as Complete
+                  Marquer l'étape comme terminée
                 </>
               )}
             </button>

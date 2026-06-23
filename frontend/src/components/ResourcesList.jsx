@@ -13,14 +13,14 @@ const ResourcesList = ({ week }) => {
                 <svg width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="var(--accent-primary)">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
                 </svg>
-                Focus & Strategy Resources
+                Ressources & Stratégie
             </h4>
             
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1.5rem' }}>
                 {/* Source Links */}
                 {week.source_links && week.source_links.length > 0 && (
                     <div>
-                        <h5 style={{ fontSize: '0.85rem', fontWeight: '500', color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '0.75rem' }}>Links</h5>
+                        <h5 style={{ fontSize: '0.85rem', fontWeight: '500', color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '0.75rem' }}>Liens</h5>
                         <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
                             {week.source_links.map((link, idx) => (
                                 <li key={idx}>
@@ -39,7 +39,7 @@ const ResourcesList = ({ week }) => {
                 {/* Video Links */}
                 {week.video_links && week.video_links.length > 0 && (
                     <div>
-                        <h5 style={{ fontSize: '0.85rem', fontWeight: '500', color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '0.75rem' }}>Videos</h5>
+                        <h5 style={{ fontSize: '0.85rem', fontWeight: '500', color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '0.75rem' }}>Vidéos</h5>
                         <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
                             {week.video_links.map((video, idx) => (
                                 <li key={idx}>
@@ -59,7 +59,7 @@ const ResourcesList = ({ week }) => {
                 {/* Books */}
                 {week.books && week.books.length > 0 && (
                     <div>
-                        <h5 style={{ fontSize: '0.85rem', fontWeight: '500', color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '0.75rem' }}>Books</h5>
+                        <h5 style={{ fontSize: '0.85rem', fontWeight: '500', color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '1px', marginBottom: '0.75rem' }}>Livres</h5>
                         <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
                             {week.books.map((book, idx) => (
                                 <li key={idx} style={{ display: 'flex', alignItems: 'flex-start', gap: '0.5rem', fontSize: '0.9rem', color: 'var(--text-primary)' }}>
@@ -76,7 +76,7 @@ const ResourcesList = ({ week }) => {
                                                 book.title
                                             )}
                                         </strong>
-                                        <span style={{ color: 'var(--text-secondary)', fontSize: '0.8rem' }}>by {book.author}</span>
+                                        <span style={{ color: 'var(--text-secondary)', fontSize: '0.8rem' }}>par {book.author}</span>
                                     </div>
                                 </li>
                             ))}
