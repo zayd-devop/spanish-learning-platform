@@ -44,3 +44,11 @@ Route::put('/weeks/{weekId}/tasks/{taskIndex}/reset', [WeekController::class, 'r
 // Route::get('/tests/final', [TestController::class, 'getFinalTest']);
 // Route::post('/tests/{testId}/submit', [TestController::class, 'submitTest']);
 // Route::get('/progress', [WeekController::class, 'progress']);
+
+// Fallback for CORS OPTIONS requests
+Route::options('{any}', function () {
+    return response('', 204)
+        ->header('Access-Control-Allow-Origin', '*')
+        ->header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS')
+        ->header('Access-Control-Allow-Headers', '*');
+})->where('any', '.*');
