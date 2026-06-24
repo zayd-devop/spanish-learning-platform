@@ -135,7 +135,7 @@ const InterviewSimulator = () => {
 
     return (
         <div className="animate-fade-in interview-container" style={{ padding: '1rem', height: 'calc(100vh - 100px)', display: 'flex', flexDirection: 'column' }}>
-            <div style={{ marginBottom: '1.5rem', flexShrink: 0 }}>
+            <div style={{ marginBottom: '1rem', flexShrink: 0 }}>
                 <h1 className="gradient-text" style={{ fontSize: '2.5rem', marginBottom: '0.5rem', fontWeight: '800' }}>Simulation d'Entretien</h1>
                 <p style={{ color: 'var(--text-secondary)' }}>Préparez-vous à l'entretien pédagogique Campus France face à notre IA.</p>
             </div>
@@ -160,7 +160,7 @@ const InterviewSimulator = () => {
                         style={{ background: 'white', border: '1px solid rgba(0,0,0,0.1)', color: 'var(--text-primary)', padding: '0.5rem 1rem', borderRadius: '8px', fontSize: '0.85rem', fontWeight: '600', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '0.5rem' }}
                     >
                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21.5 2v6h-6M2.5 22v-6h6M2 11.5a10 10 0 0 1 18.8-4.3M22 12.5a10 10 0 0 1-18.8 4.2"/></svg>
-                        Recommencer
+                        <span className="recommencer-text">Recommencer</span>
                     </button>
                 </div>
 
@@ -269,25 +269,45 @@ const InterviewSimulator = () => {
                 /* Mobile Responsive Styles */
                 @media (max-width: 768px) {
                     .interview-container {
-                        height: calc(100vh - 60px) !important;
+                        height: calc(100dvh - 130px) !important;
                         padding: 0.5rem !important;
                     }
                     .interview-container h1 {
-                        font-size: 1.8rem !important;
+                        font-size: 1.5rem !important;
+                        margin-bottom: 0.2rem !important;
+                    }
+                    .interview-container > div:first-child p {
+                        font-size: 0.85rem !important;
+                        margin-bottom: 0 !important;
                     }
                     .interview-chat-header {
-                        padding: 0.75rem 1rem !important;
+                        padding: 0.5rem 0.75rem !important;
+                        gap: 0.5rem !important;
+                    }
+                    .interview-chat-header h3 {
+                        font-size: 0.95rem !important;
+                        white-space: nowrap;
+                    }
+                    .recommencer-text {
+                        display: none !important;
+                    }
+                    .interview-chat-header .hover-lift {
+                        padding: 0.5rem !important;
                     }
                     .interview-chat-body {
-                        padding: 1rem 0.5rem !important;
+                        padding: 0.75rem 0.5rem !important;
+                        gap: 1rem !important;
                     }
                     .interview-chat-footer {
-                        padding: 0.75rem !important;
+                        padding: 0.5rem !important;
                     }
                     .interview-message {
-                        max-width: 90% !important;
+                        max-width: 92% !important;
                         padding: 0.75rem 1rem !important;
                         font-size: 0.9rem !important;
+                    }
+                    .interview-chat-footer textarea {
+                        font-size: 16px !important; /* Prevents iOS zoom */
                     }
                 }
             `}</style>

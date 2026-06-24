@@ -195,10 +195,10 @@ const Dashboard = () => {
                         <h3 style={{ marginBottom: '1rem', fontSize: '1.2rem', color: 'var(--text-primary)', textAlign: 'center' }}>Curriculum Progress</h3>
                         <div style={{ height: '240px', display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative' }}>
                             <div style={{ position: 'absolute', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', pointerEvents: 'none', zIndex: 10 }}>
-                                <span style={{ fontSize: '2rem', fontWeight: '800', color: 'var(--text-primary)', lineHeight: '1', marginBottom: '4px' }}>
+                                <span style={{ fontSize: '1.75rem', fontWeight: '800', color: 'var(--text-primary)', lineHeight: '1', marginBottom: '4px' }}>
                                     {Math.round((completionData[0].value / (completionData[0].value + completionData[1].value)) * 100)}%
                                 </span>
-                                <span style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', fontWeight: '600', textTransform: 'uppercase', letterSpacing: '1px' }}>
+                                <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', fontWeight: '600', textTransform: 'uppercase', letterSpacing: '1px' }}>
                                     Done
                                 </span>
                             </div>
@@ -208,8 +208,8 @@ const Dashboard = () => {
                                         data={completionData}
                                         cx="50%"
                                         cy="50%"
-                                        innerRadius="65%"
-                                        outerRadius="85%"
+                                        innerRadius={80}
+                                        outerRadius={100}
                                         paddingAngle={8}
                                         dataKey="value"
                                         stroke="none"
