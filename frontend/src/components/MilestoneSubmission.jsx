@@ -8,9 +8,28 @@ const MilestoneSubmission = ({ weekId }) => {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [result, setResult] = useState(null);
     const [error, setError] = useState(null);
+    const [recordingTime, setRecordingTime] = useState(0);
 
     const mediaRecorderRef = useRef(null);
     const audioChunksRef = useRef([]);
+
+    useEffect(() => {
+        let interval;
+        if (isRecording) {
+            interval = setInterval(() => {
+                setRecordingTime(prev => prev + 1);
+            }, 1000);
+        } else {
+            clearInterval(interval);
+        }
+        return () => clearInterval(interval);
+    }, [isRecording]);
+
+    const formatTime = (seconds) => {
+        const m = Math.floor(seconds / 60).toString().padStart(2, '0');
+        const s = (seconds % 60).toString().padStart(2, '0');
+        return `${m}:${s}`;
+    };
 
     const API_BASE = import.meta.env.VITE_API_BASE_URL || 'http://127.0.0.1:8000/api';
 
@@ -34,6 +53,7 @@ const MilestoneSubmission = ({ weekId }) => {
             };
 
             mediaRecorder.start();
+            setRecordingTime(0);
             setIsRecording(true);
         } catch (err) {
             console.error("Error accessing microphone:", err);
@@ -155,10 +175,29 @@ const MilestoneSubmission = ({ weekId }) => {
                             </button>
                         )}
 
-                        {audioUrl && (
+                        {audioUrl && !isRecording && (
                             <audio src={audioUrl} controls style={{ height: '40px', marginLeft: 'auto', maxWidth: '300px' }} />
                         )}
                     </div>
+                    
+                    {/* Chrono & Progress Bar */}
+                    {isRecording && (
+                        <div style={{ marginTop: '1rem' }}>
+                            <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.85rem', color: 'var(--text-secondary)', marginBottom: '0.5rem', fontWeight: 'bold' }}>
+                                <span style={{ color: '#ef4444', animation: 'pulse 1.5s infinite' }}>🔴 Enregistrement en cours...</span>
+                                <span style={{ fontFamily: 'monospace', fontSize: '1rem' }}>{formatTime(recordingTime)} / 05:00</span>
+                            </div>
+                            <div style={{ height: '8px', background: 'rgba(255,255,255,0.1)', borderRadius: '4px', overflow: 'hidden' }}>
+                                <div style={{ 
+                                    height: '100%', 
+                                    background: 'linear-gradient(90deg, #ef4444, #f87171)', 
+                                    width: `${Math.min((recordingTime / 300) * 100, 100)}%`, 
+                                    transition: 'width 1s linear' 
+                                }}></div>
+                            </div>
+                            <style>{`@keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.5; } 100% { opacity: 1; } }`}</style>
+                        </div>
+                    )}
                 </div>
 
                 {error && (
