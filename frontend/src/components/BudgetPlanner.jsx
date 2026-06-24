@@ -16,7 +16,8 @@ const BudgetPlanner = () => {
         frais_inscription: 170,
         billet_avion: 150,
         caution: 400,
-        frais_cf: 1900 // en MAD
+        frais_cf: 1900, // en MAD
+        requis_mensuel: 615 // AVI required per month
     });
 
     const [isLoaded, setIsLoaded] = useState(false);
@@ -63,19 +64,19 @@ const BudgetPlanner = () => {
         setBudget(prev => {
             const newBudget = {
                 ...prev,
-                [name]: Number(value)
+                [name]: value === '' ? '' : Number(value)
             };
             saveToDB(newBudget);
             return newBudget;
         });
     };
 
-    const monthlyTotal = budget.loyer + budget.nourriture + budget.transport + budget.telephone + budget.loisirs;
-    const initialCosts = budget.frais_inscription + budget.billet_avion + budget.caution;
+    const monthlyTotal = (Number(budget.loyer) || 0) + (Number(budget.nourriture) || 0) + (Number(budget.transport) || 0) + (Number(budget.telephone) || 0) + (Number(budget.loisirs) || 0);
+    const initialCosts = (Number(budget.frais_inscription) || 0) + (Number(budget.billet_avion) || 0) + (Number(budget.caution) || 0);
     
-    // Campus France requires 615 EUR / month minimum for AVI
-    const requiredMonthly = 615;
-    const requiredAnnual = requiredMonthly * 12; // 7380 EUR
+    // Campus France requires 615 EUR / month minimum for AVI (but can be modified)
+    const requiredMonthly = Number(budget.requis_mensuel) || 0;
+    const requiredAnnual = requiredMonthly * 12;
     const diffMonthly = monthlyTotal - requiredMonthly;
 
     return (
@@ -102,12 +103,22 @@ const BudgetPlanner = () => {
                         </div>
                     </div>
 
-                    <div style={{ marginBottom: '1rem' }}>
-                        <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.5rem', color: 'var(--text-secondary)' }}>
-                            <span>Requis par Campus France (AVI)</span>
-                            <span style={{ fontWeight: '600' }}>615 € / mois</span>
+                    <div style={{ marginBottom: '1rem', background: 'rgba(59, 130, 246, 0.05)', padding: '1rem', borderRadius: '8px', border: '1px solid rgba(59, 130, 246, 0.1)' }}>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem', color: 'var(--text-secondary)' }}>
+                            <span style={{ fontSize: '0.9rem' }}>Requis par Campus France (AVI)</span>
+                            <div style={{ display: 'flex', alignItems: 'center', background: 'white', padding: '0.2rem 0.5rem', borderRadius: '6px', border: '1px dashed var(--glass-border)', width: '80px' }}>
+                                <input 
+                                    type="number" 
+                                    name="requis_mensuel" 
+                                    value={budget.requis_mensuel === 0 ? '' : budget.requis_mensuel} 
+                                    onChange={handleInputChange}
+                                    style={{ border: 'none', background: 'transparent', outline: 'none', flex: 1, fontSize: '0.9rem', color: 'var(--text-primary)', textAlign: 'right', fontWeight: '600' }}
+                                    placeholder="615"
+                                />
+                                <span style={{ color: 'var(--text-secondary)', marginLeft: '4px', fontSize: '0.9rem' }}>€</span>
+                            </div>
                         </div>
-                        <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '0.5rem', color: 'var(--text-secondary)' }}>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', color: 'var(--text-secondary)', fontSize: '0.9rem' }}>
                             <span>Total Annuel Exigé (AVI)</span>
                             <span style={{ fontWeight: '600' }}>{requiredAnnual} €</span>
                         </div>
@@ -144,9 +155,10 @@ const BudgetPlanner = () => {
                                         <input 
                                             type="number" 
                                             name={item.id} 
-                                            value={budget[item.id]} 
+                                            value={budget[item.id] === 0 ? '' : budget[item.id]} 
                                             onChange={handleInputChange}
                                             style={{ border: 'none', background: 'transparent', outline: 'none', flex: 1, fontSize: '1rem', color: 'var(--text-primary)' }}
+                                            placeholder="0"
                                         />
                                         <span style={{ color: 'var(--text-secondary)', fontWeight: '600' }}>€</span>
                                     </div>
@@ -177,9 +189,10 @@ const BudgetPlanner = () => {
                                         <input 
                                             type="number" 
                                             name={item.id} 
-                                            value={budget[item.id]} 
+                                            value={budget[item.id] === 0 ? '' : budget[item.id]} 
                                             onChange={handleInputChange}
                                             style={{ border: 'none', background: 'transparent', outline: 'none', flex: 1, fontSize: '1rem', color: 'var(--text-primary)' }}
+                                            placeholder="0"
                                         />
                                         <span style={{ color: 'var(--text-secondary)', fontWeight: '600' }}>{item.unit}</span>
                                     </div>
