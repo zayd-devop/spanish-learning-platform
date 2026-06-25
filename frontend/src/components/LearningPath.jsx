@@ -272,25 +272,56 @@ const LearningPath = ({ pathType = 'standard', title = 'Le Chemin vers la Fluidi
         </h2>
         
         <div className="week-list" style={{ flexGrow: 1 }}>
-          {weeks.map((week) => (
-            <div 
-              key={week.id} 
-              className={`week-item ${selectedWeekId === week.id ? 'active' : ''} ${week.is_completed ? 'completed' : ''}`}
-              onClick={() => setSelectedWeekId(week.id)}
-            >
-              <div>
-                <div className="week-number">{week.title.split(' : ')[0]}</div>
-                <div className="week-title">{week.title.split(' : ')[1]}</div>
-              </div>
-              <div className="status-indicator">
-                {week.is_completed && (
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
-                    <polyline points="20 6 9 17 4 12"></polyline>
-                  </svg>
+          {weeks.map((week, index) => {
+            const parts = week.title.split(' : ');
+            const prefix = parts[0];
+            const suffix = parts[1] || '';
+            let group = null;
+            let dayStr = prefix;
+            
+            if (prefix.includes(' - ')) {
+              const subParts = prefix.split(' - ');
+              group = subParts[0];
+              dayStr = subParts[1];
+            }
+
+            let prevGroup = null;
+            if (index > 0) {
+              const prevPrefix = weeks[index - 1].title.split(' : ')[0];
+              if (prevPrefix.includes(' - ')) {
+                prevGroup = prevPrefix.split(' - ')[0];
+              }
+            }
+
+            const showGroupHeader = group && group !== prevGroup;
+
+            return (
+              <React.Fragment key={week.id}>
+                {showGroupHeader && (
+                  <div style={{ marginTop: index > 0 ? '1.5rem' : '0.5rem', marginBottom: '0.5rem', padding: '0.25rem 0.5rem', fontWeight: 'bold', color: '#94a3b8', fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.1em' }}>
+                    {group} • {suffix}
+                  </div>
                 )}
-              </div>
-            </div>
-          ))}
+                <div 
+                  className={`week-item ${selectedWeekId === week.id ? 'active' : ''} ${week.is_completed ? 'completed' : ''}`}
+                  onClick={() => setSelectedWeekId(week.id)}
+                  style={group ? { marginLeft: '0.5rem', paddingLeft: '1rem', borderLeft: '1px solid rgba(255,255,255,0.1)' } : {}}
+                >
+                  <div>
+                    <div className="week-number">{dayStr}</div>
+                    {!group && <div className="week-title">{suffix}</div>}
+                  </div>
+                  <div className="status-indicator">
+                    {week.is_completed && (
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                        <polyline points="20 6 9 17 4 12"></polyline>
+                      </svg>
+                    )}
+                  </div>
+                </div>
+              </React.Fragment>
+            );
+          })}
         </div>
       </aside>
 
