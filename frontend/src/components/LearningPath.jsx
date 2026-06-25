@@ -42,9 +42,16 @@ const LearningPath = ({ pathType = 'standard', title = 'Le Chemin vers la Fluidi
 
         setWeeks(weeksData);
         setKpiData(kpiJson);
-        if (weeksData.length > 0 && !selectedWeekId) {
-          setSelectedWeekId(weeksData[0].id);
+        
+        if (weeksData.length > 0) {
+          const weekExists = weeksData.some(w => w.id === selectedWeekId);
+          if (!selectedWeekId || !weekExists) {
+            setSelectedWeekId(weeksData[0].id);
+          }
+        } else {
+          setSelectedWeekId(null);
         }
+        
         setLoading(false);
       } catch (err) {
         setError(err.message);
@@ -53,7 +60,7 @@ const LearningPath = ({ pathType = 'standard', title = 'Le Chemin vers la Fluidi
     };
 
     fetchWeeksAndKPIs();
-  }, [selectedWeekId]);
+  }, [selectedWeekId, pathType, token]);
 
   const handleToggleCompletion = async (id) => {
     const week = weeks.find(w => w.id === id);
