@@ -111,10 +111,10 @@ const Dashboard = () => {
     if (loading) return <div className="loader"></div>;
 
     return (
-        <div style={{ padding: '2.5rem', animation: 'fadeIn 0.5s ease-out' }}>
+        <div className="dashboard-container" style={{ animation: 'fadeIn 0.5s ease-out' }}>
             <div className="dashboard-header-flex" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '2.5rem' }}>
                 <div>
-                    <h1 className="gradient-text" style={{ fontSize: '3rem', marginBottom: '0.5rem', fontWeight: '800' }}>Analytics Dashboard</h1>
+                    <h1 className="gradient-text dashboard-title" style={{ marginBottom: '0.5rem', fontWeight: '800' }}>Analytics Dashboard</h1>
                     <p style={{ color: 'var(--text-secondary)', fontSize: '1.1rem' }}>Track your fluency journey and learning metrics in real-time.</p>
                 </div>
                 <div className="dashboard-filters" style={{ display: 'flex', gap: '0.5rem', background: 'rgba(255,255,255,0.05)', padding: '0.5rem', borderRadius: '12px', border: '1px solid var(--glass-border)', alignItems: 'center' }}>

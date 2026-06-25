@@ -12,7 +12,7 @@ const EFrenchLogo = () => (
     </svg>
 );
 
-const Navbar = () => {
+const Navbar = ({ toggleMobileMenu }) => {
     const { user, logout } = useAuth();
     const navigate = useNavigate();
 
@@ -23,7 +23,16 @@ const Navbar = () => {
 
     return (
         <nav className="navbar glass-panel" style={{ position: 'sticky', top: 0, zIndex: 100, borderRadius: '0', borderLeft: 'none', borderRight: 'none', borderTop: 'none', display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '1rem', flexWrap: 'nowrap', gap: '0.5rem' }}>
-            <div className="navbar-brand">
+            <div className="navbar-brand" style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                {toggleMobileMenu && (
+                    <button className="mobile-menu-btn" onClick={toggleMobileMenu} style={{ background: 'transparent', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', color: 'var(--text-primary)' }}>
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                            <line x1="3" y1="12" x2="21" y2="12"></line>
+                            <line x1="3" y1="6" x2="21" y2="6"></line>
+                            <line x1="3" y1="18" x2="21" y2="18"></line>
+                        </svg>
+                    </button>
+                )}
                 <Link to="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '8px' }}>
                     <EFrenchLogo />
                     <span className="gradient-text" style={{ fontSize: '1.5rem', fontWeight: '800', margin: 0, whiteSpace: 'nowrap' }}>e-French</span>

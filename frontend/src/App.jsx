@@ -24,11 +24,13 @@ const ProtectedRoute = ({ children }) => {
 };
 
 const MainLayout = ({ children }) => {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
+
   return (
     <div className="main-layout">
-      <Sidebar />
+      <Sidebar isMobileMenuOpen={isMobileMenuOpen} setIsMobileMenuOpen={setIsMobileMenuOpen} />
       <div className="content-area">
-        <Navbar />
+        <Navbar toggleMobileMenu={() => setIsMobileMenuOpen(!isMobileMenuOpen)} />
         <div className="scrollable-content">
           {children}
         </div>
