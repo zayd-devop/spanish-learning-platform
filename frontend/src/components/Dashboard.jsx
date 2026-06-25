@@ -3,10 +3,12 @@ import StudentKPIs from './StudentKPIs';
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid, LineChart, Line, PieChart, Pie, Cell, AreaChart, Area } from 'recharts';
 
 import WordOfTheDay from './WordOfTheDay';
+import { useAuth } from '../context/AuthContext';
 
 const API_BASE = import.meta.env.VITE_API_BASE_URL || 'http://127.0.0.1:8000/api';
 
 const Dashboard = () => {
+    const { token } = useAuth();
     const [kpiData, setKpiData] = useState(null);
     const [loading, setLoading] = useState(true);
 
@@ -21,8 +23,13 @@ const Dashboard = () => {
 
     useEffect(() => {
         const fetchKPIs = async () => {
+            if (!token) return;
             try {
-                const res = await fetch(`${API_BASE}/weeks`);
+                const res = await fetch(`${API_BASE}/weeks`, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
                 const data = await res.json();
                 
                 setKpiData(data.kpi);
@@ -99,7 +106,7 @@ const Dashboard = () => {
             }
         };
         fetchKPIs();
-    }, []);
+    }, [token]);
 
     if (loading) return <div className="loader"></div>;
 

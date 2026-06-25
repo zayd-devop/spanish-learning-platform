@@ -323,9 +323,7 @@ const LearningPath = ({ pathType = 'standard', title = 'Le Chemin vers la Fluidi
                   <div 
                     onClick={() => toggleGroup(group)}
                     style={{ 
-                      marginTop: index > 0 ? '1rem' : '0.5rem', 
-                      marginBottom: '0.5rem', 
-                      padding: '0.5rem 0.75rem', 
+                      padding: '0.75rem 1rem', 
                       fontWeight: 'bold', 
                       color: '#94a3b8', 
                       fontSize: '0.8rem', 
@@ -336,8 +334,9 @@ const LearningPath = ({ pathType = 'standard', title = 'Le Chemin vers la Fluidi
                       alignItems: 'center',
                       justifyContent: 'space-between',
                       background: 'rgba(255,255,255,0.05)',
-                      borderRadius: '6px',
-                      userSelect: 'none'
+                      borderRadius: '8px',
+                      userSelect: 'none',
+                      border: '1px solid rgba(255,255,255,0.05)'
                     }}
                   >
                     <span>{group} • {suffix}</span>
