@@ -23,6 +23,13 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/resumes', [App\Http\Controllers\ResumeController::class, 'index']);
     Route::post('/resumes', [App\Http\Controllers\ResumeController::class, 'store']);
     Route::get('/resumes/{id}', [App\Http\Controllers\ResumeController::class, 'show']);
+    // Weeks Routes
+    Route::get('/weeks', [WeekController::class, 'index']);
+    Route::put('/weeks/{week}/toggle-complete', [WeekController::class, 'toggleComplete']);
+    Route::put('/weeks/{weekId}/checklist', [WeekController::class, 'updateChecklist']);
+    Route::put('/weeks/{weekId}/log-time', [WeekController::class, 'logTime']);
+    Route::put('/weeks/{weekId}/reset-progress', [WeekController::class, 'resetProgress']);
+    Route::put('/weeks/{weekId}/tasks/{taskIndex}/reset', [WeekController::class, 'resetTaskProgress']);
 });
 
 // AI Routes
@@ -36,14 +43,6 @@ Route::post('/ai/generate-cover-letter', [App\Http\Controllers\AiController::cla
 
 // Licences Route
 Route::get('/licences', [App\Http\Controllers\LicenceController::class, 'index']);
-
-// Weeks Routes
-Route::get('/weeks', [WeekController::class, 'index']);
-Route::put('/weeks/{week}/toggle-complete', [WeekController::class, 'toggleComplete']);
-Route::put('/weeks/{weekId}/checklist', [WeekController::class, 'updateChecklist']);
-Route::put('/weeks/{weekId}/log-time', [WeekController::class, 'logTime']);
-Route::put('/weeks/{weekId}/reset-progress', [WeekController::class, 'resetProgress']);
-Route::put('/weeks/{weekId}/tasks/{taskIndex}/reset', [WeekController::class, 'resetTaskProgress']);
 
 // Test Routes (if exists)
 // Route::get('/weeks/{weekId}/tests', [TestController::class, 'getWeeklyTest']);

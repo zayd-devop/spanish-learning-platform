@@ -57,7 +57,14 @@ function App() {
           <Route path="/learning-path" element={
             <ProtectedRoute>
               <MainLayout>
-                <LearningPath />
+                <LearningPath pathType="standard" title="Le Chemin vers la Fluidité" storageKey="spanish_journey_start_date" />
+              </MainLayout>
+            </ProtectedRoute>
+          } />
+          <Route path="/zero-to-hero" element={
+            <ProtectedRoute>
+              <MainLayout>
+                <LearningPath pathType="zero_to_hero" title="From Zero to Hero" storageKey="hero_journey_start_date" />
               </MainLayout>
             </ProtectedRoute>
           } />

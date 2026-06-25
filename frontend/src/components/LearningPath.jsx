@@ -2,10 +2,12 @@ import React, { useState, useEffect } from 'react';
 import Swal from 'sweetalert2';
 import ResourcesList from './ResourcesList';
 import TaskStopwatch from './TaskStopwatch';
+import { useAuth } from '../context/AuthContext';
 
 const API_BASE = import.meta.env.VITE_API_BASE_URL || 'http://127.0.0.1:8000/api';
 
-const LearningPath = () => {
+const LearningPath = ({ pathType = 'standard', title = 'Le Chemin vers la Fluidité', storageKey = 'spanish_journey_start_date' }) => {
+  const { token } = useAuth();
   const [weeks, setWeeks] = useState([]);
   const [kpiData, setKpiData] = useState(null);
   const [selectedWeekId, setSelectedWeekId] = useState(null);
@@ -13,10 +15,10 @@ const LearningPath = () => {
   const [error, setError] = useState(null);
 
   const [startDate] = useState(() => {
-    const saved = localStorage.getItem('spanish_journey_start_date');
+    const saved = localStorage.getItem(storageKey);
     if (saved) return new Date(saved);
     const now = new Date();
-    localStorage.setItem('spanish_journey_start_date', now.toISOString());
+    localStorage.setItem(storageKey, now.toISOString());
     return now;
   });
 
@@ -27,7 +29,11 @@ const LearningPath = () => {
   useEffect(() => {
     const fetchWeeksAndKPIs = async () => {
       try {
-        const res = await fetch(`${API_BASE}/weeks`);
+        const res = await fetch(`${API_BASE}/weeks?path=${pathType}`, {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        });
         if (!res.ok) throw new Error(`API failed: ${res.status}`);
         
         const data = await res.json();
@@ -81,7 +87,10 @@ const LearningPath = () => {
     try {
       const response = await fetch(`${API_BASE}/weeks/${id}/toggle-complete`, {
         method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
       });
       if (response.ok) {
         setWeeks(weeks.map(w => 
@@ -108,11 +117,18 @@ const LearningPath = () => {
     try {
       await fetch(`${API_BASE}/weeks/${weekId}/log-time`, {
         method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
         body: JSON.stringify({ taskIndex: checklistIdx, minutes: minutesToAdd })
       });
       
-      const res = await fetch(`${API_BASE}/weeks`);
+      const res = await fetch(`${API_BASE}/weeks?path=${pathType}`, {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
       const data = await res.json();
       setKpiData(data.kpi);
 
@@ -155,9 +171,16 @@ const LearningPath = () => {
     try {
       await fetch(`${API_BASE}/weeks/${weekId}/reset-progress`, {
         method: 'PUT',
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
       });
       
-      const res = await fetch(`${API_BASE}/weeks`);
+      const res = await fetch(`${API_BASE}/weeks?path=${pathType}`, {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
       const data = await res.json();
       setKpiData(data.kpi);
 
@@ -202,9 +225,16 @@ const LearningPath = () => {
     try {
       await fetch(`${API_BASE}/weeks/${weekId}/tasks/${checklistIdx}/reset`, {
         method: 'PUT',
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
       });
       
-      const res = await fetch(`${API_BASE}/weeks`);
+      const res = await fetch(`${API_BASE}/weeks?path=${pathType}`, {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
       const data = await res.json();
       setKpiData(data.kpi);
 
@@ -231,7 +261,7 @@ const LearningPath = () => {
     <div className="responsive-flex-layout">
       <aside className="glass-panel responsive-sidebar" style={{ padding: '1.5rem' }}>
         <h2 className="gradient-text" style={{ marginBottom: '2rem', fontSize: '1.5rem' }}>
-          Le Chemin vers la Fluidité
+          {title}
         </h2>
         
         <div className="week-list" style={{ flexGrow: 1 }}>

@@ -3,14 +3,19 @@
 namespace App\Http\Controllers;
 
 use App\Models\Week;
+use App\Models\UserWeekProgress;
 use Illuminate\Http\Request;
 
 class WeekController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $weeks = Week::orderBy('week_number', 'asc')->get();
+        $path = $request->query('path', 'standard');
+        $weeks = Week::where('path', $path)->orderBy('week_number', 'asc')->get();
         
+        $userId = $request->user()->id;
+        $progressRecords = UserWeekProgress::where('user_id', $userId)->get()->keyBy('week_id');
+
         $totalMinutesLogged = 0;
         $totalTasks = 0;
         $completedTasks = 0;
@@ -18,6 +23,10 @@ class WeekController extends Controller
         $weeklyVelocity = 0;
 
         foreach ($weeks as $week) {
+            $userProgress = $progressRecords->get($week->id);
+            $week->is_completed = $userProgress ? $userProgress->is_completed : false;
+            $week->task_progress = $userProgress ? $userProgress->task_progress : [];
+
             $checklist = $week->checklist ?? [];
             $progress = $week->task_progress ?? [];
             if (!is_array($checklist)) $checklist = [];
@@ -75,9 +84,19 @@ class WeekController extends Controller
 
     public function toggleCompletion(Request $request, $id)
     {
+        $userId = $request->user()->id;
         $week = Week::findOrFail($id);
-        $week->is_completed = !$week->is_completed;
-        $week->save();
+        
+        $progress = UserWeekProgress::firstOrCreate(
+            ['user_id' => $userId, 'week_id' => $week->id],
+            ['is_completed' => false, 'task_progress' => []]
+        );
+        
+        $progress->is_completed = !$progress->is_completed;
+        $progress->save();
+
+        $week->is_completed = $progress->is_completed;
+        $week->task_progress = $progress->task_progress;
 
         return response()->json([
             'message' => 'Week status updated successfully',
@@ -87,6 +106,8 @@ class WeekController extends Controller
 
     public function updateChecklist(Request $request, $id)
     {
+        // Deprecated or rarely used, but we keep the structure just in case.
+        // It updates the global week model which might be wrong, but it's not standard progress.
         $request->validate([
             'completed_checklists' => 'array'
         ]);
@@ -108,17 +129,26 @@ class WeekController extends Controller
             'minutes' => 'required|integer'
         ]);
 
+        $userId = $request->user()->id;
         $week = Week::findOrFail($id);
-        $progress = $week->task_progress ?? [];
         
+        $progress = UserWeekProgress::firstOrCreate(
+            ['user_id' => $userId, 'week_id' => $week->id],
+            ['is_completed' => false, 'task_progress' => []]
+        );
+
+        $taskProgress = $progress->task_progress ?? [];
         $idx = $request->taskIndex;
-        if (!isset($progress[$idx])) {
-            $progress[$idx] = 0;
+        if (!isset($taskProgress[$idx])) {
+            $taskProgress[$idx] = 0;
         }
-        $progress[$idx] += $request->minutes;
+        $taskProgress[$idx] += $request->minutes;
         
-        $week->task_progress = $progress;
-        $week->save();
+        $progress->task_progress = $taskProgress;
+        $progress->save();
+
+        $week->is_completed = $progress->is_completed;
+        $week->task_progress = $progress->task_progress;
 
         return response()->json([
             'message' => 'Time logged successfully',
@@ -126,11 +156,19 @@ class WeekController extends Controller
         ]);
     }
 
-    public function resetProgress($id)
+    public function resetProgress(Request $request, $id)
     {
+        $userId = $request->user()->id;
         $week = Week::findOrFail($id);
+        
+        $progress = UserWeekProgress::where('user_id', $userId)->where('week_id', $week->id)->first();
+        if ($progress) {
+            $progress->task_progress = null;
+            $progress->save();
+        }
+
+        $week->is_completed = $progress ? $progress->is_completed : false;
         $week->task_progress = null;
-        $week->save();
 
         return response()->json([
             'message' => 'Progress reset successfully',
@@ -138,14 +176,21 @@ class WeekController extends Controller
         ]);
     }
 
-    public function resetTaskProgress($weekId, $taskIndex)
+    public function resetTaskProgress(Request $request, $weekId, $taskIndex)
     {
+        $userId = $request->user()->id;
         $week = Week::findOrFail($weekId);
-        $progress = $week->task_progress ?? [];
-        $progress[$taskIndex] = 0;
         
-        $week->task_progress = $progress;
-        $week->save();
+        $progress = UserWeekProgress::where('user_id', $userId)->where('week_id', $week->id)->first();
+        if ($progress) {
+            $taskProgress = $progress->task_progress ?? [];
+            $taskProgress[$taskIndex] = 0;
+            $progress->task_progress = $taskProgress;
+            $progress->save();
+        }
+
+        $week->is_completed = $progress ? $progress->is_completed : false;
+        $week->task_progress = $progress ? $progress->task_progress : [];
 
         return response()->json([
             'message' => 'Task progress reset successfully',
@@ -153,10 +198,11 @@ class WeekController extends Controller
         ]);
     }
 
-    public function progress()
+    public function progress(Request $request)
     {
+        $userId = $request->user()->id;
         $total = Week::count();
-        $completed = Week::where('is_completed', true)->count();
+        $completed = UserWeekProgress::where('user_id', $userId)->where('is_completed', true)->count();
         
         return response()->json([
             'total' => $total,

@@ -122,6 +122,113 @@ class DatabaseSeeder extends Seeder
             ]);
         }
 
+        // "From Zero to Hero" 8-Week Sprint
+        $heroWeeks = [
+            [
+                'title' => 'Semaine 1 : The Past Tense Fixation',
+                'focus' => 'Focus: Passé Composé vs. Imparfait. Your biggest hurdle right now is telling stories. Spend this week mastering when to use the passé composé (completed actions) versus the imparfait (ongoing states, habits, background details). Drill the irregular past participles and the verbs that use être instead of avoir.',
+                'milestone' => 'Speak into your phone\'s voice memo app for 3 solid minutes about what you did last weekend, detailing the events and how you felt, without stopping to look up a verb conjugation.',
+                'checklist' => [
+                    ['task' => 'Hour 1: Active Study (Morning) - Anki flashcards and targeted grammar exercises.', 'weekly_goal_minutes' => 60],
+                    ['task' => 'Hours 2 & 3: Comprehensible Input - Listening and reading to content just slightly above your level.', 'weekly_goal_minutes' => 120],
+                    ['task' => 'Hour 4: Output & Speaking - 1-on-1 tutoring, language exchange, or speaking out loud.', 'weekly_goal_minutes' => 60],
+                    ['task' => 'Hour 5: Passive/Native Media (Evening) - Watching French YouTubers, Netflix, or reading a French book.', 'weekly_goal_minutes' => 60],
+                ]
+            ],
+            [
+                'title' => 'Semaine 2 : Navigating the Future & Pronouns',
+                'focus' => 'Focus: Futur Proche/Simple and \'y\' & \'en\'. Stop repeating the same nouns. Master direct/indirect object pronouns (le, la, les, lui, leur) and the spatial/quantity pronouns (y and en). This is what makes French sound "fluid." Pair this with mastering how to talk about the future.',
+                'milestone' => 'Explain your 5-year career or life plan to a language partner (or camera), successfully substituting nouns with y or en at least 5 times (e.g., "J\'y vais" instead of "Je vais à Paris").',
+                'checklist' => [
+                    ['task' => 'Hour 1: Active Study (Morning) - Anki flashcards and targeted grammar exercises.', 'weekly_goal_minutes' => 60],
+                    ['task' => 'Hours 2 & 3: Comprehensible Input - Listening and reading to content just slightly above your level.', 'weekly_goal_minutes' => 120],
+                    ['task' => 'Hour 4: Output & Speaking - 1-on-1 tutoring, language exchange, or speaking out loud.', 'weekly_goal_minutes' => 60],
+                    ['task' => 'Hour 5: Passive/Native Media (Evening) - Watching French YouTubers, Netflix, or reading a French book.', 'weekly_goal_minutes' => 60],
+                ]
+            ],
+            [
+                'title' => 'Semaine 3 : The Ear Training Gauntlet',
+                'focus' => 'Focus: Transitioning to Native Audio. Around Week 3, the "brain fog" will hit. Push through. Shift your input from learner-focused audio to native-speed podcasts and YouTube videos. French natives drop the ne in negative sentences (Je sais pas instead of Je ne sais pas) and mash words together (T\'es instead of Tu es).',
+                'milestone' => 'Watch a 20-minute French YouTube vlog intended for natives with subtitles turned completely off. Write a half-page summary of the video in French.',
+                'checklist' => [
+                    ['task' => 'Hour 1: Active Study (Morning) - Anki flashcards and targeted grammar exercises.', 'weekly_goal_minutes' => 60],
+                    ['task' => 'Hours 2 & 3: Comprehensible Input - Listening and reading to content just slightly above your level.', 'weekly_goal_minutes' => 120],
+                    ['task' => 'Hour 4: Output & Speaking - 1-on-1 tutoring, language exchange, or speaking out loud.', 'weekly_goal_minutes' => 60],
+                    ['task' => 'Hour 5: Passive/Native Media (Evening) - Watching French YouTubers, Netflix, or reading a French book.', 'weekly_goal_minutes' => 60],
+                ]
+            ],
+            [
+                'title' => 'Semaine 4 : The Subjunctive & Opinions',
+                'focus' => 'Focus: Emotion, Doubt, and Necessity. The subjunctive mood terrifies learners, but you only need to know it for specific triggers (Il faut que, Je veux que, Bien que). Focus only on the most common irregular subjunctive verbs (faire, être, avoir, aller, pouvoir, savoir).',
+                'milestone' => 'Record a 5-minute unscripted debate taking a stance on a controversial topic. You must correctly trigger and use the subjunctive mood at least three times to express doubt or necessity.',
+                'checklist' => [
+                    ['task' => 'Hour 1: Active Study (Morning) - Anki flashcards and targeted grammar exercises.', 'weekly_goal_minutes' => 60],
+                    ['task' => 'Hours 2 & 3: Comprehensible Input - Listening and reading to content just slightly above your level.', 'weekly_goal_minutes' => 120],
+                    ['task' => 'Hour 4: Output & Speaking - 1-on-1 tutoring, language exchange, or speaking out loud.', 'weekly_goal_minutes' => 60],
+                    ['task' => 'Hour 5: Passive/Native Media (Evening) - Watching French YouTubers, Netflix, or reading a French book.', 'weekly_goal_minutes' => 60],
+                ]
+            ],
+            [
+                'title' => 'Semaine 5 : Conversational Connectors',
+                'focus' => 'Focus: Flow and Natural Fillers. You know the grammar; now you need to sound human. Focus entirely on conversational connectors: En fait (in fact), Du coup (so/therefore), Par contre (on the other hand), D\'ailleurs (by the way), and Bref (anyway).',
+                'milestone' => 'Hold a 30-minute continuous, unscripted conversation with a native speaker (via iTalki or language exchange) using at least 5 different natural connectors without ever reverting to English to fill a silence.',
+                'checklist' => [
+                    ['task' => 'Hour 1: Active Study (Morning) - Anki flashcards and targeted grammar exercises.', 'weekly_goal_minutes' => 60],
+                    ['task' => 'Hours 2 & 3: Comprehensible Input - Listening and reading to content just slightly above your level.', 'weekly_goal_minutes' => 120],
+                    ['task' => 'Hour 4: Output & Speaking - 1-on-1 tutoring, language exchange, or speaking out loud.', 'weekly_goal_minutes' => 60],
+                    ['task' => 'Hour 5: Passive/Native Media (Evening) - Watching French YouTubers, Netflix, or reading a French book.', 'weekly_goal_minutes' => 60],
+                ]
+            ],
+            [
+                'title' => 'Semaine 6 : Slang and Informal French',
+                'focus' => 'Focus: Verlan and Street French. Textbook French is not how everyday people speak in Paris, Montreal, or Dakar. Spend this week learning essential Verlan (inverted words like ouf for fou, meuf for femme) and colloquial vocabulary (un mec, kiffer, chiant).',
+                'milestone' => 'Watch a full episode of a modern French TV show (like Lupin or Dix pour cent) with ONLY French subtitles. You must be able to pause and successfully define 10 slang terms or colloquialisms used by the characters.',
+                'checklist' => [
+                    ['task' => 'Hour 1: Active Study (Morning) - Anki flashcards and targeted grammar exercises.', 'weekly_goal_minutes' => 60],
+                    ['task' => 'Hours 2 & 3: Comprehensible Input - Listening and reading to content just slightly above your level.', 'weekly_goal_minutes' => 120],
+                    ['task' => 'Hour 4: Output & Speaking - 1-on-1 tutoring, language exchange, or speaking out loud.', 'weekly_goal_minutes' => 60],
+                    ['task' => 'Hour 5: Passive/Native Media (Evening) - Watching French YouTubers, Netflix, or reading a French book.', 'weekly_goal_minutes' => 60],
+                ]
+            ],
+            [
+                'title' => 'Semaine 7 : The Professional Pivot',
+                'focus' => 'Focus: Formal Language and The Conditional. Pivot to high-level input. Read news articles, listen to political podcasts, and master the Conditional tense for politeness and hypotheticals (Je voudrais, Si j\'avais le temps, je le ferais).',
+                'milestone' => 'Read a full editorial article from Le Monde or Le Figaro. Immediately afterward, summarize the author\'s argument out loud for 3 minutes, analyzing their stance using formal vocabulary.',
+                'checklist' => [
+                    ['task' => 'Hour 1: Active Study (Morning) - Anki flashcards and targeted grammar exercises.', 'weekly_goal_minutes' => 60],
+                    ['task' => 'Hours 2 & 3: Comprehensible Input - Listening and reading to content just slightly above your level.', 'weekly_goal_minutes' => 120],
+                    ['task' => 'Hour 4: Output & Speaking - 1-on-1 tutoring, language exchange, or speaking out loud.', 'weekly_goal_minutes' => 60],
+                    ['task' => 'Hour 5: Passive/Native Media (Evening) - Watching French YouTubers, Netflix, or reading a French book.', 'weekly_goal_minutes' => 60],
+                ]
+            ],
+            [
+                'title' => 'Semaine 8 : Total Immersion & Shadowing',
+                'focus' => 'Focus: Accent Refinement and Fluidity. No new grammar. This week is purely about speed, accent reduction, and output. Do "shadowing" exercises—listen to a native speaker and repeat exactly what they say a fraction of a second later, matching their intonation, rhythm, and mouth shapes.',
+                'milestone' => 'Record a 10-minute uninterrupted monologue on a complex topic (e.g., the impact of technology on society). Listen to it back-to-back with your Week 1 recording to hear the definitive proof of your new competency.',
+                'checklist' => [
+                    ['task' => 'Hour 1: Active Study (Morning) - Anki flashcards and targeted grammar exercises.', 'weekly_goal_minutes' => 60],
+                    ['task' => 'Hours 2 & 3: Comprehensible Input - Listening and reading to content just slightly above your level.', 'weekly_goal_minutes' => 120],
+                    ['task' => 'Hour 4: Output & Speaking - 1-on-1 tutoring, language exchange, or speaking out loud.', 'weekly_goal_minutes' => 60],
+                    ['task' => 'Hour 5: Passive/Native Media (Evening) - Watching French YouTubers, Netflix, or reading a French book.', 'weekly_goal_minutes' => 60],
+                ]
+            ]
+        ];
+
+        foreach ($heroWeeks as $index => $week) {
+            Week::create([
+                'week_number' => $index + 1,
+                'path' => 'zero_to_hero',
+                'title' => $week['title'],
+                'focus' => $week['focus'],
+                'milestone' => $week['milestone'],
+                'checklist' => $week['checklist'],
+                'source_links' => [],
+                'video_links' => [],
+                'books' => [],
+                'exam_links' => []
+            ]);
+        }
+
         $this->call([
             LicenceSeeder::class,
         ]);
