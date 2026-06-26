@@ -195,27 +195,28 @@ const Dashboard = () => {
                         <h3 style={{ marginBottom: '1rem', fontSize: '1.2rem', color: 'var(--text-primary)', textAlign: 'center' }}>Curriculum Progress</h3>
                         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '1rem 0' }}>
                             <div style={{ position: 'relative', width: '100%', maxWidth: '200px', aspectRatio: '1/1', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                                <svg viewBox="0 0 100 100" style={{ width: '100%', height: '100%', transform: 'rotate(-90deg)', overflow: 'visible' }}>
+                                <svg viewBox="0 0 120 120" style={{ width: '100%', height: '100%', overflow: 'visible' }}>
                                     {/* Background Track */}
                                     <circle 
-                                        cx="50" 
-                                        cy="50" 
-                                        r="40" 
+                                        cx="60" 
+                                        cy="60" 
+                                        r="45" 
                                         fill="none" 
                                         stroke="rgba(0,0,0,0.06)" 
                                         strokeWidth="10" 
                                     />
                                     {/* Progress Ring */}
                                     <circle 
-                                        cx="50" 
-                                        cy="50" 
-                                        r="40" 
+                                        cx="60" 
+                                        cy="60" 
+                                        r="45" 
                                         fill="none" 
                                         stroke="url(#progressGradient)" 
                                         strokeWidth="10" 
                                         strokeLinecap="round"
-                                        strokeDasharray={`${2 * Math.PI * 40}`}
-                                        strokeDashoffset={`${2 * Math.PI * 40 * (1 - (kpiData?.completionRate || 0) / 100)}`}
+                                        strokeDasharray={`${2 * Math.PI * 45}`}
+                                        strokeDashoffset={`${2 * Math.PI * 45 * (1 - (kpiData?.completionRate || 0) / 100)}`}
+                                        transform="rotate(-90 60 60)"
                                         style={{ transition: 'stroke-dashoffset 1s ease-in-out', filter: 'drop-shadow(0px 4px 6px rgba(16, 185, 129, 0.3))' }}
                                     />
                                     <defs>
