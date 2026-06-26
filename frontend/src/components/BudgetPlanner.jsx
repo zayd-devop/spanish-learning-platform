@@ -106,16 +106,16 @@ const BudgetPlanner = () => {
                     <div style={{ marginBottom: '1rem', background: 'rgba(59, 130, 246, 0.05)', padding: '1rem', borderRadius: '8px', border: '1px solid rgba(59, 130, 246, 0.1)' }}>
                         <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem', color: 'var(--text-secondary)' }}>
                             <span style={{ fontSize: '0.9rem', flex: '1 1 auto', minWidth: '150px' }}>Requis par Campus France (AVI)</span>
-                            <div style={{ display: 'flex', alignItems: 'center', background: 'white', padding: '0.2rem 0.5rem', borderRadius: '6px', border: '1px dashed var(--glass-border)', width: '80px' }}>
+                            <div style={{ display: 'flex', alignItems: 'center', background: 'white', padding: '0.4rem 0.8rem', borderRadius: '6px', border: '1px dashed var(--glass-border)', width: '120px' }}>
                                 <input 
                                     type="number" 
                                     name="requis_mensuel" 
                                     value={budget.requis_mensuel || ''} 
                                     onChange={handleInputChange}
-                                    style={{ border: 'none', background: 'transparent', outline: 'none', flex: 1, fontSize: '0.9rem', color: 'var(--text-primary)', textAlign: 'right', fontWeight: '600' }}
+                                    style={{ border: 'none', background: 'transparent', outline: 'none', width: '100%', minWidth: 0, fontSize: '1rem', color: 'var(--text-primary)', textAlign: 'right', fontWeight: '600' }}
                                     placeholder="615"
                                 />
-                                <span style={{ color: 'var(--text-secondary)', marginLeft: '4px', fontSize: '0.9rem' }}>€</span>
+                                <span style={{ color: 'var(--text-secondary)', marginLeft: '6px', fontSize: '1rem' }}>€</span>
                             </div>
                         </div>
                         <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem', justifyContent: 'space-between', color: 'var(--text-secondary)', fontSize: '0.9rem' }}>
