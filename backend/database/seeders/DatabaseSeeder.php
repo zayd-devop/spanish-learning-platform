@@ -123,94 +123,118 @@ class DatabaseSeeder extends Seeder
             ]);
         }
 
-        // "From Zero to Hero" 8-Week Sprint
+        // "From Zero to Hero" 8-Week Sprint with 56 Unique Daily Topics
         $heroWeeks = [
             [
                 'title' => 'Semaine 1 : The Past Tense Fixation',
-                'focus' => 'Focus: Passé Composé vs. Imparfait. Your biggest hurdle right now is telling stories. Spend this week mastering when to use the passé composé (completed actions) versus the imparfait (ongoing states, habits, background details). Drill the irregular past participles and the verbs that use être instead of avoir.',
+                'focus' => 'Focus: Passé Composé vs. Imparfait. Your biggest hurdle right now is telling stories. Spend this week mastering when to use the passé composé (completed actions) versus the imparfait (ongoing states, habits, background details).',
                 'milestone' => 'Speak into your phone\'s voice memo app for 3 solid minutes about what you did last weekend, detailing the events and how you felt, without stopping to look up a verb conjugation.',
-                'checklist' => [
-                    ['task' => 'Hour 1: Active Study (Morning) - Anki flashcards and targeted grammar exercises.', 'weekly_goal_minutes' => 60, 'resource' => ['title' => 'Exercices : Passé vs Imparfait', 'url' => 'https://www.lepointdufle.net/p/passecompose_imparfait.htm'], 'youtube_resource' => ['title' => 'Leçon : Passé Composé vs Imparfait', 'url' => 'https://www.youtube.com/results?search_query=lecon+passe+compose+vs+imparfait']],
-                    ['task' => 'Hours 2 & 3: Comprehensible Input - Listening and reading to content just slightly above your level.', 'weekly_goal_minutes' => 120, 'resource' => ['title' => 'Exercices de Compréhension Orale', 'url' => 'https://www.lepointdufle.net/p/comprehensionorale.htm'], 'youtube_resource' => ['title' => 'Leçon : Comment améliorer l\'écoute', 'url' => 'https://www.youtube.com/results?search_query=lecon+ameliorer+comprehension+orale']],
-                    ['task' => 'Hour 4: Output & Speaking - 1-on-1 tutoring, language exchange, or speaking out loud.', 'weekly_goal_minutes' => 60, 'resource' => ['title' => 'Exercices de Production Orale', 'url' => 'https://www.lepointdufle.net/p/productionorale.htm'], 'youtube_resource' => ['title' => 'Leçon : Raconter une histoire au passé', 'url' => 'https://www.youtube.com/results?search_query=lecon+raconter+une+histoire+passe+francais']],
-                    ['task' => 'Hour 5: Passive/Native Media (Evening) - Watching French YouTubers, Netflix, or reading a French book.', 'weekly_goal_minutes' => 60, 'resource' => ['title' => 'Exercices Culture Française', 'url' => 'https://www.lepointdufle.net/p/civilisation.htm'], 'youtube_resource' => ['title' => 'Leçon : Comprendre les francophones', 'url' => 'https://www.youtube.com/results?search_query=lecon+comprendre+les+francais']],
+                'daily_topics' => [
+                    "Le Passé Composé (Verbes réguliers avec Avoir)",
+                    "Le Passé Composé (Verbes irréguliers et avec Être)",
+                    "L'Imparfait (Descriptions et habitudes)",
+                    "Passé Composé vs Imparfait (La grande différence)",
+                    "Raconter un événement historique",
+                    "Le Plus-que-parfait (Introduction)",
+                    "Bilan : Raconter une anecdote personnelle"
                 ]
             ],
             [
                 'title' => 'Semaine 2 : Navigating the Future & Pronouns',
-                'focus' => 'Focus: Futur Proche/Simple and \'y\' & \'en\'. Stop repeating the same nouns. Master direct/indirect object pronouns (le, la, les, lui, leur) and the spatial/quantity pronouns (y and en). This is what makes French sound "fluid." Pair this with mastering how to talk about the future.',
-                'milestone' => 'Explain your 5-year career or life plan to a language partner (or camera), successfully substituting nouns with y or en at least 5 times (e.g., "J\'y vais" instead of "Je vais à Paris").',
-                'checklist' => [
-                    ['task' => 'Hour 1: Active Study (Morning) - Anki flashcards and targeted grammar exercises.', 'weekly_goal_minutes' => 60, 'resource' => ['title' => 'Exercices : Pronoms Y et EN', 'url' => 'https://www.lepointdufle.net/p/pronoms-y-en.htm'], 'youtube_resource' => ['title' => 'Leçon : Les Pronoms Y et EN', 'url' => 'https://www.youtube.com/results?search_query=lecon+pronoms+y+et+en']],
-                    ['task' => 'Hours 2 & 3: Comprehensible Input - Listening and reading to content just slightly above your level.', 'weekly_goal_minutes' => 120, 'resource' => ['title' => 'Exercices de Lecture B2', 'url' => 'https://www.lepointdufle.net/p/comprehensionecrite.htm'], 'youtube_resource' => ['title' => 'Leçon : Lire en français', 'url' => 'https://www.youtube.com/results?search_query=lecon+lecture+francais']],
-                    ['task' => 'Hour 4: Output & Speaking - 1-on-1 tutoring, language exchange, or speaking out loud.', 'weekly_goal_minutes' => 60, 'resource' => ['title' => 'Exercices : Le Futur', 'url' => 'https://www.lepointdufle.net/p/futur.htm'], 'youtube_resource' => ['title' => 'Leçon : Parler du Futur', 'url' => 'https://www.youtube.com/results?search_query=lecon+parler+du+futur+francais']],
-                    ['task' => 'Hour 5: Passive/Native Media (Evening) - Watching French YouTubers, Netflix, or reading a French book.', 'weekly_goal_minutes' => 60, 'resource' => ['title' => 'Exercices de Dictée', 'url' => 'https://www.lepointdufle.net/p/dictees.htm'], 'youtube_resource' => ['title' => 'Leçon : Pronoms Compléments', 'url' => 'https://www.youtube.com/results?search_query=lecon+pronoms+complements']],
+                'focus' => 'Focus: Futur Proche/Simple and \'y\' & \'en\'. Stop repeating the same nouns. Master direct/indirect object pronouns and the spatial/quantity pronouns. Pair this with mastering how to talk about the future.',
+                'milestone' => 'Explain your 5-year career or life plan to a language partner, successfully substituting nouns with y or en at least 5 times.',
+                'daily_topics' => [
+                    "Le Futur Proche",
+                    "Le Futur Simple (Verbes réguliers et irréguliers)",
+                    "Les Pronoms COD (le, la, les)",
+                    "Les Pronoms COI (lui, leur)",
+                    "Le Pronom Y (Lieu et Chose)",
+                    "Le Pronom EN (Quantité et De)",
+                    "Bilan : Mes projets d'avenir"
                 ]
             ],
             [
                 'title' => 'Semaine 3 : The Ear Training Gauntlet',
-                'focus' => 'Focus: Transitioning to Native Audio. Around Week 3, the "brain fog" will hit. Push through. Shift your input from learner-focused audio to native-speed podcasts and YouTube videos. French natives drop the ne in negative sentences (Je sais pas instead of Je ne sais pas) and mash words together (T\'es instead of Tu es).',
-                'milestone' => 'Watch a 20-minute French YouTube vlog intended for natives with subtitles turned completely off. Write a half-page summary of the video in French.',
-                'checklist' => [
-                    ['task' => 'Hour 1: Active Study (Morning) - Anki flashcards and targeted grammar exercises.', 'weekly_goal_minutes' => 60, 'resource' => ['title' => 'Exercices : Français Familier', 'url' => 'https://www.lepointdufle.net/p/francais-familier.htm'], 'youtube_resource' => ['title' => 'Leçon : Contractions à l\'oral', 'url' => 'https://www.youtube.com/results?search_query=lecon+francais+parle+contractions']],
-                    ['task' => 'Hours 2 & 3: Comprehensible Input - Listening and reading to content just slightly above your level.', 'weekly_goal_minutes' => 120, 'resource' => ['title' => 'Exercices avec Vidéos', 'url' => 'https://www.lepointdufle.net/p/francais-avec-videos.htm'], 'youtube_resource' => ['title' => 'Leçon : Comprendre les natifs', 'url' => 'https://www.youtube.com/results?search_query=lecon+comprendre+les+natifs+francais']],
-                    ['task' => 'Hour 4: Output & Speaking - 1-on-1 tutoring, language exchange, or speaking out loud.', 'weekly_goal_minutes' => 60, 'resource' => ['title' => 'Exercices : Phonétique', 'url' => 'https://www.lepointdufle.net/p/phonetique.htm'], 'youtube_resource' => ['title' => 'Leçon : Prononciation rapide', 'url' => 'https://www.youtube.com/results?search_query=lecon+prononciation+rapide+francais']],
-                    ['task' => 'Hour 5: Passive/Native Media (Evening) - Watching French YouTubers, Netflix, or reading a French book.', 'weekly_goal_minutes' => 60, 'resource' => ['title' => 'Exercices : Vocabulaire Quotidien', 'url' => 'https://www.lepointdufle.net/p/vocabulaire.htm'], 'youtube_resource' => ['title' => 'Leçon : Expressions idiomatiques', 'url' => 'https://www.youtube.com/results?search_query=lecon+expressions+idiomatiques']],
+                'focus' => 'Focus: Transitioning to Native Audio. Shift your input from learner-focused audio to native-speed podcasts. French natives drop the \'ne\' in negative sentences and mash words together.',
+                'milestone' => 'Watch a 20-minute French YouTube vlog intended for natives with subtitles turned completely off. Write a half-page summary of the video.',
+                'daily_topics' => [
+                    "Les contractions à l'oral (t'es, y'a)",
+                    "La négation orale (suppression du NE)",
+                    "Les liaisons obligatoires et interdites",
+                    "Comprendre le rythme et l'accentuation",
+                    "L'accent québécois vs français",
+                    "L'accent du sud de la France",
+                    "Bilan : Écoute d'un vlog natif sans sous-titres"
                 ]
             ],
             [
                 'title' => 'Semaine 4 : The Subjunctive & Opinions',
-                'focus' => 'Focus: Emotion, Doubt, and Necessity. The subjunctive mood terrifies learners, but you only need to know it for specific triggers (Il faut que, Je veux que, Bien que). Focus only on the most common irregular subjunctive verbs (faire, être, avoir, aller, pouvoir, savoir).',
-                'milestone' => 'Record a 5-minute unscripted debate taking a stance on a controversial topic. You must correctly trigger and use the subjunctive mood at least three times to express doubt or necessity.',
-                'checklist' => [
-                    ['task' => 'Hour 1: Active Study (Morning) - Anki flashcards and targeted grammar exercises.', 'weekly_goal_minutes' => 60, 'resource' => ['title' => 'Exercices : Le Subjonctif', 'url' => 'https://www.lepointdufle.net/p/subjonctif.htm'], 'youtube_resource' => ['title' => 'Leçon : Quand utiliser le Subjonctif', 'url' => 'https://www.youtube.com/results?search_query=lecon+quand+utiliser+le+subjonctif']],
-                    ['task' => 'Hours 2 & 3: Comprehensible Input - Listening and reading to content just slightly above your level.', 'weekly_goal_minutes' => 120, 'resource' => ['title' => 'Exercices : Exprimer son opinion', 'url' => 'https://www.lepointdufle.net/p/expression_opinion.htm'], 'youtube_resource' => ['title' => 'Leçon : Donner son avis', 'url' => 'https://www.youtube.com/results?search_query=lecon+donner+son+avis']],
-                    ['task' => 'Hour 4: Output & Speaking - 1-on-1 tutoring, language exchange, or speaking out loud.', 'weekly_goal_minutes' => 60, 'resource' => ['title' => 'Exercices : Débat et Argumentation', 'url' => 'https://www.lepointdufle.net/p/argumentation.htm'], 'youtube_resource' => ['title' => 'Leçon : Débattre en français', 'url' => 'https://www.youtube.com/results?search_query=lecon+debattre+en+francais']],
-                    ['task' => 'Hour 5: Passive/Native Media (Evening) - Watching French YouTubers, Netflix, or reading a French book.', 'weekly_goal_minutes' => 60, 'resource' => ['title' => 'Exercices : Verbes Irréguliers (Subjonctif)', 'url' => 'https://www.lepointdufle.net/p/subjonctif_irreguliers.htm'], 'youtube_resource' => ['title' => 'Leçon : Les émotions en français', 'url' => 'https://www.youtube.com/results?search_query=lecon+emotions+francais']],
+                'focus' => 'Focus: Emotion, Doubt, and Necessity. The subjunctive mood terrifies learners, but you only need to know it for specific triggers (Il faut que, Je veux que, Bien que).',
+                'milestone' => 'Record a 5-minute unscripted debate taking a stance on a controversial topic. You must correctly trigger and use the subjunctive mood at least three times.',
+                'daily_topics' => [
+                    "Introduction au Subjonctif (Il faut que, Je veux que)",
+                    "Le Subjonctif (Émotions et doutes)",
+                    "Les verbes irréguliers au subjonctif",
+                    "Exprimer son opinion (Indicatif vs Subjonctif)",
+                    "Exprimer l'accord et le désaccord",
+                    "L'expression de la condition (Bien que, Pour que)",
+                    "Bilan : Débat sur un sujet polémique"
                 ]
             ],
             [
                 'title' => 'Semaine 5 : Conversational Connectors',
-                'focus' => 'Focus: Flow and Natural Fillers. You know the grammar; now you need to sound human. Focus entirely on conversational connectors: En fait (in fact), Du coup (so/therefore), Par contre (on the other hand), D\'ailleurs (by the way), and Bref (anyway).',
-                'milestone' => 'Hold a 30-minute continuous, unscripted conversation with a native speaker (via iTalki or language exchange) using at least 5 different natural connectors without ever reverting to English to fill a silence.',
-                'checklist' => [
-                    ['task' => 'Hour 1: Active Study (Morning) - Anki flashcards and targeted grammar exercises.', 'weekly_goal_minutes' => 60, 'resource' => ['title' => 'Exercices : Connecteurs Logiques', 'url' => 'https://www.lepointdufle.net/p/connecteurs.htm'], 'youtube_resource' => ['title' => 'Leçon : Connecteurs Logiques', 'url' => 'https://www.youtube.com/results?search_query=lecon+connecteurs+logiques']],
-                    ['task' => 'Hours 2 & 3: Comprehensible Input - Listening and reading to content just slightly above your level.', 'weekly_goal_minutes' => 120, 'resource' => ['title' => 'Exercices : Mots de liaison', 'url' => 'https://www.lepointdufle.net/p/relations_logiques.htm'], 'youtube_resource' => ['title' => 'Leçon : Mots de liaison à l\'oral', 'url' => 'https://www.youtube.com/results?search_query=lecon+mots+de+liaison+oral']],
-                    ['task' => 'Hour 4: Output & Speaking - 1-on-1 tutoring, language exchange, or speaking out loud.', 'weekly_goal_minutes' => 60, 'resource' => ['title' => 'Exercices : Cohérence du texte', 'url' => 'https://www.lepointdufle.net/p/coherence.htm'], 'youtube_resource' => ['title' => 'Leçon : Parler naturellement (Fillers)', 'url' => 'https://www.youtube.com/results?search_query=lecon+parler+naturellement+mots+de+remplissage']],
-                    ['task' => 'Hour 5: Passive/Native Media (Evening) - Watching French YouTubers, Netflix, or reading a French book.', 'weekly_goal_minutes' => 60, 'resource' => ['title' => 'Exercices : Les tics de langage', 'url' => 'https://www.lepointdufle.net/p/tics_langage.htm'], 'youtube_resource' => ['title' => 'Leçon : Du coup, Bref, En fait', 'url' => 'https://www.youtube.com/results?search_query=lecon+du+coup+bref+en+fait']],
+                'focus' => 'Focus: Flow and Natural Fillers. You know the grammar; now you need to sound human. Focus entirely on conversational connectors: En fait, Du coup, Par contre, D\'ailleurs, and Bref.',
+                'milestone' => 'Hold a 30-minute continuous, unscripted conversation with a native speaker using at least 5 different natural connectors without reverting to English.',
+                'daily_topics' => [
+                    "Connecteurs d'addition (De plus, En outre)",
+                    "Connecteurs d'opposition (Cependant, En revanche)",
+                    "Connecteurs de cause (Parce que, Puisque)",
+                    "Connecteurs de conséquence (Donc, Par conséquent)",
+                    "Les tics de langage (Du coup, Bref, En fait)",
+                    "Structurer un long discours (D'abord, Ensuite, Enfin)",
+                    "Bilan : Monologue argumentatif de 5 minutes"
                 ]
             ],
             [
                 'title' => 'Semaine 6 : Slang and Informal French',
-                'focus' => 'Focus: Verlan and Street French. Textbook French is not how everyday people speak in Paris, Montreal, or Dakar. Spend this week learning essential Verlan (inverted words like ouf for fou, meuf for femme) and colloquial vocabulary (un mec, kiffer, chiant).',
-                'milestone' => 'Watch a full episode of a modern French TV show (like Lupin or Dix pour cent) with ONLY French subtitles. You must be able to pause and successfully define 10 slang terms or colloquialisms used by the characters.',
-                'checklist' => [
-                    ['task' => 'Hour 1: Active Study (Morning) - Anki flashcards and targeted grammar exercises.', 'weekly_goal_minutes' => 60, 'resource' => ['title' => 'Exercices : Argot et Verlan', 'url' => 'https://www.lepointdufle.net/p/argot.htm'], 'youtube_resource' => ['title' => 'Leçon : L\'Argot Français', 'url' => 'https://www.youtube.com/results?search_query=lecon+argot+francais']],
-                    ['task' => 'Hours 2 & 3: Comprehensible Input - Listening and reading to content just slightly above your level.', 'weekly_goal_minutes' => 120, 'resource' => ['title' => 'Exercices : Registres de Langue', 'url' => 'https://www.lepointdufle.net/p/registres_de_langue.htm'], 'youtube_resource' => ['title' => 'Leçon : Les registres de langue', 'url' => 'https://www.youtube.com/results?search_query=lecon+registres+de+langue']],
-                    ['task' => 'Hour 4: Output & Speaking - 1-on-1 tutoring, language exchange, or speaking out loud.', 'weekly_goal_minutes' => 60, 'resource' => ['title' => 'Exercices : Vocabulaire de rue', 'url' => 'https://www.lepointdufle.net/p/vocabulaire-familier.htm'], 'youtube_resource' => ['title' => 'Leçon : Parler comme les jeunes', 'url' => 'https://www.youtube.com/results?search_query=lecon+parler+comme+un+jeune+francais']],
-                    ['task' => 'Hour 5: Passive/Native Media (Evening) - Watching French YouTubers, Netflix, or reading a French book.', 'weekly_goal_minutes' => 60, 'resource' => ['title' => 'Exercices : Chansons en argot', 'url' => 'https://www.lepointdufle.net/p/chansons.htm'], 'youtube_resource' => ['title' => 'Leçon : Le Verlan', 'url' => 'https://www.youtube.com/results?search_query=lecon+le+verlan']],
+                'focus' => 'Focus: Verlan and Street French. Textbook French is not how everyday people speak. Spend this week learning essential Verlan and colloquial vocabulary.',
+                'milestone' => 'Watch a full episode of a modern French TV show (like Lupin) with ONLY French subtitles. Successfully define 10 slang terms used by the characters.',
+                'daily_topics' => [
+                    "Le vocabulaire familier du quotidien",
+                    "Les expressions idiomatiques (Avoir le cafard, etc.)",
+                    "Le vocabulaire de l'entreprise (Informel)",
+                    "L'argot de rue et des jeunes",
+                    "Le Verlan (ouf, meuf, relou)",
+                    "Raccourcis et abréviations (À plus, d'ac, a+)",
+                    "Bilan : Regarder une série française (Lupin ou Dix pour cent)"
                 ]
             ],
             [
                 'title' => 'Semaine 7 : The Professional Pivot',
-                'focus' => 'Focus: Formal Language and The Conditional. Pivot to high-level input. Read news articles, listen to political podcasts, and master the Conditional tense for politeness and hypotheticals (Je voudrais, Si j\'avais le temps, je le ferais).',
-                'milestone' => 'Read a full editorial article from Le Monde or Le Figaro. Immediately afterward, summarize the author\'s argument out loud for 3 minutes, analyzing their stance using formal vocabulary.',
-                'checklist' => [
-                    ['task' => 'Hour 1: Active Study (Morning) - Anki flashcards and targeted grammar exercises.', 'weekly_goal_minutes' => 60, 'resource' => ['title' => 'Exercices : Le Conditionnel', 'url' => 'https://www.lepointdufle.net/p/conditionnel.htm'], 'youtube_resource' => ['title' => 'Leçon : Le Conditionnel (Politesse)', 'url' => 'https://www.youtube.com/results?search_query=lecon+conditionnel+francais']],
-                    ['task' => 'Hours 2 & 3: Comprehensible Input - Listening and reading to content just slightly above your level.', 'weekly_goal_minutes' => 120, 'resource' => ['title' => 'Exercices : Vocabulaire Professionnel', 'url' => 'https://www.lepointdufle.net/p/francais-des-affaires.htm'], 'youtube_resource' => ['title' => 'Leçon : Français des affaires', 'url' => 'https://www.youtube.com/results?search_query=lecon+francais+des+affaires']],
-                    ['task' => 'Hour 4: Output & Speaking - 1-on-1 tutoring, language exchange, or speaking out loud.', 'weekly_goal_minutes' => 60, 'resource' => ['title' => 'Exercices : Les Hypothèses (Si)', 'url' => 'https://www.lepointdufle.net/p/hypotheses.htm'], 'youtube_resource' => ['title' => 'Leçon : Faire des hypothèses', 'url' => 'https://www.youtube.com/results?search_query=lecon+faire+des+hypotheses+avec+si']],
-                    ['task' => 'Hour 5: Passive/Native Media (Evening) - Watching French YouTubers, Netflix, or reading a French book.', 'weekly_goal_minutes' => 60, 'resource' => ['title' => 'Exercices : Résumer un texte', 'url' => 'https://www.lepointdufle.net/p/resume_synthese.htm'], 'youtube_resource' => ['title' => 'Leçon : Comment faire une synthèse', 'url' => 'https://www.youtube.com/results?search_query=lecon+faire+une+synthese+francais']],
+                'focus' => 'Focus: Formal Language and The Conditional. Pivot to high-level input. Read news articles, listen to political podcasts, and master the Conditional tense for politeness and hypotheticals.',
+                'milestone' => 'Read a full editorial article from Le Monde or Le Figaro. Immediately afterward, summarize the author\'s argument out loud for 3 minutes.',
+                'daily_topics' => [
+                    "Le vocabulaire du recrutement et du CV",
+                    "Rédiger un email ou une lettre formelle",
+                    "Le Conditionnel (Politesse et Souhaits)",
+                    "Le Conditionnel (Hypothèses avec Si)",
+                    "Présenter son parcours professionnel",
+                    "Négocier et argumenter en réunion",
+                    "Bilan : Simulation d'entretien d'embauche"
                 ]
             ],
             [
                 'title' => 'Semaine 8 : Total Immersion & Shadowing',
-                'focus' => 'Focus: Accent Refinement and Fluidity. No new grammar. This week is purely about speed, accent reduction, and output. Do "shadowing" exercises—listen to a native speaker and repeat exactly what they say a fraction of a second later, matching their intonation, rhythm, and mouth shapes.',
-                'milestone' => 'Record a 10-minute uninterrupted monologue on a complex topic (e.g., the impact of technology on society). Listen to it back-to-back with your Week 1 recording to hear the definitive proof of your new competency.',
-                'checklist' => [
-                    ['task' => 'Hour 1: Active Study (Morning) - Anki flashcards and targeted grammar exercises.', 'weekly_goal_minutes' => 60, 'resource' => ['title' => 'Exercices : Phonétique et Intonation', 'url' => 'https://www.lepointdufle.net/p/phonetique.htm'], 'youtube_resource' => ['title' => 'Leçon : L\'intonation en français', 'url' => 'https://www.youtube.com/results?search_query=lecon+intonation+francais']],
-                    ['task' => 'Hours 2 & 3: Comprehensible Input - Listening and reading to content just slightly above your level.', 'weekly_goal_minutes' => 120, 'resource' => ['title' => 'Exercices : Dictées Avancées', 'url' => 'https://www.lepointdufle.net/p/dictees.htm'], 'youtube_resource' => ['title' => 'Leçon : Améliorer son accent', 'url' => 'https://www.youtube.com/results?search_query=lecon+ameliorer+son+accent+francais']],
-                    ['task' => 'Hour 4: Output & Speaking - 1-on-1 tutoring, language exchange, or speaking out loud.', 'weekly_goal_minutes' => 60, 'resource' => ['title' => 'Exercices : La Fluidité', 'url' => 'https://www.lepointdufle.net/p/expressionorale.htm'], 'youtube_resource' => ['title' => 'Leçon : Technique du Shadowing', 'url' => 'https://www.youtube.com/results?search_query=lecon+technique+shadowing']],
-                    ['task' => 'Hour 5: Passive/Native Media (Evening) - Watching French YouTubers, Netflix, or reading a French book.', 'weekly_goal_minutes' => 60, 'resource' => ['title' => 'Exercices : Quiz de Culture Générale', 'url' => 'https://www.lepointdufle.net/p/civilisation.htm'], 'youtube_resource' => ['title' => 'Leçon : Bilan B2/C1', 'url' => 'https://www.youtube.com/results?search_query=lecon+bilan+niveau+b2+c1']],
+                'focus' => 'Focus: Accent Refinement and Fluidity. No new grammar. This week is purely about speed, accent reduction, and output. Do "shadowing" exercises to match native intonation.',
+                'milestone' => 'Record a 10-minute uninterrupted monologue on a complex topic. Listen to it back-to-back with your Week 1 recording to hear the proof of your new competency.',
+                'daily_topics' => [
+                    "Shadowing : Journal télévisé (Rythme soutenu)",
+                    "Shadowing : Interview politique (Débat)",
+                    "Shadowing : Podcast humoristique (Intonation)",
+                    "Shadowing : Documentaire scientifique (Précision)",
+                    "Exercices de prononciation (Les voyelles nasales)",
+                    "Exercices de prononciation (Le R français et les liaisons)",
+                    "Bilan Final : Monologue de 10 minutes (L'impact de la technologie)"
                 ]
             ]
         ];
@@ -219,17 +243,43 @@ class DatabaseSeeder extends Seeder
         foreach ($heroWeeks as $index => $week) {
             $semaineNum = $index + 1;
             
-            $parts = explode(':', $week['title'], 2);
-            $themeTitle = isset($parts[1]) ? trim($parts[1]) : $week['title'];
-
             for ($day = 1; $day <= 7; $day++) {
+                $dailyTopic = $week['daily_topics'][$day - 1];
+                
+                $checklist = [
+                    [
+                        'task' => "Bloc 1 (45 min): Active Study (Morning) - Anki flashcards and targeted grammar exercises ($dailyTopic).",
+                        'weekly_goal_minutes' => 45,
+                        'resource' => ['title' => "Exercices : $dailyTopic", 'url' => 'https://www.google.com/search?q=' . urlencode("exercices francais " . $dailyTopic)],
+                        'youtube_resource' => ['title' => "Leçon : $dailyTopic", 'url' => 'https://www.youtube.com/results?search_query=' . urlencode("lecon francais " . $dailyTopic)]
+                    ],
+                    [
+                        'task' => "Bloc 2 (60 min): Comprehensible Input - Listening and reading to content just slightly above your level ($dailyTopic).",
+                        'weekly_goal_minutes' => 60,
+                        'resource' => ['title' => "Texte & Audio : $dailyTopic", 'url' => 'https://www.google.com/search?q=' . urlencode("texte avec audio francais " . $dailyTopic)],
+                        'youtube_resource' => ['title' => "Podcast / Vidéo : $dailyTopic", 'url' => 'https://www.youtube.com/results?search_query=' . urlencode("podcast francais " . $dailyTopic)]
+                    ],
+                    [
+                        'task' => "Bloc 3 (45 min): Output & Speaking - 1-on-1 tutoring, language exchange, or speaking out loud ($dailyTopic).",
+                        'weekly_goal_minutes' => 45,
+                        'resource' => ['title' => "Sujets de discussion : $dailyTopic", 'url' => 'https://www.google.com/search?q=' . urlencode("sujets de conversation francais " . $dailyTopic)],
+                        'youtube_resource' => ['title' => "Exemple d'oral : $dailyTopic", 'url' => 'https://www.youtube.com/results?search_query=' . urlencode("production orale francais " . $dailyTopic)]
+                    ],
+                    [
+                        'task' => "Bloc 4 (30 min): Passive/Native Media (Evening) - Watching French YouTubers, Netflix, or reading a French book.",
+                        'weekly_goal_minutes' => 30,
+                        'resource' => ['title' => 'Culture et Divertissement', 'url' => 'https://www.lepointdufle.net/p/civilisation.htm'],
+                        'youtube_resource' => ['title' => 'Médias natifs', 'url' => 'https://www.youtube.com/results?search_query=documentaire+francais']
+                    ]
+                ];
+
                 Week::create([
                     'week_number' => $heroWeekNumber++,
                     'path' => 'zero_to_hero',
-                    'title' => "Semaine {$semaineNum} - Jour {$day} : {$themeTitle}",
+                    'title' => "Semaine {$semaineNum} - Jour {$day} : {$dailyTopic}",
                     'focus' => $week['focus'],
                     'milestone' => $week['milestone'],
-                    'checklist' => $week['checklist'],
+                    'checklist' => $checklist,
                     'source_links' => [],
                     'video_links' => [],
                     'books' => [],
