@@ -70,37 +70,14 @@ const Dashboard = () => {
                 setWeeklyTimeData(dynamicWeeklyTimeData);
                 setWeeklyTasksData(dynamicWeeklyTasksData);
 
-                // Build dynamic Curriculum Progress Data
-                let completedTasks = 0;
-                let remainingTasks = 0;
-                
-                data.weeks.forEach(week => {
-                    const checklist = week.checklist || [];
-                    const progress = week.task_progress || {};
-                    
-                    checklist.forEach((item, i) => {
-                        const goal = item.weekly_goal_minutes || 0;
-                        const logged = progress[i] ? Number(progress[i]) : 0;
-                        
-                        if (goal > 0 && logged >= goal) {
-                            completedTasks++;
-                        } else {
-                            remainingTasks++;
-                        }
-                    });
-                });
-
+                // Build Curriculum Progress Data directly from the backend KPI
+                const compRate = data.kpi?.completionRate || 0;
                 const newCompletionData = [];
-                if (completedTasks > 0) {
-                    newCompletionData.push({ name: 'Completed', value: completedTasks });
+                if (compRate > 0) {
+                    newCompletionData.push({ name: 'Completed', value: compRate });
                 }
-                if (remainingTasks > 0) {
-                    newCompletionData.push({ name: 'Remaining', value: remainingTasks });
-                }
-
-                // Avoid empty chart if there are no tasks
-                if (newCompletionData.length === 0) {
-                    newCompletionData.push({ name: 'Remaining', value: 1 });
+                if (compRate < 100) {
+                    newCompletionData.push({ name: 'Remaining', value: Math.max(1, 100 - compRate) });
                 }
 
                 setCompletionData(newCompletionData);
@@ -219,7 +196,7 @@ const Dashboard = () => {
                         <div style={{ height: '240px', display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative' }}>
                             <div style={{ position: 'absolute', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', pointerEvents: 'none', zIndex: 10 }}>
                                 <span style={{ fontSize: '1.75rem', fontWeight: '800', color: 'var(--text-primary)', lineHeight: '1', marginBottom: '4px' }}>
-                                    {Math.round(((completionData.find(d => d.name === 'Completed')?.value || 0) / ((completionData.find(d => d.name === 'Completed')?.value || 0) + (completionData.find(d => d.name === 'Remaining')?.value || 0))) * 100) || 0}%
+                                    {kpiData?.completionRate || 0}%
                                 </span>
                                 <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', fontWeight: '600', textTransform: 'uppercase', letterSpacing: '1px' }}>
                                     Done
@@ -231,11 +208,9 @@ const Dashboard = () => {
                                         data={completionData}
                                         cx="50%"
                                         cy="50%"
-                                        startAngle={90}
-                                        endAngle={-270}
                                         innerRadius={80}
                                         outerRadius={100}
-                                        paddingAngle={completionData.length > 1 ? 8 : 0}
+                                        paddingAngle={completionData.length > 1 ? 5 : 0}
                                         dataKey="value"
                                         stroke="none"
                                         cornerRadius={5}
