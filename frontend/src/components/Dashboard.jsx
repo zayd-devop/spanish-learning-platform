@@ -193,47 +193,62 @@ const Dashboard = () => {
                     {/* Completion Donut Chart */}
                     <div className="glass-panel hover-glow" style={{ padding: '1.5rem', borderRadius: '20px', display: 'flex', flexDirection: 'column', background: 'linear-gradient(145deg, rgba(255,255,255,0.05) 0%, rgba(0,0,0,0) 100%)' }}>
                         <h3 style={{ marginBottom: '1rem', fontSize: '1.2rem', color: 'var(--text-primary)', textAlign: 'center' }}>Curriculum Progress</h3>
-                        <div style={{ height: '240px', display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative' }}>
-                            <div style={{ position: 'absolute', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', pointerEvents: 'none', zIndex: 10 }}>
-                                <span style={{ fontSize: '1.75rem', fontWeight: '800', color: 'var(--text-primary)', lineHeight: '1', marginBottom: '4px' }}>
-                                    {kpiData?.completionRate || 0}%
-                                </span>
-                                <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', fontWeight: '600', textTransform: 'uppercase', letterSpacing: '1px' }}>
-                                    Done
-                                </span>
+                        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '1rem 0' }}>
+                            <div style={{ position: 'relative', width: '100%', maxWidth: '200px', aspectRatio: '1/1', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                                <svg viewBox="0 0 100 100" style={{ width: '100%', height: '100%', transform: 'rotate(-90deg)', overflow: 'visible' }}>
+                                    {/* Background Track */}
+                                    <circle 
+                                        cx="50" 
+                                        cy="50" 
+                                        r="40" 
+                                        fill="none" 
+                                        stroke="rgba(0,0,0,0.06)" 
+                                        strokeWidth="10" 
+                                    />
+                                    {/* Progress Ring */}
+                                    <circle 
+                                        cx="50" 
+                                        cy="50" 
+                                        r="40" 
+                                        fill="none" 
+                                        stroke="url(#progressGradient)" 
+                                        strokeWidth="10" 
+                                        strokeLinecap="round"
+                                        strokeDasharray={`${2 * Math.PI * 40}`}
+                                        strokeDashoffset={`${2 * Math.PI * 40 * (1 - (kpiData?.completionRate || 0) / 100)}`}
+                                        style={{ transition: 'stroke-dashoffset 1s ease-in-out', filter: 'drop-shadow(0px 4px 6px rgba(16, 185, 129, 0.3))' }}
+                                    />
+                                    <defs>
+                                        <linearGradient id="progressGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                            <stop offset="0%" stopColor="#10b981" />
+                                            <stop offset="100%" stopColor="#059669" />
+                                        </linearGradient>
+                                    </defs>
+                                </svg>
+                                <div style={{ position: 'absolute', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+                                    <span style={{ fontSize: '2.5rem', fontWeight: '800', color: 'var(--text-primary)', lineHeight: '1', marginBottom: '2px', letterSpacing: '-1px' }}>
+                                        {kpiData?.completionRate || 0}%
+                                    </span>
+                                    <span style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', fontWeight: '600', textTransform: 'uppercase', letterSpacing: '1.5px' }}>
+                                        Completed
+                                    </span>
+                                </div>
                             </div>
-                            <ResponsiveContainer width="100%" height="100%">
-                                <PieChart>
-                                    <Pie
-                                        data={completionData}
-                                        cx="50%"
-                                        cy="50%"
-                                        startAngle={90}
-                                        endAngle={-270}
-                                        innerRadius={80}
-                                        outerRadius={100}
-                                        paddingAngle={completionData.length > 1 ? 5 : 0}
-                                        dataKey="value"
-                                        stroke="none"
-                                        cornerRadius={5}
-                                    >
-                                        {completionData.map((entry, index) => {
-                                            const color = entry.name === 'Completed' ? '#10b981' : '#334155';
-                                            return <Cell key={`cell-${index}`} fill={color} style={{ filter: `drop-shadow(0px 4px 8px ${color}40)` }} />;
-                                        })}
-                                    </Pie>
-                                    <Tooltip contentStyle={{ backgroundColor: 'rgba(255,255,255,0.95)', border: '1px solid rgba(0,0,0,0.1)', borderRadius: '12px', color: 'var(--text-primary)', boxShadow: '0 4px 6px -1px rgba(0,0,0,0.1)' }} itemStyle={{ color: 'var(--text-primary)' }} />
-                                </PieChart>
-                            </ResponsiveContainer>
                         </div>
-                        <div style={{ display: 'flex', justifyContent: 'center', gap: '2rem', marginTop: '1.5rem', background: 'rgba(0,0,0,0.04)', padding: '1rem', borderRadius: '12px', border: '1px solid rgba(0,0,0,0.05)' }}>
-                            <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-                                <div style={{ width: '14px', height: '14px', background: COLORS[0], borderRadius: '4px' }}></div>
-                                <span style={{ fontSize: '1rem', fontWeight: '500', color: 'var(--text-primary)' }}>Completed</span>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', gap: '1rem', marginTop: '1.5rem', background: 'rgba(255,255,255,0.5)', padding: '1.25rem', borderRadius: '16px', border: '1px solid var(--glass-border)' }}>
+                            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.25rem' }}>
+                                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                                    <div style={{ width: '10px', height: '10px', background: '#10b981', borderRadius: '50%' }}></div>
+                                    <span style={{ fontSize: '0.9rem', fontWeight: '600', color: 'var(--text-primary)' }}>Done</span>
+                                </div>
+                                <span style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', marginLeft: '1.1rem' }}>{kpiData?.completionRate || 0}% of tasks</span>
                             </div>
-                            <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
-                                <div style={{ width: '14px', height: '14px', background: COLORS[1], borderRadius: '4px' }}></div>
-                                <span style={{ fontSize: '1rem', fontWeight: '500', color: 'var(--text-secondary)' }}>Remaining</span>
+                            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.25rem' }}>
+                                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                                    <div style={{ width: '10px', height: '10px', background: 'rgba(0,0,0,0.1)', borderRadius: '50%' }}></div>
+                                    <span style={{ fontSize: '0.9rem', fontWeight: '600', color: 'var(--text-primary)' }}>Remaining</span>
+                                </div>
+                                <span style={{ fontSize: '0.8rem', color: 'var(--text-secondary)', marginLeft: '1.1rem' }}>{100 - (kpiData?.completionRate || 0)}% of tasks</span>
                             </div>
                         </div>
                     </div>
