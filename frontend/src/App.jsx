@@ -63,13 +63,6 @@ function App() {
               </MainLayout>
             </ProtectedRoute>
           } />
-          <Route path="/zero-to-hero" element={
-            <ProtectedRoute>
-              <MainLayout>
-                <LearningPath pathType="zero_to_hero" title="From Zero to Hero" storageKey="hero_journey_start_date" />
-              </MainLayout>
-            </ProtectedRoute>
-          } />
           <Route path="/licences" element={
             <ProtectedRoute>
               <MainLayout>
