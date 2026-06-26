@@ -208,6 +208,8 @@ const Dashboard = () => {
                                         data={completionData}
                                         cx="50%"
                                         cy="50%"
+                                        startAngle={90}
+                                        endAngle={-270}
                                         innerRadius={80}
                                         outerRadius={100}
                                         paddingAngle={completionData.length > 1 ? 5 : 0}
