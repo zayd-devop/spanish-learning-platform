@@ -226,7 +226,7 @@ const Dashboard = () => {
                                         </linearGradient>
                                     </defs>
                                 </svg>
-                                <div style={{ position: 'absolute', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+                                <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', width: '100%' }}>
                                     <span style={{ fontSize: '2.5rem', fontWeight: '800', color: 'var(--text-primary)', lineHeight: '1', marginBottom: '2px', letterSpacing: '-1px' }}>
                                         {kpiData?.completionRate || 0}%
                                     </span>
