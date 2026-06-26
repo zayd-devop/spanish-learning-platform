@@ -162,7 +162,7 @@ const CampusFranceGuide = () => {
           De nombreux étudiants de l'OFPPT optent pour des écoles privées (souvent appelées "écoles d'ingénierie informatique"). Ces écoles ne délivrent pas de Licences universitaires, mais des <strong>Titres RNCP Niveau 6 (Bac+3)</strong> ou <strong>Niveau 7 (Bac+5)</strong>, très reconnus par les entreprises françaises.
         </p>
 
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem', marginBottom: '2rem' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '2rem', marginBottom: '2rem' }}>
           <div style={{ background: 'rgba(0,0,0,0.03)', padding: '1.5rem', borderRadius: '12px' }}>
             <h4 style={{ color: 'var(--text-primary)', marginBottom: '1rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
               <span style={{ fontSize: '1.5rem' }}>⚡</span> Le Processus (Très Différent)

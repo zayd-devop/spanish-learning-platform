@@ -968,52 +968,6 @@ h1, h2, h3 {
     gap: 1rem;
   }
 
-  .sidebar-menu {
-    flex-direction: row;
-    flex-wrap: nowrap;
-    justify-content: flex-start;
-    align-items: center;
-    width: 100%;
-    padding: 0 0.5rem;
-    margin: 0;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-  }
-
-  .sidebar-menu::-webkit-scrollbar {
-    display: none;
-  }
-
-  .sidebar-link {
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 0.5rem 0.25rem;
-    font-size: 0.75rem;
-    gap: 0.25rem;
-    flex: 0 0 auto;
-    min-width: 80px;
-    text-align: center;
-  }
-
-  .sidebar-link .sidebar-label {
-    display: block !important; /* Show text under icon */
-    font-size: 0.65rem;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow: hidden;
-    max-width: 100%;
-  }
-
-  .sidebar-icon {
-    margin-right: 0 !important;
-    font-size: 1.25rem;
-  }
-
-  .scrollable-content {
-    padding-bottom: 90px; /* Make room for bottom nav */
-  }
-
   /* Timeline Guide Adjustments */
   .timeline-container {
     padding-left: 0.5rem !important;

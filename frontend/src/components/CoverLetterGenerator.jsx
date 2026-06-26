@@ -229,7 +229,7 @@ const CoverLetterGenerator = () => {
                     <h2 style={{ fontSize: '1.2rem', marginBottom: '1.5rem', color: 'var(--text-primary)', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                         <span>🗂️</span> Historique de vos lettres
                     </h2>
-                    <div style={{ display: 'grid', gap: '1rem', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))' }}>
+                    <div style={{ display: 'grid', gap: '1rem', gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))' }}>
                         {savedLetters.map(letter => (
                             <div key={letter.id} className="hover-lift" style={{ background: 'rgba(255,255,255,0.6)', border: '1px solid var(--glass-border)', padding: '1rem', borderRadius: '12px', display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
                                 <div style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>{letter.date}</div>

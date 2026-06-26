@@ -169,7 +169,7 @@ const LicencesList = () => {
                 {Object.keys(scores).length > 0 ? "Recommended For You (Ranked)" : "All Programs"}
             </h2>
 
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '1.5rem' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '1.5rem' }}>
                 {[...licences]
                     .sort((a, b) => {
                         const scoreA = scores[a.id] ? scores[a.id].score : 0;

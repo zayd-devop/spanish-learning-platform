@@ -90,15 +90,20 @@ const Dashboard = () => {
                     });
                 });
 
-                // Avoid division by zero in UI if there are no tasks
-                if (completedTasks === 0 && remainingTasks === 0) {
-                    remainingTasks = 1; 
+                const newCompletionData = [];
+                if (completedTasks > 0) {
+                    newCompletionData.push({ name: 'Completed', value: completedTasks });
+                }
+                if (remainingTasks > 0) {
+                    newCompletionData.push({ name: 'Remaining', value: remainingTasks });
                 }
 
-                setCompletionData([
-                    { name: 'Completed', value: completedTasks },
-                    { name: 'Remaining', value: remainingTasks }
-                ]);
+                // Avoid empty chart if there are no tasks
+                if (newCompletionData.length === 0) {
+                    newCompletionData.push({ name: 'Remaining', value: 1 });
+                }
+
+                setCompletionData(newCompletionData);
 
                 setLoading(false);
             } catch (err) {
@@ -214,7 +219,7 @@ const Dashboard = () => {
                         <div style={{ height: '240px', display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative' }}>
                             <div style={{ position: 'absolute', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', pointerEvents: 'none', zIndex: 10 }}>
                                 <span style={{ fontSize: '1.75rem', fontWeight: '800', color: 'var(--text-primary)', lineHeight: '1', marginBottom: '4px' }}>
-                                    {Math.round((completionData[0].value / (completionData[0].value + completionData[1].value)) * 100)}%
+                                    {Math.round(((completionData.find(d => d.name === 'Completed')?.value || 0) / ((completionData.find(d => d.name === 'Completed')?.value || 0) + (completionData.find(d => d.name === 'Remaining')?.value || 0))) * 100) || 0}%
                                 </span>
                                 <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', fontWeight: '600', textTransform: 'uppercase', letterSpacing: '1px' }}>
                                     Done
@@ -226,15 +231,19 @@ const Dashboard = () => {
                                         data={completionData}
                                         cx="50%"
                                         cy="50%"
+                                        startAngle={90}
+                                        endAngle={-270}
                                         innerRadius={80}
                                         outerRadius={100}
-                                        paddingAngle={8}
+                                        paddingAngle={completionData.length > 1 ? 8 : 0}
                                         dataKey="value"
                                         stroke="none"
+                                        cornerRadius={5}
                                     >
-                                        {completionData.map((entry, index) => (
-                                            <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} style={{ filter: `drop-shadow(0px 4px 8px ${COLORS[index % COLORS.length]}40)` }} />
-                                        ))}
+                                        {completionData.map((entry, index) => {
+                                            const color = entry.name === 'Completed' ? '#10b981' : '#334155';
+                                            return <Cell key={`cell-${index}`} fill={color} style={{ filter: `drop-shadow(0px 4px 8px ${color}40)` }} />;
+                                        })}
                                     </Pie>
                                     <Tooltip contentStyle={{ backgroundColor: 'rgba(255,255,255,0.95)', border: '1px solid rgba(0,0,0,0.1)', borderRadius: '12px', color: 'var(--text-primary)', boxShadow: '0 4px 6px -1px rgba(0,0,0,0.1)' }} itemStyle={{ color: 'var(--text-primary)' }} />
                                 </PieChart>

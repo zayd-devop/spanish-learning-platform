@@ -86,7 +86,7 @@ const BudgetPlanner = () => {
                 <p style={{ color: 'var(--text-secondary)', fontSize: '1.1rem' }}>Estimez vos dépenses en France et vérifiez si vous respectez les critères de l'AVI (Attestation de Virement Irrévocable).</p>
             </div>
 
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem', marginBottom: '2rem' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '1.5rem', marginBottom: '2rem' }}>
                 {/* Résumé des frais */}
                 <div className="glass-panel animate-slide-up stagger-1" style={{ padding: '2rem' }}>
                     <h2 style={{ fontSize: '1.2rem', marginBottom: '1.5rem', color: 'var(--text-primary)', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
